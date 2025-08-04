@@ -106,65 +106,88 @@ export default function Dashboard() {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+
+
       </div>
+      
     );
   }
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Welcome back, {user?.full_name}!</h1>
-        <p className="text-gray-600">Here's your investment overview</p>
+        <h1 className="text-2xl font-bold text-white-900">Welcome back, {user?.full_name}!</h1>
+        <p className="text-white-600">Here's your investment overview</p>
       </div>
+   
+<div
+  className="h-[25vh] rounded-lg shadow-sm border"
+  style={{
+    backgroundImage: "url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat"
+  }}
+>
+  <div className="p-6 border-b  rounded-t-lg h-full">
+    <h3 className="text-lg font-semibold text-gray-900">Active Packages</h3>
+  </div>
+</div>
 
+
+
+   
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
           <div className="flex items-center">
             <Wallet className="h-8 w-8 text-green-600" />
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Wallet Balance</p>
-              <p className="text-2xl font-bold text-gray-900">${user?.wallet_balance?.toFixed(2) || '0.00'}</p>
+              <p className="text-lg font-medium mb-2">Wallet Balance</p>
+              <p className="text-3xl font-bold">${user?.wallet_balance?.toFixed(2) || '0.00'}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
           <div className="flex items-center">
             <Package className="h-8 w-8 text-blue-600" />
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Active Packages</p>
-              <p className="text-2xl font-bold text-gray-900">{stats.activePackages}</p>
+              <p className="text-lg font-medium mb-2">Active Packages</p>
+              <p className="text-3xl font-bold">{stats.activePackages}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
           <div className="flex items-center">
             <TrendingUp className="h-8 w-8 text-purple-600" />
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Total Earned</p>
-              <p className="text-2xl font-bold text-gray-900">${stats.totalEarned.toFixed(2)}</p>
+              <p className="text-lg font-medium mb-2">Total Earned</p>
+              <p className="text-3xl font-bold">${stats.totalEarned.toFixed(2)}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
           <div className="flex items-center">
             <Gift className="h-8 w-8 text-yellow-600" />
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Referrals</p>
-              <p className="text-2xl font-bold text-gray-900">{stats.referrals}</p>
+              <p className="text-lg font-medium mb-2">Referrals</p>
+              <p className="text-3xl font-bold">{stats.referrals}</p>
             </div>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+
+        
         {/* Active Packages */}
         <div className="bg-white rounded-lg shadow-sm border">
-          <div className="p-6 border-b">
-            <h3 className="text-lg font-semibold text-gray-900">Active Packages</h3>
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+            <h3 className="text-lg font-medium mb-2">Active Packages</h3>
           </div>
           <div className="p-6">
             {activePackages.length > 0 ? (
@@ -197,8 +220,8 @@ export default function Dashboard() {
 
         {/* Recent Transactions */}
         <div className="bg-white rounded-lg shadow-sm border">
-          <div className="p-6 border-b">
-            <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+            <h3 className="text-lg font-medium mb-2">Recent Transactions</h3>
           </div>
           <div className="p-6">
             {recentTransactions.length > 0 ? (
