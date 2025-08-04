@@ -130,7 +130,7 @@ export default function Dashboard() {
   }}
 >
   <div className="p-6 border-b  rounded-t-lg h-full">
-    <h3 className="text-lg font-semibold text-gray-900">Active Packages</h3>
+    <h3 className="text-lg font-semibold text-white-900">Active</h3>
   </div>
 </div>
 
