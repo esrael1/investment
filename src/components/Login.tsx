@@ -48,7 +48,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-white">
       {/* Header */}
-      <header className="bg-white dark:bg-gray-800 shadow-sm border-b sticky top-0 z-30">
+      <header className="bg-blue dark:bg-gray-800 shadow-sm border-b sticky top-0 z-30">
         <div className="flex justify-between items-center h-16 px-4">
           <div className="flex items-center">
             <DollarSign className="h-6 w-6 text-blue-600" />
