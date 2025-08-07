@@ -1,115 +1,259 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { DollarSign } from 'lucide-react';
+import { supabase, UserPackage, Transaction } from '../lib/supabase';
+import { Wallet, Package, Gift, CheckSquare, TrendingUp } from 'lucide-react';
+import { format } from 'date-fns';
 
-export default function Login() {
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  
-  const { login } = useAuth();
-  const navigate = useNavigate();
+export default function Dashboard() {
+  const { user } = useAuth();
+  const [stats, setStats] = useState({
+    activePackages: 0,
+    totalEarned: 0,
+    referrals: 0,
+    tasksCompleted: 0,
+  });
+  const [recentTransactions, setRecentTransactions] = useState<Transaction[]>([]);
+  const [activePackages, setActivePackages] = useState<UserPackage[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!phone || !password) {
-      setError('Please fill in all fields');
-      return;
+  useEffect(() => {
+    if (user) {
+      fetchDashboardData();
     }
+  }, [user]);
 
-    setLoading(true);
-    setError('');
+  const fetchDashboardData = async () => {
+    if (!user) return;
 
-    const success = await login(phone, password);
-    
-    if (success) {
-      navigate('/dashboard');
-    } else {
-      setError('Invalid phone number or password');
+    try {
+      // Fetch active packages
+      const { data: packages } = await supabase
+        .from('user_packages')
+        .select(`
+          *,
+          packages (*)
+        `)
+        .eq('user_id', user.id)
+        .eq('is_active', true);
+
+      // Fetch recent transactions
+      const { data: transactions } = await supabase
+        .from('transactions')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+        .limit(5);
+
+      // Fetch referrals count
+      const { count: referralsCount } = await supabase
+        .from('referrals')
+        .select('*', { count: 'exact' })
+        .eq('referrer_id', user.id);
+
+      // Fetch completed tasks count
+      const { count: tasksCount } = await supabase
+        .from('user_tasks')
+        .select('*', { count: 'exact' })
+        .eq('user_id', user.id);
+
+      // Calculate total earned
+      const totalEarned = transactions?.reduce((sum, t) => {
+        if (t.type === 'task_reward' || t.type === 'referral_bonus') {
+          return sum + Number(t.amount);
+        }
+        return sum;
+      }, 0) || 0;
+
+      setStats({
+        activePackages: packages?.length || 0,
+        totalEarned,
+        referrals: referralsCount || 0,
+        tasksCompleted: tasksCount || 0,
+      });
+
+      setRecentTransactions(transactions || []);
+      setActivePackages(packages || []);
+    } catch (error) {
+      console.error('Error fetching dashboard data:', error);
+    } finally {
+      setLoading(false);
     }
-    
-    setLoading(false);
   };
 
+  const getTransactionIcon = (type: Transaction['type']) => {
+    switch (type) {
+      case 'deposit': return '💳';
+      case 'withdrawal': return '💸';
+      case 'package_purchase': return '📦';
+      case 'task_reward': return '✅';
+      case 'referral_bonus': return '🎁';
+      default: return '💰';
+    }
+  };
+
+  const getTransactionColor = (type: Transaction['type']) => {
+    switch (type) {
+      case 'deposit': return 'text-green-600';
+      case 'withdrawal': return 'text-red-600';
+      case 'package_purchase': return 'text-blue-600';
+      case 'task_reward': return 'text-purple-600';
+      case 'referral_bonus': return 'text-yellow-600';
+      default: return 'text-gray-600';
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+
+
+      </div>
+      
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <div className="flex justify-center">
-            <DollarSign className="h-12 w-12 text-blue-600" />
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold text-white-900">Welcome back, {user?.full_name}!</h1>
+        <p className="text-white-600">Here's your investment overview</p>
+      </div>
+   
+<div
+  className="h-[25vh] rounded-lg shadow-sm border"
+  style={{
+    backgroundImage: "url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat"
+  }}
+>
+  <div className="p-6 border-b  rounded-t-lg h-full">
+    <h3 className="text-lg font-semibold text-gray-900"></h3>
+  </div>
+</div>
+
+
+
+   
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+          <div className="flex items-center">
+            <Wallet className="h-8 w-8 text-green-600" />
+            <div className="ml-4">
+              <p className="text-lg font-medium mb-2">Wallet Balance</p>
+              <p className="text-3xl font-bold">${user?.wallet_balance?.toFixed(2) || '0.00'}</p>
+            </div>
           </div>
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            Welcome to InvestPro
-          </h2>
-          <p className="mt-2 text-sm text-gray-600">
-            Sign in to your account
-          </p>
         </div>
+
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+          <div className="flex items-center">
+            <Package className="h-8 w-8 text-blue-600" />
+            <div className="ml-4">
+              <p className="text-lg font-medium mb-2">Active Packages</p>
+              <p className="text-3xl font-bold">{stats.activePackages}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+          <div className="flex items-center">
+            <TrendingUp className="h-8 w-8 text-purple-600" />
+            <div className="ml-4">
+              <p className="text-lg font-medium mb-2">Total Earned</p>
+              <p className="text-3xl font-bold">${stats.totalEarned.toFixed(2)}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+          <div className="flex items-center">
+            <Gift className="h-8 w-8 text-yellow-600" />
+            <div className="ml-4">
+              <p className="text-lg font-medium mb-2">Referrals</p>
+              <p className="text-3xl font-bold">{stats.referrals}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+
         
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-              {error}
-            </div>
-          )}
-          
-          <div className="space-y-4">
-            <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                Phone Number
-              </label>
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                required
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Enter your phone number"
-              />
-            </div>
-            
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Enter your password"
-              />
-            </div>
+        {/* Active Packages */}
+        <div className="bg-green-500 rounded-lg shadow-sm border">
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+            <h3 className="text-lg font-medium mb-2">Active Packages</h3>
           </div>
-
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? 'Signing in...' : 'Sign in'}
-            </button>
+          <div className="p-6">
+            {activePackages.length > 0 ? (
+              <div className="space-y-4">
+                {activePackages.map((userPackage) => (
+                  <div key={userPackage.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div>
+                      <h4 className="font-medium text-gray-900">{userPackage.packages?.name}</h4>
+                      <p className="text-sm text-gray-600">
+                        Earned: ${userPackage.total_earned.toFixed(2)} | 
+                        Tasks Today: {userPackage.tasks_completed_today}/{userPackage.packages?.daily_tasks}
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-medium text-green-600">
+                        ${userPackage.packages?.daily_return}/day
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        Expires: {format(new Date(userPackage.expiry_date), 'MMM dd, yyyy')}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-500 text-center py-8">No active packages</p>
+            )}
           </div>
+        </div>
 
-          <div className="text-center">
-            <span className="text-sm text-gray-600">
-              Don't have an account?{' '}
-              <Link to="/register" className="font-medium text-blue-600 hover:text-blue-500">
-                Sign up
-              </Link>
-            </span>
+        {/* Recent Transactions */}
+        <div className="bg-green-500 rounded-lg shadow-sm border">
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+            <h3 className="text-lg font-medium mb-2">Recent Transactions</h3>
           </div>
-
-          
-        </form>
+          <div className="p-6">
+            {recentTransactions.length > 0 ? (
+              <div className="space-y-4">
+                {recentTransactions.map((transaction) => (
+                  <div key={transaction.id} className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <span className="text-2xl mr-3">{getTransactionIcon(transaction.type)}</span>
+                      <div>
+                        <p className="font-medium text-gray-900 capitalize">
+                          {transaction.type.replace('_', ' ')}
+                        </p>
+                        <p className="text-sm text-gray-600">{transaction.description}</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className={`font-medium ${getTransactionColor(transaction.type)}`}>
+                        {transaction.type === 'withdrawal' || transaction.type === 'package_purchase' ? '-' : '+'}
+                        ${transaction.amount.toFixed(2)}
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        {format(new Date(transaction.created_at), 'MMM dd, HH:mm')}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-500 text-center py-8">No transactions yet</p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
