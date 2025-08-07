@@ -121,7 +121,7 @@ export default function Dashboard() {
       </div>
    
 <div
-  className="h-[25vh] rounded-lg shadow-sm border"
+  className="h-[50vh] rounded-lg shadow-sm border"
   style={{
     backgroundImage: "url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif')",
     backgroundSize: "cover",
