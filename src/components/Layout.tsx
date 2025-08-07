@@ -46,7 +46,7 @@ export default function Layout({ children }: LayoutProps) {
   const menuItems = user?.is_admin ? adminMenuItems : customerMenuItems;
 
   return (
-    <div className="flex flex-col min-h-screen bg-blue-500 dark:bg-gray-900 dark:text-white">
+    <div className="flex flex-col min-h-screen bg-blue-900 dark:bg-gray-900 dark:text-white">
       {/* Header */}
       <header className="bg-blue-500 dark:bg-gray-800 shadow-sm border-b sticky top-0 z-30">
         <div className="flex justify-between items-center h-16 px-4">
