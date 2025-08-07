@@ -90,31 +90,31 @@ export default function Referrals() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
           <div className="flex items-center">
             <Users className="h-8 w-8 text-blue-600" />
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Total Referrals</p>
-              <p className="text-2xl font-bold text-gray-900">{stats.totalReferrals}</p>
+              <p className="text-lg font-medium mb-2">Total Referrals</p>
+              <p className="text-2xl font-bold text-white-900">{stats.totalReferrals}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
           <div className="flex items-center">
             <DollarSign className="h-8 w-8 text-green-600" />
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Total Earnings</p>
-              <p className="text-2xl font-bold text-gray-900">${stats.totalBonus.toFixed(2)}</p>
+              <p className="text-lg font-medium mb-2">Total Earnings</p>
+              <p className="text-2xl font-bold text-white-900">${stats.totalBonus.toFixed(2)}</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Referral Tools */}
-      <div className="bg-white rounded-lg shadow-sm border">
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
         <div className="p-6 border-b">
-          <h3 className="text-lg font-semibold text-gray-900">Your Referral Tools</h3>
+          <h3 className="text-lg font-medium mb-2">Your Referral Tools</h3>
         </div>
         <div className="p-6 space-y-4">
           <div>
@@ -172,9 +172,9 @@ export default function Referrals() {
       </div>
 
       {/* Referral History */}
-      <div className="bg-white rounded-lg shadow-sm border">
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
         <div className="p-6 border-b">
-          <h3 className="text-lg font-semibold text-gray-900">Referral History</h3>
+          <h3 className="text-lg font-medium mb-2">Referral History</h3>
         </div>
         <div className="p-6">
           {referrals.length > 0 ? (
@@ -184,23 +184,23 @@ export default function Referrals() {
                   <div className="flex items-center">
                     <Gift className="h-8 w-8 text-yellow-600" />
                     <div className="ml-4">
-                      <p className="font-medium text-gray-900">{referral.users.full_name}</p>
-                      <p className="text-sm text-gray-600">
+                      <p className="font-medium text-white-900">{referral.users.full_name}</p>
+                      <p className="text-sm text-white-600">
                         Joined on {format(new Date(referral.created_at), 'MMM dd, yyyy')}
                       </p>
                     </div>
                   </div>
                   <div className="text-right">
                     <p className="font-medium text-green-600">+${referral.bonus_amount.toFixed(2)}</p>
-                    <p className="text-sm text-gray-500">Bonus earned</p>
+                    <p className="text-sm text-white-500">Bonus earned</p>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
             <div className="text-center py-8">
-              <Gift className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-500">No referrals yet. Start sharing your code to earn bonuses!</p>
+              <Gift className="h-12 w-12 text-green-400 mx-auto mb-4" />
+              <p className="text-white-500">No referrals yet. Start sharing your code to earn bonuses!</p>
             </div>
           )}
         </div>
