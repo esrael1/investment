@@ -1,116 +1,109 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { DollarSign } from 'lucide-react';
+import {
+  Home,
+  Package,
+  Wallet,
+  Users,
+  LogOut,
+  DollarSign,
+  Gift,
+  CheckSquare,
+  BarChart3,
+} from 'lucide-react';
 
-export default function Login() {
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  
-  const { login } = useAuth();
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export default function Layout({ children }: LayoutProps) {
+  const { user, logout } = useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!phone || !password) {
-      setError('Please fill in all fields');
-      return;
-    }
-
-    setLoading(true);
-    setError('');
-
-    const success = await login(phone, password);
-    
-    if (success) {
-      navigate('/dashboard');
-    } else {
-      setError('Invalid phone number or password');
-    }
-    
-    setLoading(false);
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
   };
 
+  const customerMenuItems = [
+    { path: '/dashboard', icon: Home, label: 'Home' },
+    { path: '/packages', icon: Package, label: 'Packages' },
+    { path: '/tasks', icon: CheckSquare, label: 'Tasks' },
+    { path: '/wallet', icon: Wallet, label: 'Wallet' },
+    { path: '/referrals', icon: Gift, label: 'Referrals' },
+  ];
+
+  const adminMenuItems = [
+    { path: '/admin', icon: BarChart3, label: 'Admin' },
+    { path: '/admin/users', icon: Users, label: 'Users' },
+    { path: '/admin/packages', icon: Package, label: 'Packages' },
+    { path: '/admin/deposits', icon: DollarSign, label: 'Deposits' },
+    { path: '/admin/withdrawals', icon: Wallet, label: 'Withdrawals' },
+  ];
+
+  const menuItems = user?.is_admin ? adminMenuItems : customerMenuItems;
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <div className="flex justify-center">
-            <DollarSign className="h-12 w-12 text-blue-600" />
-          </div>
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            Welcome to InvestPro
-          </h2>
-          <p className="mt-2 text-sm text-gray-600">
-            Sign in to your account
-          </p>
-        </div>
-        
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-              {error}
-            </div>
-          )}
-          
-          <div className="space-y-4">
-            <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                Phone Number
-              </label>
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                required
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Enter your phone number"
-              />
-            </div>
-            
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Enter your password"
-              />
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? 'Signing in...' : 'Sign in'}
-            </button>
-          </div>
-
-          <div className="text-center">
-            <span className="text-sm text-gray-600">
-              Don't have an account?{' '}
-              <Link to="/register" className="font-medium text-blue-600 hover:text-blue-500">
-                Sign up
-              </Link>
+    <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-white">
+      {/* Header */}
+      <header className="bg-white dark:bg-gray-800 shadow-sm border-b sticky top-0 z-30">
+        <div className="flex justify-between items-center h-16 px-4">
+          <div className="flex items-center">
+            <DollarSign className="h-6 w-6 text-blue-600" />
+            <span className="ml-2 text-lg font-bold text-gray-900 dark:text-white">
+              InvestPro
             </span>
           </div>
+          <div className="flex items-center space-x-3">
+            <div className="text-sm text-right">
+              <p className="font-medium">{user?.full_name}</p>
+              {!user?.is_admin && (
+                <p className="text-green-600 font-semibold text-xs">
+                  ${user?.wallet_balance?.toFixed(2) || '0.00'}
+                </p>
+              )}
+            </div>
+            <button
+              onClick={handleLogout}
+              className="text-gray-600 dark:text-gray-300 hover:text-red-600"
+            >
+              <LogOut className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      </header>
 
-          
-        </form>
-      </div>
+      {/* Main Content */}
+      <main className="flex-1 overflow-y-auto px-4 py-6 pb-24">{children}</main>
+
+      {/* Bottom Navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t shadow z-40">
+        <div className="flex justify-around items-center h-16">
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = location.pathname === item.path;
+
+            return (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`flex flex-col items-center text-sm px-3 py-1 rounded transition-all duration-200 ${
+                  isActive
+                    ? 'bg-blue-100 text-blue-700 font-semibold dark:bg-blue-900 dark:text-blue-400'
+                    : 'text-gray-800 dark:text-gray-300'
+                }`}
+              >
+                <Icon className="h-6 w-6 mb-1" />
+                <span className="text-xs font-medium leading-tight select-none">
+                  {item.label}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
     </div>
   );
 }
