@@ -79,7 +79,7 @@ export default function Layout({ children }: LayoutProps) {
       <main className="flex-1 overflow-y-auto px-4 py-6 pb-24">{children}</main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t shadow z-40">
+      <nav className="fixed bottom-0 left-0 right-0 bg-blue-500 dark:bg-gray-900 border-t shadow z-40">
         <div className="flex justify-around items-center h-16">
           {menuItems.map((item) => {
             const Icon = item.icon;
