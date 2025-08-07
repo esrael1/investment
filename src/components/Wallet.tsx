@@ -218,9 +218,9 @@ export default function Wallet() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Deposits */}
-        <div className="bg-white rounded-lg shadow-sm border">
-          <div className="p-6 border-b">
-            <h3 className="text-lg font-semibold text-gray-900">Recent Deposits</h3>
+        <div className="bg-green-500 rounded-lg shadow-sm border">
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+            <h3 className="text-lg font-semibold text-white-900">Recent Deposits</h3>
           </div>
           <div className="p-6">
             {deposits.length > 0 ? (
@@ -244,9 +244,9 @@ export default function Wallet() {
         </div>
 
         {/* Recent Withdrawals */}
-        <div className="bg-white rounded-lg shadow-sm border">
-          <div className="p-6 border-b">
-            <h3 className="text-lg font-semibold text-gray-900">Recent Withdrawals</h3>
+        <div className="bg-green-500 rounded-lg shadow-sm border">
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+            <h3 className="text-lg font-semibold text-white-900">Recent Withdrawals</h3>
           </div>
           <div className="p-6">
             {withdrawals.length > 0 ? (
@@ -270,9 +270,9 @@ export default function Wallet() {
         </div>
 
         {/* Recent Transactions */}
-        <div className="bg-white rounded-lg shadow-sm border">
-          <div className="p-6 border-b">
-            <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
+        <div className="bg-green-500 rounded-lg shadow-sm border">
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+            <h3 className="text-lg font-semibold text-white-900">Recent Transactions</h3>
           </div>
           <div className="p-6">
             {transactions.length > 0 ? (
