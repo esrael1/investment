@@ -84,8 +84,8 @@ export default function Referrals() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Referral Program</h1>
-        <p className="text-gray-600">Invite friends and earn $10 for each successful referral</p>
+        <h1 className="text-2xl font-bold text-white-900">Referral Program</h1>
+        <p className="text-white-600">Invite friends and earn $10 for each successful referral</p>
       </div>
 
       {/* Stats Cards */}
