@@ -130,7 +130,7 @@ export default function Dashboard() {
   }}
 >
   <div className="p-6 border-b  rounded-t-lg h-full">
-    <h3 className="text-lg font-semibold text-white-900">Active</h3>
+    <h3 className="text-lg font-semibold text-gray-900">Active Packages</h3>
   </div>
 </div>
 
@@ -185,7 +185,7 @@ export default function Dashboard() {
 
         
         {/* Active Packages */}
-        <div className="bg-white rounded-lg shadow-sm border">
+        <div className="bg-green-500 rounded-lg shadow-sm border">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
             <h3 className="text-lg font-medium mb-2">Active Packages</h3>
           </div>
@@ -219,7 +219,7 @@ export default function Dashboard() {
         </div>
 
         {/* Recent Transactions */}
-        <div className="bg-white rounded-lg shadow-sm border">
+        <div className="bg-green-500 rounded-lg shadow-sm border">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
             <h3 className="text-lg font-medium mb-2">Recent Transactions</h3>
           </div>
