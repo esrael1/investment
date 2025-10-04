@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+-import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase, Referral, User } from '../lib/supabase';
 import { Gift, Copy, Users, DollarSign } from 'lucide-react';
