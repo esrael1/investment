@@ -127,9 +127,9 @@ export default function Dashboard() {
 
    
 <div
-  className="h-[50vh] rounded-lg shadow-sm border"
+  className="h-[50vh] rounded-lg shadow-sm"
   style={{
-    backgroundImage: "url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif')",
+    backgroundImage: "url('https://www.canva.com/design/DAG01L-Vz3Q/Sn2XljOC_0KQDxMLupclOQ/view?utm_content=DAG01L-Vz3Q&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h6710c125d4')",
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat"
