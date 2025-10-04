@@ -53,7 +53,7 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex items-center">
             <DollarSign className="h-6 w-6 text-blue-600" />
             <span className="ml-2 text-lg font-bold text-gray-900 dark:text-white">
-              InvestPro123
+              InvestPro
             </span>
           </div>
           <div className="flex items-center space-x-3">
