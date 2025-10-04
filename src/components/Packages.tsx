@@ -155,7 +155,7 @@ export default function Packages() {
                 
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Package Price</span>
+                    <span className="text-sm text-gray-600">Packaged Price</span>
                     <span className="font-semibold text-gray-900">${pkg.price}</span>
                   </div>
                   
