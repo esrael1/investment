@@ -135,7 +135,21 @@ export default function Packages() {
         <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {p
+        {packages.map((pkg) => {
+          const isPurchased = isPackagePurchased(pkg.id);
+          const canAfford = user && user.wallet_balance >= pkg.price;
+          
+          return (
+            <div key={pkg.id} className="bg-white rounded-lg shadow-sm border overflow-hidden">
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <PackageIcon className="h-8 w-8 text-blue-600" />
+                  {isPurchased && (
+                    <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">
+                      Owned
+                    </span>
+                  )}
+                </div>
                 
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">{pkg.name}</h3>
                 
