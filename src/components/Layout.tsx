@@ -48,12 +48,12 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="flex flex-col min-h-screen bg-green-500 dark:bg-green-500 dark:text-white">
       {/* Header */}
-      <header className="bg-red-500 dark:bg-red-800 shadow-sm border-b sticky top-0 z-30">
+      <header className="bg-blue-500 dark:bg-gray-800 shadow-sm border-b sticky top-0 z-30">
         <div className="flex justify-between items-center h-16 px-4">
           <div className="flex items-center">
             <DollarSign className="h-6 w-6 text-blue-600" />
             <span className="ml-2 text-lg font-bold text-gray-900 dark:text-white">
-              InvestPro
+              InvestPro123
             </span>
           </div>
           <div className="flex items-center space-x-3">
