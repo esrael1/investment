@@ -125,16 +125,24 @@ export default function Dashboard() {
         <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
       </div>
 
-   
+   <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
+ padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
+ border-radius: 8px; will-change: transform;">
+  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+    src="https://www.canva.com/design/DAG01L-Vz3Q/RSQbCHaDOwlgMaKzBm5YGw/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+  </iframe>
+</div>
+<a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAG01L-Vz3Q&#x2F;RSQbCHaDOwlgMaKzBm5YGw&#x2F;view?utm_content=DAG01L-Vz3Q&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">Blue Black Modern Bold Earth Presentation</a>
 <div
   className="h-[50vh] rounded-lg shadow-sm"
   style={{
-    backgroundImage: "url('https://www.canva.com/design/DAG01L-Vz3Q/RSQbCHaDOwlgMaKzBm5YGw/view')",
+    backgroundImage: "url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif')",
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat"
   }}
 >
+
   <div className="p-6 border-b  rounded-t-lg h-full">
     <h3 className="text-lg font-semibold text-gray-900"></h3>
   </div>
