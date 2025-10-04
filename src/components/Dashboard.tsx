@@ -129,7 +129,7 @@ export default function Dashboard() {
 <div
   className="h-[50vh] rounded-lg shadow-sm"
   style={{
-    backgroundImage: "url('https://www.canva.com/design/DAG01L-Vz3Q/Sn2XljOC_0KQDxMLupclOQ/view?utm_content=DAG01L-Vz3Q&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h6710c125d4')",
+    backgroundImage: "url('https://www.canva.com/design/DAG01L-Vz3Q/RSQbCHaDOwlgMaKzBm5YGw/view')",
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat"
