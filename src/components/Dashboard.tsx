@@ -115,7 +115,7 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <div className="text-center bg-gradient-to-br from-gray-100 via-red-800 to-red-200 p-8 rounded-2xl shadow-xl">
+      <div className="text-center bg-gradient-to-br from-gray-50 via-gray-900 to-red-50 p-8 rounded-2xl shadow-xl">
         <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
           Welcome back, {user?.full_name || "Investor"}!
         </h1>
