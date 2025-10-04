@@ -130,14 +130,14 @@ export default function Packages() {
           Investment Packages
         </h1>
         <p className="mt-3 text-gray-300 text-lg tracking-wide">
-          <span className="font-semibold text-indigo-400">Chose a package to start earning daily returns</span>
+          <span className="font-semibold text-indigo-400">Choose a package to start earning daily returns</span>
         </p>
         <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {packages.map((pkg) => {
           const isPurchased = isPackagePurchased(pkg.id);
-          const canAfford = user && user.walletbalance >= pkg.price;
+          const canAfford = user && user.wallet_balance >= pkg.price;
           
           return (
             <div key={pkg.id} className="bg-white rounded-lg shadow-sm border overflow-hidden">
