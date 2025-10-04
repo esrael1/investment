@@ -115,15 +115,15 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <div className="text-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-8 rounded-2xl shadow-xl border border-gray-700">
-  <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-    Welcome back, {user?.full_name || "Investor"}!
-  </h1>
-  <p className="mt-3 text-gray-300 text-lg tracking-wide">
-    Here's your <span className="font-semibold text-indigo-400">investment overview</span>
-  </p>
-  <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
-</div>
+      <div className="text-center bg-gradient-to-br from-gray-100 via-gray-800 to-gray-900 p-8 rounded-2xl shadow-xl border border-gray-700">
+        <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+          Welcome back, {user?.full_name || "Investor"}!
+        </h1>
+        <p className="mt-3 text-gray-300 text-lg tracking-wide">
+          Here's your <span className="font-semibold text-indigo-400">investment overview</span>
+        </p>
+        <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
+      </div>
 
    
 <div
