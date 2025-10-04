@@ -115,8 +115,8 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl text-center font-bold text-white-900">Welcome back, {user?.full_name}!</h1>
+      <div className="text-center ">
+        <h1 className="text-2xl font-bold text-white-900">Welcome back, {user?.full_name}!</h1>
         <p className="text-white-600">Here's your investment overview</p>
       </div>
    
