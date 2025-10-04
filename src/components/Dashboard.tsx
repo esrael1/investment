@@ -115,10 +115,36 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <div className="text-center ">
-        <h1 className="text-2xl font-bold text-white-900">Welcome back, {user?.full_name}!</h1>
-        <p className="text-white-600 space-y-6">Here's your investment overview</p>
-      </div>
+      import { motion } from "framer-motion";
+import { Sparkles } from "lucide-react";
+
+export default function WelcomeHeader({ user }) {
+  return (
+    <motion.div
+      className="text-center py-10 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 rounded-2xl shadow-lg"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <motion.div
+        className="flex items-center justify-center gap-2 mb-3"
+        initial={{ scale: 0.9 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.3 }}
+      >
+        <Sparkles className="w-6 h-6 text-yellow-300" />
+        <h1 className="text-3xl font-extrabold text-white drop-shadow-sm">
+          Welcome back, {user?.full_name || "Investor"}!
+        </h1>
+      </motion.div>
+
+      <p className="text-indigo-100 text-lg tracking-wide">
+        Here's your <span className="font-semibold text-yellow-200">investment overview</span>
+      </p>
+    </motion.div>
+  );
+}
+
    
 <div
   className="h-[50vh] rounded-lg shadow-sm border"
