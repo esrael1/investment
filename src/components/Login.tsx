@@ -39,14 +39,14 @@ export default function Login() {
         <div className="text-center">
           <div className="flex flex-col items-center justify-center">
             <img
-              src="/logo.png"
+              src="..\logo.jpg"
               alt="InvestPro Logo"
               className="h-16 w-16 mb-2 object-contain"
             />
             <DollarSign className="h-12 w-12 text-blue-600" />
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            Welcome to InvestPro
+            Welcome to InvesadsfstPro
           </h2>
           <p className="mt-2 text-sm text-gray-600">
             Sign in to your account
