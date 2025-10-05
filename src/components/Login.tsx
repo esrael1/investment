@@ -41,7 +41,7 @@ export default function Login() {
             <DollarSign className="h-12 w-12 text-blue-600" />
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            Welcome to InvestPro
+            Welcome to InvestPro123
           </h2>
           <p className="mt-2 text-sm text-gray-600">
             Sign in to your account
