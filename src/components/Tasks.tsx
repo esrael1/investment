@@ -204,7 +204,7 @@ export default function Tasks() {
 
                 <div className="p-6">
                   {tasks.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                       {tasks.map((task) => {
                         const isCompleted = isTaskCompletedToday(task.id, userPackage.id);
                         const canCompleteThis = canComplete && !isCompleted && tasksCompletedToday < maxDailyTasks;
