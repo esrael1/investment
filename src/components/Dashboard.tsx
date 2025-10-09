@@ -195,6 +195,9 @@ export default function Dashboard() {
         <div className="bg-green-200 rounded-lg shadow-sm border">
           <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
             <h3 className="text-lg font-large mb-2">Active Packages</h3>
+            <span className="bg-white text-red-600 px-3 py-1 rounded-full text-sm font-medium shadow">
+              {activePackages.length} Active
+            </span>
           </div>
           <div className="p-6">
             {activePackages.length > 0 ? (
