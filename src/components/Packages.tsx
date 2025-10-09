@@ -134,7 +134,6 @@ export default function Packages() {
 
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <PackageIcon className="h-8 w-8 text-blue-600" />
                   {isPurchased && (
                     <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">
                       Owned
