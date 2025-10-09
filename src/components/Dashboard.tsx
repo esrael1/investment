@@ -126,7 +126,7 @@ export default function Dashboard() {
       </div>
 
         
-      <div className="relative w-screen h-[100px] overflow-hidden rounded-lg shadow-lg">
+      <div className="relative w-screen h-[300px] overflow-hidden rounded-lg shadow-lg">
         {/* Overlay for better contrast */}
         <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
 
