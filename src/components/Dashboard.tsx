@@ -192,7 +192,7 @@ export default function Dashboard() {
 
         
         {/* Active Packages */}
-      <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+      <div className=" mx-auto bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-r from-red-500 to-blue-500 text-white p-6 flex justify-between items-center">
           <h3 className="text-xl font-semibold">Active Packages</h3>
