@@ -39,7 +39,7 @@ export default function Login() {
         <div className="text-center">
           <div className="flex flex-col items-center justify-center">
             <img
-              src="src/logo.jpg"
+              src="logo.jpg"
               alt="InvestPro Logo"
               className="h-16 w-16 mb-2 object-contain"
             />
