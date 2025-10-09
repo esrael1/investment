@@ -193,7 +193,7 @@ export default function Dashboard() {
         
         {/* Active Packages */}
         <div className="bg-green-200 rounded-lg shadow-sm border">
-          <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
+          <div className="bg-gradient-to-r from-red-400 to-bluke-400 text-white p-6 rounded-lg">
             <h3 className="text-lg font-large mb-2">Active Packages</h3>
             <span className="bg-white text-red-600 px-3 py-1 rounded-full text-sm font-medium shadow">
               {activePackages.length} Active
@@ -230,7 +230,7 @@ export default function Dashboard() {
 
         {/* Recent Transactions */}
         <div className="bg-green-200 rounded-lg shadow-sm border">
-          <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
+          <div className="bg-gradient-to-r from-red-400 to-bluekl-400 text-white p-6 rounded-lg">
             <h3 className="text-lg font-medium mb-2">Recent Transactions</h3>
           </div>
           <div className="p-6">
