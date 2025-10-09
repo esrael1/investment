@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; 
+import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 
 const AdminPackages = () => {
@@ -51,7 +51,14 @@ const AdminPackages = () => {
         await supabase.from('packages').insert(payload);
       }
 
-      setForm({ name: '', price: '', daily_tasks: '', daily_return: '', duration_days: '', background_image: '' });
+      setForm({
+        name: '',
+        price: '',
+        daily_tasks: '',
+        daily_return: '',
+        duration_days: '',
+        background_image: '',
+      });
       setEditingId(null);
       fetchPackages();
     } catch (err) {
@@ -91,14 +98,14 @@ const AdminPackages = () => {
 
       if (error) throw error;
 
-      // Get public URL
-      const { publicUrl, error: urlError } = supabase.storage
+      // Correctly get public URL
+      const { data: publicData, error: urlError } = supabase.storage
         .from('package-images')
         .getPublicUrl(`package-backgrounds/${fileName}`);
 
       if (urlError) throw urlError;
 
-      setForm({ ...form, background_image: publicUrl });
+      setForm({ ...form, background_image: publicData.publicUrl });
     } catch (err) {
       console.error('Upload error:', err);
       alert('Failed to upload image');
