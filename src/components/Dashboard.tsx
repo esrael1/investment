@@ -193,7 +193,7 @@ export default function Dashboard() {
         
         {/* Active Packages */}
         <div className="bg-green-200 rounded-lg shadow-sm border">
-          <div className="bg-gradient-to-r from-blue-300 to-purple-300 text-white p-6 rounded-lg">
+          <div className="bg-gradient-to-r from-red-200 to-blue-200 text-yellow p-6 rounded-lg">
             <h3 className="text-lg font-medium mb-2">Active Packages</h3>
           </div>
           <div className="p-6">
