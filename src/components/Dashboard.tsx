@@ -148,27 +148,27 @@ export default function Dashboard() {
     <div className="w-full overflow-hidden">
       <div className="flex animate-scroll whitespace-nowrap space-x-6">
         <img
-          src="https://via.placeholder.com/150/FF0000/FFFFFF?text=1"
+          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif"
           alt="img1"
           className="h-24 md:h-32 rounded-lg shadow-md"
         />
         <img
-          src="https://via.placeholder.com/150/00FF00/FFFFFF?text=2"
+          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif"
           alt="img2"
           className="h-24 md:h-32 rounded-lg shadow-md"
         />
         <img
-          src="https://via.placeholder.com/150/0000FF/FFFFFF?text=3"
+          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif"
           alt="img3"
           className="h-24 md:h-32 rounded-lg shadow-md"
         />
         <img
-          src="https://via.placeholder.com/150/FFFF00/FFFFFF?text=4"
+          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif"
           alt="img4"
           className="h-24 md:h-32 rounded-lg shadow-md"
         />
         <img
-          src="https://via.placeholder.com/150/FF00FF/FFFFFF?text=5"
+          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif"
           alt="img5"
           className="h-24 md:h-32 rounded-lg shadow-md"
         />
