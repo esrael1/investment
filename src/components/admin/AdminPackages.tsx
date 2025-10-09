@@ -10,7 +10,7 @@ const AdminPackages = () => {
     daily_tasks: '',
     daily_return: '',
     duration_days: '',
-    background_image: '', // NEW
+    background_image: '', // NEW field
   });
   const [editingId, setEditingId] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -19,19 +19,23 @@ const AdminPackages = () => {
     fetchPackages();
   }, []);
 
+  // Fetch all packages
   const fetchPackages = async () => {
+    setLoading(true);
     const { data, error } = await supabase
       .from('packages')
       .select('*')
       .order('created_at', { ascending: false });
 
     if (error) console.error('Error fetching packages:', error);
-    else setPackages(data);
+    else setPackages(data || []);
     setLoading(false);
   };
 
+  // Handle create/update package
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const payload = {
       ...form,
       price: parseFloat(form.price),
@@ -40,22 +44,29 @@ const AdminPackages = () => {
       duration_days: parseInt(form.duration_days),
     };
 
-    if (editingId) {
-      await supabase.from('packages').update(payload).eq('id', editingId);
-    } else {
-      await supabase.from('packages').insert(payload);
-    }
+    try {
+      if (editingId) {
+        await supabase.from('packages').update(payload).eq('id', editingId);
+      } else {
+        await supabase.from('packages').insert(payload);
+      }
 
-    setForm({ name: '', price: '', daily_tasks: '', daily_return: '', duration_days: '', background_image: '' });
-    setEditingId(null);
-    fetchPackages();
+      setForm({ name: '', price: '', daily_tasks: '', daily_return: '', duration_days: '', background_image: '' });
+      setEditingId(null);
+      fetchPackages();
+    } catch (err) {
+      console.error('Error saving package:', err);
+      alert('Failed to save package');
+    }
   };
 
+  // Handle edit package
   const handleEdit = (pkg) => {
     setForm(pkg);
     setEditingId(pkg.id);
   };
 
+  // Handle delete package
   const handleDelete = async (id) => {
     if (confirm('Are you sure you want to delete this package?')) {
       await supabase.from('packages').delete().eq('id', id);
@@ -63,32 +74,44 @@ const AdminPackages = () => {
     }
   };
 
+  // Handle background image upload
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
     setUploading(true);
 
-    const fileName = `${Date.now()}_${file.name}`;
-    const { data, error } = await supabase.storage
-      .from('package-backgrounds') // Make sure you have created this bucket
-      .upload(fileName, file);
+    const fileName = `${Date.now()}_${file.name.replace(/\s/g, '_')}`;
 
-    if (error) {
-      console.error('Upload error:', error);
+    try {
+      // Upload file to Supabase storage
+      const { data, error } = await supabase.storage
+        .from('package-images') // bucket name
+        .upload(`package-backgrounds/${fileName}`, file, { upsert: true });
+
+      if (error) throw error;
+
+      // Get public URL
+      const { publicUrl, error: urlError } = supabase.storage
+        .from('package-images')
+        .getPublicUrl(`package-backgrounds/${fileName}`);
+
+      if (urlError) throw urlError;
+
+      setForm({ ...form, background_image: publicUrl });
+    } catch (err) {
+      console.error('Upload error:', err);
       alert('Failed to upload image');
-    } else {
-      const { publicURL } = supabase.storage
-        .from('package-backgrounds')
-        .getPublicUrl(fileName);
-      setForm({ ...form, background_image: publicURL });
+    } finally {
+      setUploading(false);
     }
-    setUploading(false);
   };
 
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Manage Investment Packages</h1>
 
+      {/* Package form */}
       <form onSubmit={handleSubmit} className="space-y-4 bg-white p-4 rounded shadow mb-6">
         <input
           className="w-full border p-2 rounded"
@@ -132,15 +155,15 @@ const AdminPackages = () => {
           required
         />
 
-        {/* File upload input */}
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileUpload}
-        />
+        {/* File upload */}
+        <input type="file" accept="image/*" onChange={handleFileUpload} />
         {uploading && <p>Uploading image...</p>}
         {form.background_image && (
-          <img src={form.background_image} alt="Background Preview" className="mt-2 w-32 h-20 object-cover rounded" />
+          <img
+            src={form.background_image}
+            alt="Background Preview"
+            className="mt-2 w-32 h-20 object-cover rounded"
+          />
         )}
 
         <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
@@ -148,6 +171,7 @@ const AdminPackages = () => {
         </button>
       </form>
 
+      {/* Packages list */}
       {loading ? (
         <p>Loading...</p>
       ) : packages.length === 0 ? (
@@ -157,7 +181,11 @@ const AdminPackages = () => {
           {packages.map((pkg) => (
             <div key={pkg.id} className="border p-4 rounded shadow-sm">
               {pkg.background_image && (
-                <img src={pkg.background_image} alt="Background" className="w-full h-32 object-cover rounded mb-2" />
+                <img
+                  src={pkg.background_image}
+                  alt="Background"
+                  className="w-full h-32 object-cover rounded mb-2"
+                />
               )}
               <p><strong>Name:</strong> {pkg.name}</p>
               <p><strong>Price:</strong> ${pkg.price}</p>
