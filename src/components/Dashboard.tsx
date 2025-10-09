@@ -114,7 +114,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-0">
               
       <div className="relative w-screen h-[500px] overflow-hidden">
         {/* Overlay for better contrast */}
@@ -133,13 +133,13 @@ export default function Dashboard() {
 
         {/* Marquee container */}
         <div className="flex z-20 animate-marquee space-x-6">
-          <img src="gift.jpg" alt="gift" className="h-[500px] w-auto rounded-lg shadow-md" />
-          <img src="money.jpg" alt="money" className="h-[500px] w-auto rounded-lg shadow-md" />
-          <img src="bitconsak.jpg" alt="bitcoin" className="h-[500px] w-auto rounded-lg shadow-md" />
+          <img src="gift.jpg" alt="gift" className="h-[500px] w-auto" />
+          <img src="money.jpg" alt="money" className="h-[500px] w-auto" />
+          <img src="bitconsak.jpg" alt="bitcoin" className="h-[500px] w-auto" />
           {/* Duplicate images for continuous scroll */}
-          <img src="gift.jpg" alt="gift" className="h-[500px] w-auto rounded-lg shadow-md" />
-          <img src="money.jpg" alt="money" className="h-[500px] w-auto rounded-lg shadow-md" />
-          <img src="bitconsak.jpg" alt="bitcoin" className="h-[500px] w-auto rounded-lg shadow-md" />
+          <img src="gift.jpg" alt="gift" className="h-[500px] w-auto" />
+          <img src="money.jpg" alt="money" className="h-[500px] w-auto" />
+          <img src="bitconsak.jpg" alt="bitcoin" className="h-[500px] w-auto" />
         </div>
 
         {/* CSS Animation */}
