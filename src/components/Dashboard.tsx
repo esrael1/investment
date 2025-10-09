@@ -126,20 +126,71 @@ export default function Dashboard() {
       </div>
 
   
-<div
-  className="h-[50vh] rounded-lg shadow-sm"
-  style={{
-    backgroundImage: "url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat"
-  }}
->
+<div className="relative h-[50vh] rounded-lg overflow-hidden shadow-lg">
+  {/* Background GIF */}
+  <div
+    className="absolute inset-0 bg-cover bg-center"
+    style={{
+      backgroundImage: "url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif')"
+    }}
+  ></div>
 
-  <div className="p-6 border-b  rounded-t-lg h-full">
-    <h3 className="text-lg font-semibold text-gray-900">uhbnn</h3>
+  {/* Overlay for blur + contrast */}
+  <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
+
+  {/* Content */}
+  <div className="relative h-full flex flex-col justify-center items-start p-6 space-y-6">
+    <h3 className="text-2xl md:text-4xl font-bold text-white drop-shadow-lg">
+      Notifications
+    </h3>
+
+    {/* Scrolling images */}
+    <div className="w-full overflow-hidden">
+      <div className="flex animate-scroll whitespace-nowrap space-x-6">
+        <img
+          src="https://via.placeholder.com/150/FF0000/FFFFFF?text=1"
+          alt="img1"
+          className="h-24 md:h-32 rounded-lg shadow-md"
+        />
+        <img
+          src="https://via.placeholder.com/150/00FF00/FFFFFF?text=2"
+          alt="img2"
+          className="h-24 md:h-32 rounded-lg shadow-md"
+        />
+        <img
+          src="https://via.placeholder.com/150/0000FF/FFFFFF?text=3"
+          alt="img3"
+          className="h-24 md:h-32 rounded-lg shadow-md"
+        />
+        <img
+          src="https://via.placeholder.com/150/FFFF00/FFFFFF?text=4"
+          alt="img4"
+          className="h-24 md:h-32 rounded-lg shadow-md"
+        />
+        <img
+          src="https://via.placeholder.com/150/FF00FF/FFFFFF?text=5"
+          alt="img5"
+          className="h-24 md:h-32 rounded-lg shadow-md"
+        />
+      </div>
+    </div>
   </div>
+
+  {/* CSS Animation */}
+  <style>
+    {`
+      @keyframes scroll {
+        0% { transform: translateX(0%); }
+        100% { transform: translateX(-50%); }
+      }
+      .animate-scroll {
+        display: flex;
+        animation: scroll 3s linear infinite;
+      }
+    `}
+  </style>
 </div>
+
 
 
 
