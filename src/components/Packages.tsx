@@ -219,7 +219,6 @@ export default function Packages() {
           );
         })}
       </div>
-
       {packages.length === 0 && (
         <div className="text-center py-12">
           <PackageIcon className="h-12 w-12 text-gray-400 mx-auto mb-4" />
