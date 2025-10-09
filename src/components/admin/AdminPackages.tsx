@@ -10,8 +10,10 @@ const AdminPackages = () => {
     daily_tasks: '',
     daily_return: '',
     duration_days: '',
+    background_image: '', // NEW
   });
   const [editingId, setEditingId] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     fetchPackages();
@@ -44,7 +46,7 @@ const AdminPackages = () => {
       await supabase.from('packages').insert(payload);
     }
 
-    setForm({ name: '', price: '', daily_tasks: '', daily_return: '', duration_days: '' });
+    setForm({ name: '', price: '', daily_tasks: '', daily_return: '', duration_days: '', background_image: '' });
     setEditingId(null);
     fetchPackages();
   };
@@ -61,20 +63,42 @@ const AdminPackages = () => {
     }
   };
 
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setUploading(true);
+
+    const fileName = `${Date.now()}_${file.name}`;
+    const { data, error } = await supabase.storage
+      .from('package-backgrounds') // Make sure you have created this bucket
+      .upload(fileName, file);
+
+    if (error) {
+      console.error('Upload error:', error);
+      alert('Failed to upload image');
+    } else {
+      const { publicURL } = supabase.storage
+        .from('package-backgrounds')
+        .getPublicUrl(fileName);
+      setForm({ ...form, background_image: publicURL });
+    }
+    setUploading(false);
+  };
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Manage Investment Packages</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4 bg-white p-4 rounded shadow mb-6">
         <input
-          className="w-full border p-2 rounded bg-yellow-500"
+          className="w-full border p-2 rounded"
           placeholder="Package Name"
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
           required
         />
         <input
-          className="w-full border p-2 rounded bg-yellow-500"
+          className="w-full border p-2 rounded"
           type="number"
           step="0.01"
           placeholder="Price"
@@ -83,7 +107,7 @@ const AdminPackages = () => {
           required
         />
         <input
-          className="w-full border p-2 rounded bg-yellow-500"
+          className="w-full border p-2 rounded"
           type="number"
           placeholder="Daily Tasks"
           value={form.daily_tasks}
@@ -91,7 +115,7 @@ const AdminPackages = () => {
           required
         />
         <input
-          className="w-full border p-2 rounded bg-yellow-500"
+          className="w-full border p-2 rounded"
           type="number"
           step="0.01"
           placeholder="Daily Return"
@@ -100,14 +124,26 @@ const AdminPackages = () => {
           required
         />
         <input
-          className="w-full border p-2 rounded bg-yellow-500"
+          className="w-full border p-2 rounded"
           type="number"
           placeholder="Duration (days)"
           value={form.duration_days}
           onChange={(e) => setForm({ ...form, duration_days: e.target.value })}
           required
         />
-        <button type="submit" className="bg-blue-600 text- px-4 py-2 rounded">
+
+        {/* File upload input */}
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileUpload}
+        />
+        {uploading && <p>Uploading image...</p>}
+        {form.background_image && (
+          <img src={form.background_image} alt="Background Preview" className="mt-2 w-32 h-20 object-cover rounded" />
+        )}
+
+        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
           {editingId ? 'Update Package' : 'Create Package'}
         </button>
       </form>
@@ -119,14 +155,16 @@ const AdminPackages = () => {
       ) : (
         <div className="space-y-4">
           {packages.map((pkg) => (
-            <div key={pkg.id} className="border p-4 rounded bg-yellow-500 shadow-sm">
+            <div key={pkg.id} className="border p-4 rounded shadow-sm">
+              {pkg.background_image && (
+                <img src={pkg.background_image} alt="Background" className="w-full h-32 object-cover rounded mb-2" />
+              )}
               <p><strong>Name:</strong> {pkg.name}</p>
               <p><strong>Price:</strong> ${pkg.price}</p>
               <p><strong>Daily Tasks:</strong> {pkg.daily_tasks}</p>
               <p><strong>Daily Return:</strong> ${pkg.daily_return}</p>
               <p><strong>Duration (days):</strong> {pkg.duration_days}</p>
               <p><strong>Status:</strong> {pkg.is_active ? 'Active' : 'Inactive'}</p>
-              <p><strong>Created:</strong> {new Date(pkg.created_at).toLocaleString()}</p>
               <div className="mt-2 space-x-2">
                 <button
                   onClick={() => handleEdit(pkg)}
