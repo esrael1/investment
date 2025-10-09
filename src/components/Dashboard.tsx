@@ -126,19 +126,19 @@ export default function Dashboard() {
       </div>
 
         
-      <div className="relative w-screen h-[300px] overflow-hidden rounded-lg shadow-lg">
+      <div className="relative w-screen h-[400px] overflow-hidden">
         {/* Overlay for better contrast */}
         <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
 
         {/* Marquee container */}
         <div className="flex animate-marquee space-x-6">
-          <img src="gift.jpg" alt="gift" className="h-[100px] w-auto rounded-lg shadow-md" />
-          <img src="money.jpg" alt="money" className="h-[100px] w-auto rounded-lg shadow-md" />
-          <img src="bitconsak.jpg" alt="bitcoin" className="h-[100px] w-auto rounded-lg shadow-md" />
+          <img src="gift.jpg" alt="gift" className="h-[400px] w-auto rounded-lg shadow-md" />
+          <img src="money.jpg" alt="money" className="h-[400px] w-auto rounded-lg shadow-md" />
+          <img src="bitconsak.jpg" alt="bitcoin" className="h-[400px] w-auto rounded-lg shadow-md" />
           {/* Duplicate images for continuous scroll */}
-          <img src="gift.jpg" alt="gift" className="h-[100px] w-auto rounded-lg shadow-md" />
-          <img src="money.jpg" alt="money" className="h-[100px] w-auto rounded-lg shadow-md" />
-          <img src="bitconsak.jpg" alt="bitcoin" className="h-[100px] w-auto rounded-lg shadow-md" />
+          <img src="gift.jpg" alt="gift" className="h-[400px] w-auto rounded-lg shadow-md" />
+          <img src="money.jpg" alt="money" className="h-[400px] w-auto rounded-lg shadow-md" />
+          <img src="bitconsak.jpg" alt="bitcoin" className="h-[400px] w-auto rounded-lg shadow-md" />
         </div>
 
         {/* CSS Animation */}
