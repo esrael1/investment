@@ -126,7 +126,7 @@ export default function Dashboard() {
       </div>
 
   
-<div className="relative h-[50vh] rounded-lg overflow-hidden shadow-lg">
+<div className="relative h-[50vh] w-full rounded-lg overflow-hidden shadow-lg">
   {/* Background GIF */}
   <div
     className="absolute inset-0 bg-cover bg-center"
@@ -165,7 +165,7 @@ export default function Dashboard() {
         <img
           src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif"
           alt="img4"
-          className="h-24 md:h-32 rounded-lg shadow-md"
+          className="h-full md:h-32 rounded-lg shadow-md"
         />
         <img
           src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif"
