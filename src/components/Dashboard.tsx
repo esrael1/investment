@@ -117,7 +117,7 @@ export default function Dashboard() {
     <div className="space-y-6">
       <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
         <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-          እስራኤል ተበዳ, {user?.full_name || "Investor"}!
+          Welcome back to, {user?.full_name || "Investor"}!
         </h1>
         <p className="mt-3 text-gray-300 text-lg tracking-wide">
           Here's your <span className="font-semibold text-indigo-400">investment overview</span>
