@@ -45,7 +45,11 @@ export default function Register() {
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <div className="flex justify-center">
-            <DollarSign className="h-12 w-12 text-blue-600" />
+            <img
+              src="logo.jpg"
+              alt="InvestPro Logo"
+              className="h-100 w-100 mb-2 object-contain"
+            />
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
             Create your account
