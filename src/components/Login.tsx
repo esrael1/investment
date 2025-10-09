@@ -47,9 +47,6 @@ export default function Login() {
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
       
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
-            Sign in to your account
-          </p>
         </div>
         
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
