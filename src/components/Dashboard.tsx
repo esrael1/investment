@@ -148,17 +148,17 @@ export default function Dashboard() {
     <div className="w-full overflow-hidden">
       <div className="flex animate-scroll whitespace-nowrap space-x-6">
         <img
-          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif"
+          src="gift.jpg"
           alt="img1"
           className="h-24 md:h-32 rounded-lg shadow-md"
         />
         <img
-          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif"
+          src="money.jpg"
           alt="img2"
           className="h-24 md:h-32 rounded-lg shadow-md"
         />
         <img
-          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif"
+          src="bitconsak.jpg"
           alt="img3"
           className="h-24 md:h-32 rounded-lg shadow-md"
         />
