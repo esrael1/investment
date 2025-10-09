@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase, Package, UserPackage } from '../lib/supabase';
-import { Package as PackageIcon, Clock, DollarSign, CheckSquare } from 'lucide-react';
+import { Package as PackageIcon, Clock, CheckSquare } from 'lucide-react';
 
 export default function Packages() {
   const { user, refreshUser } = useAuth();
@@ -12,9 +12,7 @@ export default function Packages() {
 
   useEffect(() => {
     fetchPackages();
-    if (user) {
-      fetchUserPackages();
-    }
+    if (user) fetchUserPackages();
   }, [user]);
 
   const fetchPackages = async () => {
@@ -24,7 +22,6 @@ export default function Packages() {
         .select('*')
         .eq('is_active', true)
         .order('price');
-
       if (error) throw error;
       setPackages(data || []);
     } catch (error) {
@@ -34,17 +31,12 @@ export default function Packages() {
 
   const fetchUserPackages = async () => {
     if (!user) return;
-
     try {
       const { data, error } = await supabase
         .from('user_packages')
-        .select(`
-          *,
-          packages (*)
-        `)
+        .select(`*, packages (*)`)
         .eq('user_id', user.id)
         .eq('is_active', true);
-
       if (error) throw error;
       setUserPackages(data || []);
     } catch (error) {
@@ -59,49 +51,35 @@ export default function Packages() {
       alert('Insufficient balance. Please deposit funds first.');
       return;
     }
-
     setPurchasing(pkg.id);
-
     try {
-      // Start a transaction to ensure consistency
       const { error: balanceError } = await supabase.rpc('decrement_balance', {
         user_id: user.id,
-        amount: pkg.price
+        amount: pkg.price,
       });
-
       if (balanceError) throw balanceError;
 
-      // Create user package
       const expiryDate = new Date();
       expiryDate.setDate(expiryDate.getDate() + pkg.duration_days);
 
-      const { error: packageError } = await supabase
-        .from('user_packages')
-        .insert({
-          user_id: user.id,
-          package_id: pkg.id,
-          expiry_date: expiryDate.toISOString(),
-        });
-
+      const { error: packageError } = await supabase.from('user_packages').insert({
+        user_id: user.id,
+        package_id: pkg.id,
+        expiry_date: expiryDate.toISOString(),
+      });
       if (packageError) throw packageError;
 
-      // Add transaction record
-      const { error: transactionError } = await supabase
-        .from('transactions')
-        .insert({
-          user_id: user.id,
-          type: 'package_purchase',
-          amount: pkg.price,
-          description: `Purchased ${pkg.name}`,
-          reference_id: pkg.id,
-        });
-
+      const { error: transactionError } = await supabase.from('transactions').insert({
+        user_id: user.id,
+        type: 'package_purchase',
+        amount: pkg.price,
+        description: `Purchased ${pkg.name}`,
+        reference_id: pkg.id,
+      });
       if (transactionError) throw transactionError;
 
-      // Refresh data
       await refreshUser();
       await fetchUserPackages();
-      
       alert('Package purchased successfully!');
     } catch (error) {
       console.error('Error purchasing package:', error);
@@ -134,13 +112,26 @@ export default function Packages() {
         </p>
         <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {packages.map((pkg) => {
+        {packages.map(pkg => {
           const isPurchased = isPackagePurchased(pkg.id);
           const canAfford = user && user.wallet_balance >= pkg.price;
-          
+
           return (
             <div key={pkg.id} className="bg-white rounded-lg shadow-sm border overflow-hidden">
+              {/* Background Image */}
+              {pkg.background_image && (
+                <div
+                  className="w-full h-32 object-cover rounded-t-lg"
+                  style={{
+                    backgroundImage: `url(${pkg.background_image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                />
+              )}
+
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <PackageIcon className="h-8 w-8 text-blue-600" />
@@ -150,20 +141,20 @@ export default function Packages() {
                     </span>
                   )}
                 </div>
-                
+
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">{pkg.name}</h3>
-                
+
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Packaged Price</span>
                     <span className="font-semibold text-gray-900">${pkg.price}</span>
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Daily Return</span>
                     <span className="font-semibold text-green-600">${pkg.daily_return}</span>
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Daily Tasks</span>
                     <div className="flex items-center">
@@ -171,7 +162,7 @@ export default function Packages() {
                       <span className="font-semibold text-gray-900">{pkg.daily_tasks}</span>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Duration</span>
                     <div className="flex items-center">
@@ -183,17 +174,19 @@ export default function Packages() {
 
                 <div className="space-y-2 mb-6">
                   <div className="text-sm text-gray-600">
-                    Total Return: <span className="font-semibold text-green-600">
+                    Total Return:{' '}
+                    <span className="font-semibold text-green-600">
                       ${(pkg.daily_return * pkg.duration_days).toFixed(2)}
                     </span>
                   </div>
                   <div className="text-sm text-gray-600">
-                    Profit: <span className="font-semibold text-green-600">
+                    Profit:{' '}
+                    <span className="font-semibold text-green-600">
                       ${(pkg.daily_return * pkg.duration_days - pkg.price).toFixed(2)}
                     </span>
                   </div>
                 </div>
-                
+
                 <button
                   onClick={() => handlePurchase(pkg)}
                   disabled={isPurchased || !canAfford || purchasing === pkg.id}
@@ -211,8 +204,7 @@ export default function Packages() {
                     ? 'Already Purchased'
                     : canAfford
                     ? 'Purchase Package'
-                    : 'Insufficient Balance'
-                  }
+                    : 'Insufficient Balance'}
                 </button>
               </div>
             </div>
