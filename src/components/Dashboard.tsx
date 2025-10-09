@@ -125,71 +125,37 @@ export default function Dashboard() {
         <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
       </div>
 
-  
-<div className="relative h-[50vh] w-full rounded-lg overflow-hidden shadow-lg">
-  {/* Background GIF */}
-  <div
-    className="absolute inset-0 bg-cover bg-center"
-    style={{
-      backgroundImage: "url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif')"
-    }}
-  ></div>
+        
+      <div className="relative w-screen h-[100px] overflow-hidden rounded-lg shadow-lg">
+        {/* Overlay for better contrast */}
+        <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
 
-  {/* Overlay for blur + contrast */}
-  <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
+        {/* Marquee container */}
+        <div className="flex animate-marquee space-x-6">
+          <img src="gift.jpg" alt="gift" className="h-[100px] w-auto rounded-lg shadow-md" />
+          <img src="money.jpg" alt="money" className="h-[100px] w-auto rounded-lg shadow-md" />
+          <img src="bitconsak.jpg" alt="bitcoin" className="h-[100px] w-auto rounded-lg shadow-md" />
+          {/* Duplicate images for continuous scroll */}
+          <img src="gift.jpg" alt="gift" className="h-[100px] w-auto rounded-lg shadow-md" />
+          <img src="money.jpg" alt="money" className="h-[100px] w-auto rounded-lg shadow-md" />
+          <img src="bitconsak.jpg" alt="bitcoin" className="h-[100px] w-auto rounded-lg shadow-md" />
+        </div>
 
-  {/* Content */}
-  <div className="relative h-full flex flex-col justify-center items-start p-6 space-y-6">
-    <h3 className="text-2xl md:text-4xl font-bold text-white drop-shadow-lg">
-      Notifications
-    </h3>
-
-    {/* Scrolling images */}
-    <div className="w-full overflow-hidden">
-      <div className="flex animate-scroll whitespace-nowrap space-x-6">
-        <img
-          src="gift.jpg"
-          alt="img1"
-          className="h-24 md:h-32 rounded-lg shadow-md"
-        />
-        <img
-          src="money.jpg"
-          alt="img2"
-          className="h-24 md:h-32 rounded-lg shadow-md"
-        />
-        <img
-          src="bitconsak.jpg"
-          alt="img3"
-          className="h-24 md:h-32 rounded-lg shadow-md"
-        />
-        <img
-          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif"
-          alt="img4"
-          className="h-full md:h-32 rounded-lg shadow-md"
-        />
-        <img
-          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif"
-          alt="img5"
-          className="h-24 md:h-32 rounded-lg shadow-md"
-        />
+        {/* CSS Animation */}
+        <style>
+          {`
+            @keyframes marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .animate-marquee {
+              display: flex;
+              width: max-content;
+              animation: marquee 9s linear infinite;
+            }
+          `}
+        </style>
       </div>
-    </div>
-  </div>
-
-  {/* CSS Animation */}
-  <style>
-    {`
-      @keyframes scroll {
-        0% { transform: translateX(0%); }
-        100% { transform: translateX(-50%); }
-      }
-      .animate-scroll {
-        display: flex;
-        animation: scroll 3s linear infinite;
-      }
-    `}
-  </style>
-</div>
 
 
 
