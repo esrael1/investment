@@ -192,38 +192,47 @@ export default function Dashboard() {
 
         
         {/* Active Packages */}
-        <div className="bg-green-200 rounded-lg shadow-sm border">
-          <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
-            <h3 className="text-lg font-large mb-2">Active Packages</h3>
-          </div>
-          <div className="p-6">
-            {activePackages.length > 0 ? (
-              <div className="space-y-4">
-                {activePackages.map((userPackage) => (
-                  <div key={userPackage.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                    <div>
-                      <h4 className="font-medium text-gray-900">{userPackage.packages?.name}</h4>
-                      <p className="text-sm text-gray-600">
-                        Earned: ${userPackage.total_earned.toFixed(2)} | 
-                        Tasks Today: {userPackage.tasks_completed_today}/{userPackage.packages?.daily_tasks}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm font-medium text-green-600">
-                        ${userPackage.packages?.daily_return}/day
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        Expires: {format(new Date(userPackage.expiry_date), 'MMM dd, yyyy')}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-gray-500 text-center py-8">No active packages</p>
-            )}
-          </div>
+      <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-red-500 to-blue-500 text-white p-6 flex justify-between items-center">
+          <h3 className="text-xl font-semibold">Active Packages</h3>
+          <span className="bg-white text-red-600 px-3 py-1 rounded-full text-sm font-medium shadow">
+            {activePackages.length} Active
+          </span>
         </div>
+
+        {/* Body */}
+        <div className="p-6 space-y-4">
+          {activePackages.length > 0 ? (
+            activePackages.map((userPackage) => (
+              <div
+                key={userPackage.id}
+                className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300"
+              >
+                {/* Package Info */}
+                <div className="flex-1">
+                  <h4 className="font-semibold text-gray-900 text-lg">{userPackage.packages?.name}</h4>
+                  <p className="text-sm text-gray-600 mt-1">
+                    Earned: <span className="font-medium text-gray-800">${userPackage.total_earned.toFixed(2)}</span> | 
+                    Tasks Today: <span className="font-medium text-gray-800">{userPackage.tasks_completed_today}/{userPackage.packages?.daily_tasks}</span>
+                  </p>
+                </div>
+
+                {/* Package Stats */}
+                <div className="mt-3 sm:mt-0 sm:text-right">
+                  <p className="text-green-600 font-semibold text-lg">${userPackage.packages?.daily_return}/day</p>
+                  <p className="text-gray-500 text-sm mt-1">
+                    Expires: {format(new Date(userPackage.expiry_date), 'MMM dd, yyyy')}
+                  </p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-500 text-center py-12 text-lg">No active packages</p>
+          )}
+        </div>
+      </div>
+
 
         {/* Recent Transactions */}
         <div className="bg-green-500 rounded-lg shadow-sm border">
