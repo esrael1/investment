@@ -115,30 +115,31 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
-        <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-          Welcome back to, {user?.full_name || "Investor"}!
-        </h1>
-        <p className="mt-3 text-gray-300 text-lg tracking-wide">
-          Here's your <span className="font-semibold text-indigo-400">investment overview</span>
-        </p>
-        <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
-      </div>
-
-        
-      <div className="relative w-screen h-[400px] overflow-hidden">
+              
+      <div className="relative w-screen h-[500px] overflow-hidden">
         {/* Overlay for better contrast */}
-        <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-black/20 pointer-events-none">
+          <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
+          <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            Welcome back to, {user?.full_name || "Investor"}!
+          </h1>
+          <p className="mt-3 text-gray-300 text-lg tracking-wide">
+            Here's your <span className="font-semibold text-indigo-400">investment overview</span>
+          </p>
+          <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
+        </div>
+          
+        </div>
 
         {/* Marquee container */}
         <div className="flex animate-marquee space-x-6">
-          <img src="gift.jpg" alt="gift" className="h-[400px] w-auto rounded-lg shadow-md" />
-          <img src="money.jpg" alt="money" className="h-[400px] w-auto rounded-lg shadow-md" />
-          <img src="bitconsak.jpg" alt="bitcoin" className="h-[400px] w-auto rounded-lg shadow-md" />
+          <img src="gift.jpg" alt="gift" className="h-[500px] w-auto rounded-lg shadow-md" />
+          <img src="money.jpg" alt="money" className="h-[500px] w-auto rounded-lg shadow-md" />
+          <img src="bitconsak.jpg" alt="bitcoin" className="h-[500px] w-auto rounded-lg shadow-md" />
           {/* Duplicate images for continuous scroll */}
-          <img src="gift.jpg" alt="gift" className="h-[400px] w-auto rounded-lg shadow-md" />
-          <img src="money.jpg" alt="money" className="h-[400px] w-auto rounded-lg shadow-md" />
-          <img src="bitconsak.jpg" alt="bitcoin" className="h-[400px] w-auto rounded-lg shadow-md" />
+          <img src="gift.jpg" alt="gift" className="h-[500px] w-auto rounded-lg shadow-md" />
+          <img src="money.jpg" alt="money" className="h-[500px] w-auto rounded-lg shadow-md" />
+          <img src="bitconsak.jpg" alt="bitcoin" className="h-[500px] w-auto rounded-lg shadow-md" />
         </div>
 
         {/* CSS Animation */}
@@ -151,7 +152,7 @@ export default function Dashboard() {
             .animate-marquee {
               display: flex;
               width: max-content;
-              animation: marquee 9s linear infinite;
+              animation: marquee 15s linear infinite;
             }
           `}
         </style>
