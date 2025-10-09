@@ -156,7 +156,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-red-400 to-bleue-400 text-white p-6 rounded-lg">
+        {/* <div className="bg-gradient-to-r from-red-400 to-bleue-400 text-white p-6 rounded-lg">
           <div className="flex items-center">
             <Package className="h-8 w-8 text-blue-600" />
             <div className="ml-4">
@@ -164,7 +164,7 @@ export default function Dashboard() {
               <p className="text-3xl font-bold">{stats.activePackages}</p>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
           <div className="flex items-center">
