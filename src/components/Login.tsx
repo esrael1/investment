@@ -41,9 +41,8 @@ export default function Login() {
             <img
               src="logo.jpg"
               alt="InvestPro Logo"
-              className="h-16 w-16 mb-2 object-contain"
+              className="h-100 w-100 mb-2 object-contain"
             />
-            <DollarSign className="h-12 w-12 text-blue-600" />
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
       
