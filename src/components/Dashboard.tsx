@@ -137,7 +137,7 @@ export default function Dashboard() {
 >
 
   <div className="p-6 border-b  rounded-t-lg h-full">
-    <h3 className="text-lg font-semibold text-gray-900"></h3>
+    <h3 className="text-lg font-semibold text-gray-900">uhbnn</h3>
   </div>
 </div>
 
