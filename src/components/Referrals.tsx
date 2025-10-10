@@ -88,7 +88,7 @@ export default function Referrals() {
           Referral Program
         </h1>
         <p className="mt-3 text-gray-300 text-lg tracking-wide">
-          <span className="font-semibold text-indigo-400">Invite friends and earn $10 for each successful referral</span>
+          <span className="font-semibold text-indigo-400">Invite friends and earn 20 ETB for each successful referral</span>
         </p>
         <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
       </div>
@@ -110,7 +110,7 @@ export default function Referrals() {
             <DollarSign className="h-8 w-8 text-green-600" />
             <div className="ml-4">
               <p className="text-lg font-medium mb-2">Total Earnings</p>
-              <p className="text-2xl font-bold text-white-900">${stats.totalBonus.toFixed(2)}</p>
+              <p className="text-2xl font-bold text-white-900">{stats.totalBonus.toFixed(2)} ETB</p>
             </div>
           </div>
         </div>
@@ -169,7 +169,7 @@ export default function Referrals() {
             <ul className="text-sm text-blue-800 space-y-1">
               <li>• Share your referral code or link with friends</li>
               <li>• They sign up using your referral code</li>
-              <li>• When they purchase their first package, you earn $10</li>
+              <li>• When they purchase their first package, you earn 10 %</li>
               <li>• There's no limit to how many people you can refer!</li>
             </ul>
           </div>
