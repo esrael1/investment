@@ -95,7 +95,7 @@ export default function Referrals() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
           <div className="flex items-center">
             <Users className="h-8 w-8 text-green-600" />
             <div className="ml-4">
@@ -105,7 +105,7 @@ export default function Referrals() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
           <div className="flex items-center">
             <DollarSign className="h-8 w-8 text-green-600" />
             <div className="ml-4">
@@ -117,7 +117,7 @@ export default function Referrals() {
       </div>
 
       {/* Referral Tools */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+      <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
         <div className="p-6 border-b">
           <h3 className="text-lg font-medium mb-2">Your Referral Tools</h3>
         </div>
@@ -135,7 +135,7 @@ export default function Referrals() {
               />
               <button
                 onClick={copyReferralCode}
-                className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700"
               >
                 <Copy className="h-4 w-4 mr-2" />
                 {copied ? 'Copied!' : 'Copy'}
@@ -177,7 +177,7 @@ export default function Referrals() {
       </div>
 
       {/* Referral History */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+      <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
         <div className="p-6 border-b">
           <h3 className="text-lg font-medium mb-2">Referral History</h3>
         </div>
