@@ -135,8 +135,8 @@ export default function Packages() {
                 className="relative w-full h-40 bg-cover bg-center"
                 style={{
                   backgroundImage: pkg.background_image
-                    ? `url("${pkg.background_image}")`
-                    : `linear-gradient(to right, #e0e7ff, #f3f4f6)`,
+                    ? `url("${pkg.background_imajge}")`
+                    : `linear-gradient(to right, #ce1c1cf3, #003cb3f1)`,
                 }}
               >
                 {/* Overlay */}
