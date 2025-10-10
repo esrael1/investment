@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
-import { supabase, Package, UserPackage } from '../lib/supabase';
-import { Package as PackageIcon, Clock, CheckSquare } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
+import { supabase, Package, UserPackage } from "../lib/supabase";
+import { Package as PackageIcon, Clock, CheckSquare } from "lucide-react";
 
 export default function Packages() {
   const { user, refreshUser } = useAuth();
@@ -18,14 +18,14 @@ export default function Packages() {
   const fetchPackages = async () => {
     try {
       const { data, error } = await supabase
-        .from('packages')
-        .select('*')
-        .eq('is_active', true)
-        .order('price');
+        .from("packages")
+        .select("*")
+        .eq("is_active", true)
+        .order("price");
       if (error) throw error;
       setPackages(data || []);
     } catch (error) {
-      console.error('Error fetching packages:', error);
+      console.error("Error fetching packages:", error);
     }
   };
 
@@ -33,14 +33,14 @@ export default function Packages() {
     if (!user) return;
     try {
       const { data, error } = await supabase
-        .from('user_packages')
+        .from("user_packages")
         .select(`*, packages (*)`)
-        .eq('user_id', user.id)
-        .eq('is_active', true);
+        .eq("user_id", user.id)
+        .eq("is_active", true);
       if (error) throw error;
       setUserPackages(data || []);
     } catch (error) {
-      console.error('Error fetching user packages:', error);
+      console.error("Error fetching user packages:", error);
     } finally {
       setLoading(false);
     }
@@ -48,12 +48,12 @@ export default function Packages() {
 
   const handlePurchase = async (pkg: Package) => {
     if (!user || user.wallet_balance < pkg.price) {
-      alert('Insufficient balance. Please deposit funds first.');
+      alert("Insufficient balance. Please deposit funds first.");
       return;
     }
     setPurchasing(pkg.id);
     try {
-      const { error: balanceError } = await supabase.rpc('decrement_balance', {
+      const { error: balanceError } = await supabase.rpc("decrement_balance", {
         user_id: user.id,
         amount: pkg.price,
       });
@@ -62,35 +62,39 @@ export default function Packages() {
       const expiryDate = new Date();
       expiryDate.setDate(expiryDate.getDate() + pkg.duration_days);
 
-      const { error: packageError } = await supabase.from('user_packages').insert({
-        user_id: user.id,
-        package_id: pkg.id,
-        expiry_date: expiryDate.toISOString(),
-      });
+      const { error: packageError } = await supabase
+        .from("user_packages")
+        .insert({
+          user_id: user.id,
+          package_id: pkg.id,
+          expiry_date: expiryDate.toISOString(),
+        });
       if (packageError) throw packageError;
 
-      const { error: transactionError } = await supabase.from('transactions').insert({
-        user_id: user.id,
-        type: 'package_purchase',
-        amount: pkg.price,
-        description: `Purchased ${pkg.name}`,
-        reference_id: pkg.id,
-      });
+      const { error: transactionError } = await supabase
+        .from("transactions")
+        .insert({
+          user_id: user.id,
+          type: "package_purchase",
+          amount: pkg.price,
+          description: `Purchased ${pkg.name}`,
+          reference_id: pkg.id,
+        });
       if (transactionError) throw transactionError;
 
       await refreshUser();
       await fetchUserPackages();
-      alert('Package purchased successfully!');
+      alert("Package purchased successfully!");
     } catch (error) {
-      console.error('Error purchasing package:', error);
-      alert('Failed to purchase package. Please try again.');
+      console.error("Error purchasing package:", error);
+      alert("Failed to purchase package. Please try again.");
     } finally {
       setPurchasing(null);
     }
   };
 
   const isPackagePurchased = (packageId: string) => {
-    return userPackages.some(up => up.package_id === packageId);
+    return userPackages.some((up) => up.package_id === packageId);
   };
 
   if (loading) {
@@ -108,108 +112,127 @@ export default function Packages() {
           Investment Packages
         </h1>
         <p className="mt-3 text-gray-300 text-lg tracking-wide">
-          <span className="font-semibold text-indigo-400">Choose a package to start earning daily returns</span>
+          <span className="font-semibold text-indigo-400">
+            Choose a package to start earning daily returns
+          </span>
         </p>
         <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {packages.map(pkg => {
+      {/* package box */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {packages.map((pkg) => {
           const isPurchased = isPackagePurchased(pkg.id);
           const canAfford = user && user.wallet_balance >= pkg.price;
 
           return (
-            <div key={pkg.id} className="bg-white rounded-lg shadow-sm border overflow-hidden">
+            <div
+              key={pkg.id}
+              className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100"
+            >
               {/* Background Image */}
-            {pkg.background_image ? (
-  <div
-    className="relative w-full h-36 bg-cover bg-center rounded-t-lg"
-    style={{ backgroundImage: `url("${pkg.background_image}")` }}
-  >
-    {/* Optional overlay for better readability */}
-    <div className="absolute inset-0 bg-black/30 rounded-t-lg"></div>
-    <div className="absolute bottom-2 left-3 text-white">
-      <h3 className="text-sm font-bold drop-shadow">{pkg.name}</h3>   
-       <div className="flex items-center justify-between mb-4">
-              
+              <div
+                className="relative w-full h-40 bg-cover bg-center"
+                style={{
+                  backgroundImage: pkg.background_image
+                    ? `url("${pkg.background_image}")`
+                    : `linear-gradient(to right, #e0e7ff, #f3f4f6)`,
+                }}
+              >
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"></div>
+
+                {/* Top Section (Package Name + Owned) */}
+                <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+                  <div>
+                    <h3 className="text-white font-semibold text-sm uppercase tracking-wide drop-shadow-md">
+                      {pkg.name}
+                    </h3>
+                    <p className="text-gray-200 text-xs">${pkg.price}</p>
+                  </div>
+
                   {isPurchased && (
-                    <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">
+                    <span className="px-2 py-1 bg-green-500/90 text-white text-xs font-semibold rounded-full shadow-md">
                       Owned
                     </span>
                   )}
                 </div>
-      <p className="text-xs text-gray-200">${pkg.price}</p>
-    </div>
-  </div>
-) : (
-  <div className="w-full h-36 bg-gray-200 flex items-center justify-center rounded-t-lg">
-    <span className="text-gray-500 text-sm">No Image</span>
-  </div>
-)}
+              </div>
 
-              <div className="p-6">
-               
-
-            
-
-                <div className="space-y-3 mb-6">
-                 
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Daily Return</span>
-                    <span className="font-semibold text-green-600">${pkg.daily_return}</span>
+              {/* Package Info */}
+              <div className="p-5 space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <span className="font-medium">Daily Return:</span>
+                    <span className="text-green-600 font-semibold">
+                      ${pkg.daily_return}
+                    </span>
                   </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Daily Tasks</span>
-                    <div className="flex items-center">
-                      <CheckSquare className="h-4 w-4 text-gray-400 mr-1" />
-                      <span className="font-semibold text-gray-900">{pkg.daily_tasks}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Duration</span>
-                    <div className="flex items-center">
-                      <Clock className="h-4 w-4 text-gray-400 mr-1" />
-                      <span className="font-semibold text-gray-900">{pkg.duration_days} days</span>
-                    </div>
-                  </div>
+                  <PackageIcon className="h-5 w-5 text-blue-500" />
                 </div>
 
-                <div className="space-y-2 mb-6">
-                  <div className="text-sm text-gray-600">
-                    Total Return:{' '}
+                <div className="flex justify-between items-center text-sm text-gray-600">
+                  <div className="flex items-center gap-1">
+                    <CheckSquare className="h-4 w-4 text-gray-400" />
+                    <span className="font-medium">Tasks:</span>
+                  </div>
+                  <span className="font-semibold text-gray-900">
+                    {pkg.daily_tasks}
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center text-sm text-gray-600">
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4 text-gray-400" />
+                    <span className="font-medium">Duration:</span>
+                  </div>
+                  <span className="font-semibold text-gray-900">
+                    {pkg.duration_days} days
+                  </span>
+                </div>
+
+                {/* Divider */}
+                <div className="border-t border-gray-200 my-3"></div>
+
+                {/* Returns Info */}
+                <div className="text-sm space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Total Return</span>
                     <span className="font-semibold text-green-600">
                       ${(pkg.daily_return * pkg.duration_days).toFixed(2)}
                     </span>
                   </div>
-                  <div className="text-sm text-gray-600">
-                    Profit:{' '}
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Profit</span>
                     <span className="font-semibold text-green-600">
-                      ${(pkg.daily_return * pkg.duration_days - pkg.price).toFixed(2)}
+                      $
+                      {(
+                        pkg.daily_return * pkg.duration_days -
+                        pkg.price
+                      ).toFixed(2)}
                     </span>
                   </div>
                 </div>
 
+                {/* Purchase Button */}
                 <button
                   onClick={() => handlePurchase(pkg)}
                   disabled={isPurchased || !canAfford || purchasing === pkg.id}
-                  className={`w-full py-3 px-4 rounded-md font-medium transition-colors ${
+                  className={`w-full mt-4 py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
                     isPurchased
-                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                       : canAfford
-                      ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                      : 'bg-red-100 text-red-600 cursor-not-allowed'
+                      ? "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-md hover:shadow-lg"
+                      : "bg-red-100 text-red-600 cursor-not-allowed"
                   }`}
                 >
                   {purchasing === pkg.id
-                    ? 'Purchasing...'
+                    ? "Purchasing..."
                     : isPurchased
-                    ? 'Already Purchased'
+                    ? "Already Purchased"
                     : canAfford
-                    ? 'Purchase Package'
-                    : 'Insufficient Balance'}
+                    ? "Purchase Package"
+                    : "Insufficient Balance"}
                 </button>
               </div>
             </div>
