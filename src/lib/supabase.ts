@@ -17,6 +17,8 @@ export interface User {
 }
 
 export interface Package {
+  [x: string]: any;
+  background_image: any;
   id: string;
   name: string;
   price: number;

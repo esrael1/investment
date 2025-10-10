@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase, Package, UserPackage } from '../lib/supabase';
 import { Package as PackageIcon, Clock, CheckSquare } from 'lucide-react';
- 
+
 export default function Packages() {
   const { user, refreshUser } = useAuth();
   const [packages, setPackages] = useState<Package[]>([]);
@@ -134,6 +134,7 @@ export default function Packages() {
 
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
+                  <PackageIcon className="h-8 w-8 text-blue-600" />
                   {isPurchased && (
                     <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">
                       Owned
