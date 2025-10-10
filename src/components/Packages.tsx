@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase, Package, UserPackage } from '../lib/supabase';
 import { Package as PackageIcon, Clock, CheckSquare } from 'lucide-react';
-
+ 
 export default function Packages() {
   const { user, refreshUser } = useAuth();
   const [packages, setPackages] = useState<Package[]>([]);
