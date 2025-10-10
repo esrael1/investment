@@ -125,7 +125,7 @@ export default function Packages() {
                 <div
                   className="w-full h-32 object-cover rounded-t-lg"
                   style={{
-                    backgroundImage: 'url(${pkg.background_image})',
+                    backgroundImage: `url(${pkg.background_image})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                   }}
