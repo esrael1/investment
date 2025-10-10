@@ -120,15 +120,16 @@ export default function Packages() {
 
           return (
             <div key={pkg.id} className="bg-white rounded-lg shadow-sm border overflow-hidden">
-             {pkg.background_image && (
-  <div
-    className="w-full h-32 rounded-t-lg bg-cover bg-center"
-    style={{
-      backgroundImage: `url("${pkg.background_image}")`,
-    }}
-  />
-)}
-
+              {/* Background Image */}
+              {pkg.background_image && (
+                <div
+                  className="w-full h-32 object-cover rounded-t-lg"
+                  style={{
+                    backgroundImage: `url(${pkg.background_image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                />
               )}
 
               <div className="p-6">
