@@ -1,72 +1,223 @@
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../supabaseClient';
-import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import { supabase, Package, UserPackage } from '../lib/supabase';
+import { Package as PackageIcon, Clock, CheckSquare } from 'lucide-react';
 
-const Packages = () => {
-  const [packages, setPackages] = useState([]);
+export default function Packages() {
+  const { user, refreshUser } = useAuth();
+  const [packages, setPackages] = useState<Package[]>([]);
+  const [userPackages, setUserPackages] = useState<UserPackage[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [purchasing, setPurchasing] = useState<string | null>(null);
 
   useEffect(() => {
     fetchPackages();
-  }, []);
+    if (user) fetchUserPackages();
+  }, [user]);
 
   const fetchPackages = async () => {
     try {
-      const { data, error } = await supabase.from('packages').select('*');
+      const { data, error } = await supabase
+        .from('packages')
+        .select('*')
+        .eq('is_active', true)
+        .order('price');
       if (error) throw error;
-      setPackages(data);
+      setPackages(data || []);
     } catch (error) {
       console.error('Error fetching packages:', error);
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gray-100 py-10 px-6">
-      <h1 className="text-2xl font-bold text-center mb-8">Available Packages</h1>
+  const fetchUserPackages = async () => {
+    if (!user) return;
+    try {
+      const { data, error } = await supabase
+        .from('user_packages')
+        .select(`*, packages (*)`)
+        .eq('user_id', user.id)
+        .eq('is_active', true);
+      if (error) throw error;
+      setUserPackages(data || []);
+    } catch (error) {
+      console.error('Error fetching user packages:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {packages.map((pkg) => (
-          <div
-            key={pkg.id}
-            className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-          >
-            {/* Background Image with Overlay */}
-            {pkg.background_image ? (
-              <div
-                className="relative w-full h-36 bg-cover bg-center rounded-t-lg"
-                style={{ backgroundImage: `url("${pkg.background_image}")` }}
-              >
-                {/* Overlay for better text visibility */}
-                <div className="absolute inset-0 bg-black bg-opacity-40 rounded-t-lg"></div>
+  const handlePurchase = async (pkg: Package) => {
+    if (!user || user.wallet_balance < pkg.price) {
+      alert('Insufficient balance. Please deposit funds first.');
+      return;
+    }
+    setPurchasing(pkg.id);
+    try {
+      const { error: balanceError } = await supabase.rpc('decrement_balance', {
+        user_id: user.id,
+        amount: pkg.price,
+      });
+      if (balanceError) throw balanceError;
 
-                {/* Overlaid text */}
-                <div className="absolute bottom-2 left-3 text-white">
-                  <h2 className="text-lg font-bold drop-shadow-md">{pkg.name}</h2>
-                  <p className="text-sm text-gray-200">${pkg.price}</p>
-                </div>
-              </div>
-            ) : (
-              <div className="w-full h-36 bg-gray-200 flex items-center justify-center rounded-t-lg">
-                <span className="text-gray-500 text-lg">{pkg.name}</span>
-              </div>
-            )}
+      const expiryDate = new Date();
+      expiryDate.setDate(expiryDate.getDate() + pkg.duration_days);
 
-            {/* Package Details */}
-            <div className="p-4">
-              <p className="text-sm text-gray-700 mb-2">{pkg.description}</p>
-              <p className="text-gray-900 font-semibold mb-3">Daily Tasks: {pkg.tasks_per_day}</p>
+      const { error: packageError } = await supabase.from('user_packages').insert({
+        user_id: user.id,
+        package_id: pkg.id,
+        expiry_date: expiryDate.toISOString(),
+      });
+      if (packageError) throw packageError;
 
-              <Link
-                to={`/packages/${pkg.id}`}
-                className="block text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
-              >
-                View Details
-              </Link>
-            </div>
-          </div>
-        ))}
+      const { error: transactionError } = await supabase.from('transactions').insert({
+        user_id: user.id,
+        type: 'package_purchase',
+        amount: pkg.price,
+        description: `Purchased ${pkg.name}`,
+        reference_id: pkg.id,
+      });
+      if (transactionError) throw transactionError;
+
+      await refreshUser();
+      await fetchUserPackages();
+      alert('Package purchased successfully!');
+    } catch (error) {
+      console.error('Error purchasing package:', error);
+      alert('Failed to purchase package. Please try again.');
+    } finally {
+      setPurchasing(null);
+    }
+  };
+
+  const isPackagePurchased = (packageId: string) => {
+    return userPackages.some(up => up.package_id === packageId);
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
       </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
+        <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+          Investment Packages
+        </h1>
+        <p className="mt-3 text-gray-300 text-lg tracking-wide">
+          <span className="font-semibold text-indigo-400">Choose a package to start earning daily returns</span>
+        </p>
+        <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {packages.map(pkg => {
+          const isPurchased = isPackagePurchased(pkg.id);
+          const canAfford = user && user.wallet_balance >= pkg.price;
+
+          return (
+            <div key={pkg.id} className="bg-white rounded-lg shadow-sm border overflow-hidden">
+              {/* Background Image */}
+              {pkg.background_image && (
+                <div
+                  className="w-full h-32 object-cover rounded-t-lg"
+                  style={{
+                    backgroundImage: `url(${pkg.background_image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                />
+              )}
+
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <PackageIcon className="h-8 w-8 text-blue-600" />
+                  {isPurchased && (
+                    <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">
+                      Owned
+                    </span>
+                  )}
+                </div>
+
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">{pkg.name}</h3>
+
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">Packaged Price</span>
+                    <span className="font-semibold text-gray-900">${pkg.price}</span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">Daily Return</span>
+                    <span className="font-semibold text-green-600">${pkg.daily_return}</span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">Daily Tasks</span>
+                    <div className="flex items-center">
+                      <CheckSquare className="h-4 w-4 text-gray-400 mr-1" />
+                      <span className="font-semibold text-gray-900">{pkg.daily_tasks}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">Duration</span>
+                    <div className="flex items-center">
+                      <Clock className="h-4 w-4 text-gray-400 mr-1" />
+                      <span className="font-semibold text-gray-900">{pkg.duration_days} days</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-2 mb-6">
+                  <div className="text-sm text-gray-600">
+                    Total Return:{' '}
+                    <span className="font-semibold text-green-600">
+                      ${(pkg.daily_return * pkg.duration_days).toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    Profit:{' '}
+                    <span className="font-semibold text-green-600">
+                      ${(pkg.daily_return * pkg.duration_days - pkg.price).toFixed(2)}
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => handlePurchase(pkg)}
+                  disabled={isPurchased || !canAfford || purchasing === pkg.id}
+                  className={`w-full py-3 px-4 rounded-md font-medium transition-colors ${
+                    isPurchased
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      : canAfford
+                      ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                      : 'bg-red-100 text-red-600 cursor-not-allowed'
+                  }`}
+                >
+                  {purchasing === pkg.id
+                    ? 'Purchasing...'
+                    : isPurchased
+                    ? 'Already Purchased'
+                    : canAfford
+                    ? 'Purchase Package'
+                    : 'Insufficient Balance'}
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {packages.length === 0 && (
+        <div className="text-center py-12">
+          <PackageIcon className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+          <p className="text-gray-500">No packages available at the moment</p>
+        </div>
+      )}
     </div>
   );
-};
-
-export default Packages;
+}
