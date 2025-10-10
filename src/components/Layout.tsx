@@ -48,11 +48,11 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="flex flex-col min-h-screen bg-white-500 dark:bg-white-500 dark:text-white">
       {/* Header */}
-      <header className="bg-blue-500 dark:bg-gray-800 shadow-sm border-b sticky top-0 z-30">
+      <header className="bg-purple-950 dark:bg-gray-800 shadow-sm border-b sticky top-0 z-30">
         <div className="flex justify-between items-center h-16 px-4">
           <div className="flex items-center">
-            <DollarSign className="h-6 w-6 text-blue-600" />
-            <span className="ml-2 text-lg font-bold text-gray-900 dark:text-white">
+            <img src="logo1.jpg" alt="" className="w-10" h-10/>
+            <span className="ml-2 text-lg font-bold text-white-900 dark:text-white">
               InvestPro
             </span>
           </div>
@@ -79,7 +79,7 @@ export default function Layout({ children }: LayoutProps) {
       <main className="flex-1 overflow-y-auto px-4 py-6 pb-24">{children}</main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-blue-500 dark:bg-gray-900 border-t shadow z-40">
+      <nav className="fixed bottom-0 left-0 right-0 bg-Shamrock-700 dark:bg-gray-900 border-t shadow z-40">
         <div className="flex justify-around items-center h-16">
           {menuItems.map((item) => {
             const Icon = item.icon;
