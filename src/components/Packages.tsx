@@ -121,16 +121,24 @@ export default function Packages() {
           return (
             <div key={pkg.id} className="bg-white rounded-lg shadow-sm border overflow-hidden">
               {/* Background Image */}
-              {pkg.background_image && (
-                <div
-                  className="w-full h-32 object-cover rounded-t-lg"
-                  style={{
-                    backgroundImage: `url(${pkg.background_image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  }}
-                />
-              )}
+             {pkg.background_image ? (
+  <div
+    className="relative w-full h-36 bg-cover bg-center rounded-t-lg"
+    style={{ backgroundImage: `url("${pkg.background_image}")` }}
+  >
+    {/* Optional overlay for better readability */}
+    <div className="absolute inset-0 bg-black/30 rounded-t-lg"></div>
+    <div className="absolute bottom-2 left-3 text-white">
+      <h3 className="text-sm font-bold drop-shadow">{pkg.name}</h3>
+      <p className="text-xs text-gray-200">${pkg.price}</p>
+    </div>
+  </div>
+) : (
+  <div className="w-full h-36 bg-gray-200 flex items-center justify-center rounded-t-lg">
+    <span className="text-gray-500 text-sm">No Image</span>
+  </div>
+)}
+
 
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
