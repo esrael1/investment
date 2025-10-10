@@ -130,6 +130,7 @@ export default function Packages() {
     <div className="absolute inset-0 bg-black/30 rounded-t-lg"></div>
     <div className="absolute bottom-2 left-3 text-white">
       <h3 className="text-sm font-bold drop-shadow">{pkg.name}</h3>
+      <span className="text-sm text-gray-600">Packaged Price</span>
       <p className="text-xs text-gray-200">${pkg.price}</p>
     </div>
   </div>
@@ -142,7 +143,7 @@ export default function Packages() {
 
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <PackageIcon className="h-8 w-8 text-blue-600" />
+                  
                   {isPurchased && (
                     <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">
                       Owned
@@ -150,13 +151,9 @@ export default function Packages() {
                   )}
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">{pkg.name}</h3>
+          
 
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Packaged Price</span>
-                    <span className="font-semibold text-gray-900">${pkg.price}</span>
-                  </div>
+                
 
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Daily Return</span>
