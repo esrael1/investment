@@ -121,6 +121,13 @@ export default function Packages() {
           return (
             <div key={pkg.id} className="bg-white rounded-lg shadow-sm border overflow-hidden">
               {/* Background Image */}
+
+               {pkg.background_image && (
+                <img
+                  src={pkg.background_image}
+                  alt="Background"
+                  className="w-full h-32 object-cover rounded mb-2"
+                />
               {pkg.background_image && (
                 <div
                   className="w-full h-32 object-cover rounded-t-lg"
