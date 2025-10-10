@@ -135,7 +135,7 @@ export default function Packages() {
                 className="relative w-full h-40 bg-cover bg-center"
                 style={{
                   backgroundImage: pkg.background_image
-                    ? `url("${pkg.background_imajge}")`
+                    ? `url("${pkg.background_image}")`
                     : `linear-gradient(to right, #ce1c1cf3, #003cb3f1)`,
                 }}
               >
@@ -144,12 +144,21 @@ export default function Packages() {
 
                 {/* Top Section (Package Name + Owned) */}
                 <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                  <div>
-                    <h3 className="text-white font-semibold text-sm uppercase tracking-wide drop-shadow-md">
-                      {pkg.name}
-                    </h3>
-                    <p className="text-gray-200 text-xs">${pkg.price}</p>
-                  </div>
+                  <div className="absolute top-3 left-3">
+  <div
+    className="backdrop-blur-sm bg-white/10 hover:bg-white/20 border border-white/20 
+               rounded-lg px-3 py-2 transition-all duration-300 shadow-md"
+  >
+    <h3 className="text-white font-semibold text-sm uppercase tracking-wide drop-shadow-sm">
+      {pkg.name}
+    </h3>
+    <p className="text-gray-100 text-xs mt-0.5">
+      Price{" "}
+      <span className="text-yellow-300 font-medium">{pkg.price} ETB</span>
+    </p>
+  </div>
+</div>
+
 
                   {isPurchased && (
                     <span className="px-2 py-1 bg-green-500/90 text-white text-xs font-semibold rounded-full shadow-md">
