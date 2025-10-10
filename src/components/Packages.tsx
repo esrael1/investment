@@ -121,7 +121,7 @@ export default function Packages() {
           return (
             <div key={pkg.id} className="bg-white rounded-lg shadow-sm border overflow-hidden">
               {/* Background Image */}
-        {pkg.background_image ? (
+            {pkg.background_image ? (
   <div
     className="relative w-full h-36 bg-cover bg-center rounded-t-lg"
     style={{ backgroundImage: `url("${pkg.background_image}")` }}
@@ -139,7 +139,6 @@ export default function Packages() {
   </div>
 )}
 
-
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <PackageIcon className="h-8 w-8 text-blue-600" />
@@ -148,8 +147,12 @@ export default function Packages() {
                       Owned
                     </span>
                   )}
-               
+                </div>
 
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">{pkg.name}</h3>
+
+                <div className="space-y-3 mb-6">
+                 
 
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Daily Return</span>
