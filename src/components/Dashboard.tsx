@@ -115,38 +115,56 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
-        <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-          Welcome back to, {user?.full_name || "Investor"}!
-        </h1>
-        <p className="mt-3 text-gray-300 text-lg tracking-wide">
-          Here's your <span className="font-semibold text-indigo-400">investment overview</span>
-        </p>
-        <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
+              
+      <div className="relative w-screen h-[500px] overflow-hidden">
+        {/* Overlay for better contrast */}
+        <div className="absolute z-50 inset-0 bg-black/20 pointer-events-none">
+          <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
+          <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            Welcome back, {user?.full_name || "Investor"}!
+          </h1>
+          <p className="mt-3 text-gray-300 text-lg tracking-wide">
+            Here's your <span className="font-semibold text-indigo-400">investment overview</span>
+          </p>
+          <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
+        </div>
+          
+        </div>
+
+        {/* Marquee container */}
+        <div className="flex z-20 animate-marquee space-x-6">
+          <img src="gift.jpg" alt="gift" className="h-[500px] w-auto" />
+          <img src="money.jpg" alt="money" className="h-[500px] w-auto" />
+          <img src="bitconsak.jpg" alt="bitcoin" className="h-[500px] w-auto" />
+          {/* Duplicate images for continuous scroll */}
+          <img src="openbox.jpg" alt="gift" className="h-[500px] w-auto" />
+          <img src="wallet.jpg" alt="money" className="h-[500px] w-auto" />
+          <img src="reward.jpg" alt="bitcoin" className="h-[500px] w-auto" />
+        </div>
+
+        {/* CSS Animation */}
+        <style>
+          {`
+            @keyframes marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .animate-marquee {
+              display: flex;
+              width: max-content;
+              animation: marquee 15s linear infinite;
+            }
+          `}
+        </style>
       </div>
 
-  
-<div
-  className="h-[50vh] rounded-lg shadow-sm"
-  style={{
-    backgroundImage: "url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc0czcwYmNmMnptM3pjZnB5M3ZicW5xOGJlN2RpczJudWgzaXBiNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BfFFYPSVYr9UR6EtEL/giphy.gif')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat"
-  }}
->
-
-  <div className="p-6 border-b  rounded-t-lg h-full">
-    <h3 className="text-lg font-semibold text-gray-900"></h3>
-  </div>
-</div>
 
 
 
    
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
           <div className="flex items-center">
             <Wallet className="h-8 w-8 text-green-600" />
             <div className="ml-4">
@@ -156,7 +174,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+        {/* <div className="bg-gradient-to-r from-red-400 to-bleue-400 text-white p-6 rounded-lg">
           <div className="flex items-center">
             <Package className="h-8 w-8 text-blue-600" />
             <div className="ml-4">
@@ -164,9 +182,9 @@ export default function Dashboard() {
               <p className="text-3xl font-bold">{stats.activePackages}</p>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
           <div className="flex items-center">
             <TrendingUp className="h-8 w-8 text-purple-600" />
             <div className="ml-4">
@@ -176,9 +194,9 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
           <div className="flex items-center">
-            <Gift className="h-8 w-8 text-yellow-600" />
+            <Gift className="h-8 w-8 text-yellow-700" />
             <div className="ml-4">
               <p className="text-lg font-medium mb-2">Referrals</p>
               <p className="text-3xl font-bold">{stats.referrals}</p>
@@ -192,9 +210,12 @@ export default function Dashboard() {
 
         
         {/* Active Packages */}
-        <div className="bg-green-500 rounded-lg shadow-sm border">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
-            <h3 className="text-lg font-medium mb-2">Active Packages</h3>
+        <div className="bg-green-200 rounded-lg shadow-sm border">
+          <div className="bg-gradient-to-r from-red-400 to-bluke-400 text-white p-6 rounded-lg">
+            <h3 className="text-lg font-large mb-2">Active Packages</h3>
+            <span className="bg-white text-red-600 px-3 py-1 rounded-full text-sm font-medium shadow">
+              {activePackages.length} Active
+            </span>
           </div>
           <div className="p-6">
             {activePackages.length > 0 ? (
@@ -226,8 +247,8 @@ export default function Dashboard() {
         </div>
 
         {/* Recent Transactions */}
-        <div className="bg-green-500 rounded-lg shadow-sm border">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+        <div className="bg-green-200 rounded-lg shadow-sm border">
+          <div className="bg-gradient-to-r from-red-400 to-bluekl-400 text-white p-6 rounded-lg">
             <h3 className="text-lg font-medium mb-2">Recent Transactions</h3>
           </div>
           <div className="p-6">
