@@ -130,8 +130,7 @@ export default function Packages() {
                     backgroundPosition: 'center',
                   }}
                 />
-              )}
-
+              )} 
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <PackageIcon className="h-8 w-8 text-blue-600" />
