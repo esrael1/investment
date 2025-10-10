@@ -129,7 +129,15 @@ export default function Packages() {
     {/* Optional overlay for better readability */}
     <div className="absolute inset-0 bg-black/30 rounded-t-lg"></div>
     <div className="absolute bottom-2 left-3 text-white">
-      <h3 className="text-sm font-bold drop-shadow">{pkg.name}</h3>
+      <h3 className="text-sm font-bold drop-shadow">{pkg.name}</h3>   
+       <div className="flex items-center justify-between mb-4">
+              
+                  {isPurchased && (
+                    <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">
+                      Owned
+                    </span>
+                  )}
+                </div>
       <p className="text-xs text-gray-200">${pkg.price}</p>
     </div>
   </div>
@@ -140,14 +148,7 @@ export default function Packages() {
 )}
 
               <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-              
-                  {isPurchased && (
-                    <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">
-                      Owned
-                    </span>
-                  )}
-                </div>
+               
 
             
 
