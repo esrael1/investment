@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 
 export default function Referrals() {
   const { user } = useAuth();
-  const [referrals, setReferrals] = useState<(Referral & { users: User })[]>([]);
+  const [referrals, setReferrals] = useState<(Referral & { users: User; bonus_amount: number })[]>([]);
   const [stats, setStats] = useState({
     totalReferrals: 0,
     totalBonus: 0,
@@ -22,34 +22,44 @@ export default function Referrals() {
 
   const fetchReferralData = async () => {
     if (!user) return;
+    setLoading(true);
 
     try {
-      // Fetch all referrals made by this user
-      const { data: referralsData, error } = await supabase
+      // Step 1: Get all referrals made by this user
+      const { data: referralsData, error: referralsError } = await supabase
         .from('referrals')
         .select(`
           *,
-          users!referrals_referred_id_fkey (*),
-          purchases (package_price)
+          users!referrals_referred_id_fkey (id, full_name)
         `)
         .eq('referrer_id', user.id)
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (referralsError) throw referralsError;
 
-      // ✅ Calculate 10% of all packages bought by each referred user
-      const updatedReferrals = referralsData.map((ref) => {
-        const totalPurchase = ref.purchases?.reduce(
-          (sum, p) => sum + Number(p.package_price || 0),
-          0
-        );
-        const bonus_amount = totalPurchase * 0.1;
-        return { ...ref, bonus_amount };
-      });
+      // Step 2: For each referred user, get all their purchases
+      const updatedReferrals = await Promise.all(
+        (referralsData || []).map(async (ref) => {
+          const { data: purchases, error: purchasesError } = await supabase
+            .from('purchases')
+            .select('package_price')
+            .eq('user_id', ref.referred_id);
+
+          if (purchasesError) throw purchasesError;
+
+          const totalPurchases = purchases?.reduce(
+            (sum, p) => sum + Number(p.package_price || 0),
+            0
+          ) || 0;
+
+          const bonus_amount = totalPurchases * 0.1; // ✅ 10% of every purchase
+
+          return { ...ref, bonus_amount };
+        })
+      );
 
       const totalReferrals = updatedReferrals.length;
-      const totalBonus =
-        updatedReferrals.reduce((sum, r) => sum + r.bonus_amount, 0) || 0;
+      const totalBonus = updatedReferrals.reduce((sum, r) => sum + r.bonus_amount, 0) || 0;
 
       setReferrals(updatedReferrals);
       setStats({ totalReferrals, totalBonus });
@@ -63,7 +73,6 @@ export default function Referrals() {
   const copyReferralLink = async () => {
     if (!user?.referral_code) return;
     const referralLink = `${window.location.origin}/register?ref=${user.referral_code}`;
-
     try {
       await navigator.clipboard.writeText(referralLink);
       setCopied(true);
@@ -94,7 +103,8 @@ export default function Referrals() {
 
   return (
     <div className="space-y-6">
-      <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
+      {/* Header */}
+      <div className="text-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 p-8 rounded-2xl">
         <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
           Referral Program
         </h1>
@@ -177,7 +187,10 @@ export default function Referrals() {
         {referrals.length > 0 ? (
           <div className="space-y-4">
             {referrals.map((referral) => (
-              <div key={referral.id} className="flex justify-between p-4 bg-gray-50 rounded-lg">
+              <div
+                key={referral.id}
+                className="flex justify-between items-center p-4 bg-gray-50 rounded-lg"
+              >
                 <div className="flex items-center">
                   <Gift className="h-8 w-8 text-yellow-600" />
                   <div className="ml-4">
