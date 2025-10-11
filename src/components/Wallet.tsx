@@ -202,7 +202,7 @@ export default function Wallet() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="inset-0 relative pointer-events-none">
-          <div className="absolute z-50 right-1 bottom-3 flex space-x-4">
+          <div className="absolute z-50 bottom-0 flex space-x-4">
             <button
               onClick={() => setShowDepositModal(true)}
               className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
