@@ -171,7 +171,7 @@ export default function Packages() {
       </div>
 
       {/* package list */}
-      <div className="grid grid-cols-1 bg-gradient-to-b from-indigo-200 to-purple-400 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {packages.map((pkg) => {
           const isPurchased = isPackagePurchased(pkg.id);
           const canAfford = user && user.wallet_balance >= pkg.price;
@@ -179,7 +179,7 @@ export default function Packages() {
           return (
             <div
               key={pkg.id}
-              className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100"
+              className="group relative bg-gradient-to-b from-indigo-200 to-purple-400 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100"
             >
               <div
                 className="relative w-full h-40 bg-cover bg-center"
@@ -189,7 +189,7 @@ export default function Packages() {
                     : `linear-gradient(to right, #ce1c1cf3, #003cb3f1)`,
                 }}
               >
-                {/* <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"></div> */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"></div>
 
                 <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
                   <div className="backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-lg px-3 py-2 transition-all duration-300 shadow-md">
