@@ -417,7 +417,7 @@ export default function Wallet() {
                   ))}
                 </ul>
               ) : (
-                <p className="text-gray-500 bg-blue-900">
+                <p className="text-red-600">
                   No bank account information available.
                 </p>
               )}
@@ -486,7 +486,7 @@ export default function Wallet() {
                   step="0.01"
                   value={depositAmount}
                   onChange={(e) => setDepositAmount(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-blue-900"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Enter amount"
                   required
                 />
@@ -503,7 +503,7 @@ export default function Wallet() {
                   onChange={(e) =>
                     setDepositScreenshot(e.target.files?.[0] || null)
                   }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-blue-900"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
 
