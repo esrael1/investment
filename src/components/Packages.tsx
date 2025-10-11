@@ -46,6 +46,51 @@ export default function Packages() {
     }
   };
 
+  // ✅ New: Reward referrer with 10% bonus on every purchase
+  const rewardReferrerForPurchase = async (purchasingUserId, packagePrice) => {
+    try {
+      // Check if user was referred
+      const { data: referralData, error: referralError } = await supabase
+        .from("referrals")
+        .select("id, referrer_id, bonus_amount")
+        .eq("referred_id", purchasingUserId)
+        .single();
+
+      if (referralError || !referralData) {
+        console.log("No referrer found, skipping referral reward.");
+        return;
+      }
+
+      const { referrer_id, bonus_amount } = referralData;
+      const bonus = Number(packagePrice) * 0.1; // 10% bonus
+
+      // Update total bonus for this referral
+      const { error: updateError } = await supabase
+        .from("referrals")
+        .update({
+          bonus_amount: (Number(bonus_amount) || 0) + bonus,
+        })
+        .eq("referred_id", purchasingUserId);
+
+      if (updateError) throw updateError;
+
+      // Optionally add referral earning history (recommended)
+      await supabase.from("referral_earnings").insert([
+        {
+          referrer_id,
+          referred_id: purchasingUserId,
+          amount: bonus,
+          package_price: packagePrice,
+          created_at: new Date(),
+        },
+      ]);
+
+      console.log(`Referral bonus of ${bonus} ETB credited to referrer ${referrer_id}`);
+    } catch (error) {
+      console.error("Error rewarding referrer:", error);
+    }
+  };
+
   const handlePurchase = async (pkg: Package) => {
     if (!user || user.wallet_balance < pkg.price) {
       alert("Insufficient balance. Please deposit funds first.");
@@ -53,12 +98,14 @@ export default function Packages() {
     }
     setPurchasing(pkg.id);
     try {
+      // Deduct balance
       const { error: balanceError } = await supabase.rpc("decrement_balance", {
         user_id: user.id,
         amount: pkg.price,
       });
       if (balanceError) throw balanceError;
 
+      // Add package to user_packages
       const expiryDate = new Date();
       expiryDate.setDate(expiryDate.getDate() + pkg.duration_days);
 
@@ -71,6 +118,7 @@ export default function Packages() {
         });
       if (packageError) throw packageError;
 
+      // Log transaction
       const { error: transactionError } = await supabase
         .from("transactions")
         .insert({
@@ -81,6 +129,9 @@ export default function Packages() {
           reference_id: pkg.id,
         });
       if (transactionError) throw transactionError;
+
+      // ✅ Reward referrer after purchase
+      await rewardReferrerForPurchase(user.id, pkg.price);
 
       await refreshUser();
       await fetchUserPackages();
@@ -119,7 +170,7 @@ export default function Packages() {
         <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
       </div>
 
-      {/* package box */}
+      {/* package list */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {packages.map((pkg) => {
           const isPurchased = isPackagePurchased(pkg.id);
@@ -130,7 +181,6 @@ export default function Packages() {
               key={pkg.id}
               className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100"
             >
-              {/* Background Image */}
               <div
                 className="relative w-full h-40 bg-cover bg-center"
                 style={{
@@ -139,19 +189,13 @@ export default function Packages() {
                     : `linear-gradient(to right, #ce1c1cf3, #003cb3f1)`,
                 }}
               >
-                {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"></div>
 
-                {/* Top Section (Package Name + Owned) */}
                 <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                  <div
-                    className="backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 
-               rounded-lg px-3 py-2 transition-all duration-300 shadow-md"
-                  >
+                  <div className="backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-lg px-3 py-2 transition-all duration-300 shadow-md">
                     <h3 className="text-gray-900 font-bold text-sm uppercase tracking-wide drop-shadow-sm animate-glow">
                       {pkg.name}
                     </h3>
-
                     <p className="text-gray-900 text-xs mt-0.5">
                       Price{" "}
                       <span className="text-gray-600 font-medium">
@@ -168,7 +212,6 @@ export default function Packages() {
                 </div>
               </div>
 
-              {/* Package Info */}
               <div className="p-5 space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-sm text-gray-600">
@@ -199,10 +242,8 @@ export default function Packages() {
                   </span>
                 </div>
 
-                {/* Divider */}
                 <div className="border-t border-gray-200 my-3"></div>
 
-                {/* Returns Info */}
                 <div className="text-sm space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Total Return</span>
@@ -222,7 +263,6 @@ export default function Packages() {
                   </div>
                 </div>
 
-                {/* Purchase Button */}
                 <button
                   onClick={() => handlePurchase(pkg)}
                   disabled={isPurchased || !canAfford || purchasing === pkg.id}
