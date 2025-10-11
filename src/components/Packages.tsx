@@ -179,7 +179,7 @@ export default function Packages() {
           return (
             <div
               key={pkg.id}
-              className="group relative bg-gradient-to-b from-indigo-200 to-purple-400 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100"
+              className="group relative bg-gradient-to-b from-gray-100 to-cyan-400 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100"
             >
               <div
                 className="relative w-full h-40 bg-cover bg-center"
@@ -189,16 +189,14 @@ export default function Packages() {
                     : `linear-gradient(to right, #ce1c1cf3, #003cb3f1)`,
                 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"></div>
-
                 <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
                   <div className="backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-lg px-3 py-2 transition-all duration-300 shadow-md">
                     <h3 className="text-gray-900 font-bold text-sm uppercase tracking-wide drop-shadow-sm animate-glow">
                       {pkg.name}
                     </h3>
-                    <p className="text-purple-900 text-xs mt-0.5">
+                    <p className="text-blue-900 text-xs mt-0.5">
                       Price{" "}
-                      <span className="text-purple-900 font-medium">
+                      <span className="text-blue-900 font-medium">
                         {pkg.price}: ETB
                       </span>
                     </p>
@@ -241,8 +239,6 @@ export default function Packages() {
                     {pkg.duration_days} days
                   </span>
                 </div>
-
-                <div className="border-t border-gray-200 my-3"></div>
 
                 <div className="text-sm space-y-2">
                   <div className="flex justify-between">
