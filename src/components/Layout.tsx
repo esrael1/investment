@@ -60,7 +60,7 @@ export default function Layout({ children }: LayoutProps) {
             <div className="text-sm text-right">
               <p className="font-medium">{user?.full_name}</p>
               {!user?.is_admin && (
-                <p className="text-green-600 font-semibold text-xs">
+                <p className="text-white-900 font-semibold text-xs">
                   ${user?.wallet_balance?.toFixed(2) || '0.00'}
                 </p>
               )}
