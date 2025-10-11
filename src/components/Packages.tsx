@@ -173,10 +173,10 @@ export default function Packages() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-sm text-gray-600">
                     <span className="font-medium">Daily Return:</span>
-                    <span className="text-green-600 font-semibold">
-                      ${pkg.daily_return}
-                    </span>
                   </div>
+                  <span className="text-green-600 font-semibold">
+                    ${pkg.daily_return}
+                  </span>
                 </div>
 
                 <div className="flex justify-between items-center text-sm text-gray-600">
