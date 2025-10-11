@@ -1,4 +1,4 @@
-upddate the referal logic into when user invites some one must gain 10%  price of the package from purchese of the invited user                                                  import React, { useEffect, useState } from 'react';  
+import React, { useEffect, useState } from 'react';  
 import { useAuth } from '../contexts/AuthContext';
 import { supabase, Referral, User } from '../lib/supabase';
 import { Gift, Copy, Users, DollarSign } from 'lucide-react';
