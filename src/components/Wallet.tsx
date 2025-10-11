@@ -181,10 +181,6 @@ export default function Wallet() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Wallet</h1>
-          <p className="text-gray-600">Manage your deposits, withdrawals, and transactions</p>
-        </div>
         <div className="flex space-x-4">
           <button
             onClick={() => setShowDepositModal(true)}
@@ -200,6 +196,19 @@ export default function Wallet() {
             <Download className="h-4 w-4 mr-2" />
             Withdraw
           </button>
+        </div>
+        <div className="absolute z-50 inset-0 bg-black/20 pointer-events-none">
+          <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
+            <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+              Your Wallets
+            </h1>
+            <p className="mt-3 text-gray-300 text-lg tracking-wide">
+              <span className="font-semibold text-indigo-400">
+                Manage your deposits, withdrawals, and transactions
+              </span>
+            </p>
+            <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
+          </div>
         </div>
       </div>
 

@@ -154,8 +154,19 @@ export default function Tasks() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900">Daily Tasks</h1>
-      <p className="text-gray-600">Accept and complete daily tasks to earn rewards.</p>
+      <div className="absolute z-50 inset-0 bg-black/20 pointer-events-none">
+          <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
+            <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+              Daily Tasks
+            </h1>
+            <p className="mt-3 text-gray-300 text-lg tracking-wide">
+              <span className="font-semibold text-indigo-400">
+                Accept and complete daily tasks to earn rewards.
+              </span>
+            </p>
+            <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
+          </div>
+        </div>
 
       {userPackages.length > 0 ? (
         userPackages.map(pkg => {
