@@ -149,7 +149,7 @@ export default function Packages() {
                rounded-lg px-3 py-2 transition-all duration-300 shadow-md"
                   >
                     <h3 className="text-white font-semibold text-sm uppercase tracking-wide drop-shadow-sm animate-glow">
-                      {pkg.name}iukyjtgrfdjhg
+                      {pkg.name}en package
                     </h3>
 
                     <p className="text-gray-100 text-xs mt-0.5">
