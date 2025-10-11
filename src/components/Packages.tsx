@@ -182,14 +182,14 @@ export default function Packages() {
               className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100"
             >
               <div
-                className="relative w-full h-40 bg-center"
+                className="relative w-full h-40 bg-cover bg-center"
                 style={{
                   backgroundImage: pkg.background_image
                     ? `url("${pkg.background_image}")`
                     : `linear-gradient(to right, #ce1c1cf3, #003cb3f1)`,
                 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"></div>
+                {/* <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"></div> */}
 
                 <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
                   <div className="backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-lg px-3 py-2 transition-all duration-300 shadow-md">
