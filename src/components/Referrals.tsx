@@ -41,7 +41,7 @@ export default function Referrals() {
       const updatedReferrals = await Promise.all(
         (referralsData || []).map(async (ref) => {
           const { data: purchases, error: purchasesError } = await supabase
-            .from('purchases')
+            .from('packages')
             .select('package_price')
             .eq('user_id', ref.referred_id);
 
