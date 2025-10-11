@@ -201,24 +201,24 @@ export default function Wallet() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <div className="inset-0 bg-black/20 pointer-events-none">
+        <div className="inset-0 relative bg-black/20 pointer-events-none">
+          <div className="absolute z-50 rigiht-0 top-0 flex space-x-4">
+            <button
+              onClick={() => setShowDepositModal(true)}
+              className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+            >
+              <Upload className="h-4 w-4 mr-2" />
+              Deposit
+            </button>
+            <button
+              onClick={() => setShowWithdrawModal(true)}
+              className="flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+            >
+              <Download className="h-4 w-4 mr-2" />
+              Withdraw
+            </button>
+          </div>
           <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
-            <div className="absolute z-50 rigiht-0 top-0 flex space-x-4">
-              <button
-                onClick={() => setShowDepositModal(true)}
-                className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-              >
-                <Upload className="h-4 w-4 mr-2" />
-                Deposit
-              </button>
-              <button
-                onClick={() => setShowWithdrawModal(true)}
-                className="flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
-              >
-                <Download className="h-4 w-4 mr-2" />
-                Withdraw
-              </button>
-            </div>
             <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
               Your Wallets
             </h1>
@@ -239,7 +239,7 @@ export default function Wallet() {
         </p>
         <button
           onClick={() => navigate("/wallet/bank-info")}
-          className="mt-4 bg-white text-blue-700 px-4 py-2 rounded-md hover:bg-gray-100"
+          className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-gray-100"
         >
           My Bank Info
         </button>
