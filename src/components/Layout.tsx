@@ -48,7 +48,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="flex flex-col min-h-screen bg-white-500 dark:bg-white-500 dark:text-white">
       {/* Header */}
-      <header className="bg-cyan-600 dark:bg-gray-800 shadow-sm border-b sticky top-0 z-30">
+      <header className="bg-cyan-600 dark:bg-cyan-800 shadow-sm border-b sticky top-0 z-30">
         <div className="flex justify-between items-center h-16 px-4">
           <div className="flex items-center">
             <img src="logo1.jpg" alt="" className="w-10" h-10/>
