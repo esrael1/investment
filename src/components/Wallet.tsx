@@ -202,23 +202,23 @@ export default function Wallet() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="inset-0 bg-black/20 pointer-events-none">
-          <div className="absolute z-50 rigiht-0 top-0 flex space-x-4">
-            <button
-              onClick={() => setShowDepositModal(true)}
-              className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-            >
-              <Upload className="h-4 w-4 mr-2" />
-              Deposit
-            </button>
-            <button
-              onClick={() => setShowWithdrawModal(true)}
-              className="flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
-            >
-              <Download className="h-4 w-4 mr-2" />
-              Withdraw
-            </button>
-          </div>
           <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
+            <div className="absolute z-50 rigiht-0 top-0 flex space-x-4">
+              <button
+                onClick={() => setShowDepositModal(true)}
+                className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+              >
+                <Upload className="h-4 w-4 mr-2" />
+                Deposit
+              </button>
+              <button
+                onClick={() => setShowWithdrawModal(true)}
+                className="flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Withdraw
+              </button>
+            </div>
             <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
               Your Wallets
             </h1>
@@ -232,10 +232,10 @@ export default function Wallet() {
         </div>
       </div>
 
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+      <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
         <h3 className="text-lg font-medium mb-2">Current Balance</h3>
         <p className="text-3xl font-bold">
-          ${user?.wallet_balance?.toFixed(2) || "0.00"}
+          {user?.wallet_balance?.toFixed(2) || "0.00"} ETB
         </p>
         <button
           onClick={() => navigate("/wallet/bank-info")}
@@ -249,8 +249,8 @@ export default function Wallet() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Deposits */}
-        <div className="bg-green-500 rounded-lg shadow-sm border">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+        <div className="bg-gray-200 rounded-lg shadow-sm border">
+          <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
             <h3 className="text-lg font-semibold text-white-900">
               Recent Deposits
             </h3>
@@ -265,7 +265,7 @@ export default function Wallet() {
                   >
                     <div>
                       <p className="font-medium text-gray-900">
-                        ${deposit.amount.toFixed(2)}
+                        {deposit.amount.toFixed(2)} ETB
                       </p>
                       <p className="text-sm text-gray-600">
                         {format(new Date(deposit.created_at), "MMM dd, HH:mm")}
@@ -282,8 +282,8 @@ export default function Wallet() {
         </div>
 
         {/* Recent Withdrawals */}
-        <div className="bg-green-500 rounded-lg shadow-sm border">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+        <div className="bg-gray-200 rounded-lg shadow-sm border">
+          <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
             <h3 className="text-lg font-semibold text-white-900">
               Recent Withdrawals
             </h3>
@@ -298,7 +298,7 @@ export default function Wallet() {
                   >
                     <div>
                       <p className="font-medium text-gray-900">
-                        ${withdrawal.amount.toFixed(2)}
+                        {withdrawal.amount.toFixed(2)} ETB
                       </p>
                       <p className="text-sm text-gray-600">
                         {format(
@@ -320,8 +320,8 @@ export default function Wallet() {
         </div>
 
         {/* Recent Transactions */}
-        <div className="bg-green-500 rounded-lg shadow-sm border">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+        <div className="bg-gray-200 rounded-lg shadow-sm border">
+          <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
             <h3 className="text-lg font-semibold text-white-900">
               Recent Transactions
             </h3>
