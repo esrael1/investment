@@ -88,7 +88,7 @@ export default function Referrals() {
           Referral Program
         </h1>
         <p className="mt-3 text-gray-300 text-lg tracking-wide">
-          <span className="font-semibold text-indigo-400">Invite friends and earn 10% ETB for each successful referral</span>
+          <span className="font-semibold text-indigo-400">Invite friends and earn 10% for each successful referral</span>
         </p>
         <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
       </div>
