@@ -216,7 +216,7 @@ export default function Packages() {
                     <span className="font-medium">Daily Return:</span>
                   </div>
                   <span className="text-green-600 font-semibold">
-                    ${pkg.daily_return}
+                    {pkg.daily_return} ETB
                   </span>
                 </div>
 
@@ -244,17 +244,16 @@ export default function Packages() {
                   <div className="flex justify-between">
                     <span className="text-gray-600">Total Return</span>
                     <span className="font-semibold text-green-600">
-                      ${(pkg.daily_return * pkg.duration_days).toFixed(2)}
+                      {(pkg.daily_return * pkg.duration_days).toFixed(2)} ETB
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Profit</span>
                     <span className="font-semibold text-green-600">
-                      $
                       {(
                         pkg.daily_return * pkg.duration_days -
                         pkg.price
-                      ).toFixed(2)}
+                      ).toFixed(2)} ETB
                     </span>
                   </div>
                 </div>
