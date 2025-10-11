@@ -177,7 +177,6 @@ export default function Packages() {
                       ${pkg.daily_return}
                     </span>
                   </div>
-                  <PackageIcon className="h-5 w-5 text-blue-500" />
                 </div>
 
                 <div className="flex justify-between items-center text-sm text-gray-600">
