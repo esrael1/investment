@@ -148,14 +148,14 @@ export default function Packages() {
                     className="backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 
                rounded-lg px-3 py-2 transition-all duration-300 shadow-md"
                   >
-                    <h3 className="text-gray-900 font-semibold text-sm uppercase tracking-wide drop-shadow-sm animate-glow">
+                    <h3 className="text-gray-900 font-bold text-sm uppercase tracking-wide drop-shadow-sm animate-glow">
                       {pkg.name}
                     </h3>
 
                     <p className="text-gray-900 text-xs mt-0.5">
                       Price{" "}
                       <span className="text-gray-600 font-medium">
-                        {pkg.price} ETB
+                        {pkg.price}: ETB
                       </span>
                     </p>
                   </div>
