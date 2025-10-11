@@ -161,7 +161,7 @@ export default function Packages() {
                   </div>
 
                   {isPurchased && (
-                    <span className="px-2 py-1 bg-green-500/90 text-white text-xs font-semibold rounded-full shadow-md">
+                    <span className="px-1 py-1 bg-green-500/90 text-white text-xs font-semibold rounded-full shadow-md">
                       Owned
                     </span>
                   )}
