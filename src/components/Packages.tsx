@@ -191,7 +191,7 @@ export default function Packages() {
               >
                 <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
                   <div className="backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-lg px-3 py-2 transition-all duration-300 shadow-md">
-                    <h3 className="text-gray-900 font-bold text-sm uppercase tracking-wide drop-shadow-sm animate-glow">
+                    <h3 className="text-gray-900 font-bold uppercase tracking-wide drop-shadow-sm animate-glow">
                       {pkg.name}
                     </h3>
                     <p className="text-white text-xs mt-0.5">
