@@ -178,17 +178,32 @@ export default function Tasks() {
 
           return (
             <div key={pkg.id} className="bg-white rounded-lg shadow border p-6">
-              <div className="flex items-center justify-between border-b pb-3 mb-4">
-                <div>
-                  <h3 className="text-lg font-semibold">{pkg.packages?.name}</h3>
-                  <p className="text-sm text-gray-600">
-                    Daily Return: ${pkg.packages?.daily_return} | Expires: {format(new Date(pkg.expiry_date), 'MMM dd, yyyy')}
-                  </p>
-                </div>
-                <div className="text-sm text-gray-700">
-                  {tasksCompletedToday}/{maxDailyTasks} tasks completed today
-                </div>
-              </div>
+              <div className="flex flex-col md:flex-row items-center justify-between p-4 mb-4 bg-white rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+  {/* Package Info */}
+  <div className="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4">
+    <div className="flex flex-col">
+      <h3 className="text-xl font-bold text-purple-700">{pkg.packages?.name}</h3>
+      <p className="text-gray-500 text-sm">
+        Daily Return: <span className="font-semibold text-green-600">{pkg.packages?.daily_return} Birr</span><br />
+        <span className="text-gray-400 text-xs">Expires: {format(new Date(pkg.expiry_date), 'MMM dd, yyyy')}</span>
+      </p>
+    </div>
+  </div>
+
+  {/* Task Progress */}
+  <div className="flex flex-col items-end space-y-2 w-full md:w-auto mt-3 md:mt-0">
+    <span className="text-gray-700 font-medium text-sm">{tasksCompletedToday}/{maxDailyTasks} tasks completed today</span>
+    
+    {/* Progress Bar */}
+    <div className="w-full md:w-48 h-3 bg-gray-200 rounded-full overflow-hidden">
+      <div
+        className="h-3 bg-gradient-to-r from-purple-400 to-purple-600"
+        style={{ width: `${(tasksCompletedToday / maxDailyTasks) * 100}%` }}
+      ></div>
+    </div>
+  </div>
+</div>
+ 
 
               {tasks.length === 0 ? (
                 <p className="text-gray-500 text-center">No tasks available</p>
