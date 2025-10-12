@@ -195,7 +195,7 @@ export default function Tasks() {
 
           return (
             <div key={pkg.id} className="bg-gray-100 rounded-lg shadow border p-6">
-              <div className="flex flex-col md:flex-row items-center justify-between p-4 mb-4 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="flex flex-col md:flex-row items-center justify-between p-4 mb-4 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                 {/* Package Info */}
                 <div className="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4">
                   <div className="flex flex-col">
