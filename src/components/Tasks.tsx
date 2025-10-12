@@ -223,7 +223,7 @@ export default function Tasks() {
                   </span>
 
                   {/* Progress Bar */}
-                  <div className="w-full md:w-48 h-3 bg-white rounded-full overflow-hidden">
+                  <div className="w-full md:w-48 h-3 bg-white border rounded-full overflow-hidden">
                     <div
                       className="h-3 bg-gradient-to-r from-red-400 to-green-600"
                       style={{
