@@ -1,46 +1,35 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
-import { DollarSign } from "lucide-react";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import { DollarSign } from 'lucide-react';
 
 export default function Login() {
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
+  const [error, setError] = useState('');
+  
   const { login } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
-  // ✅ Detect referral code from URL
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const ref = params.get("ref");
-    if (ref) {
-      setReferralCode(ref);
-      localStorage.setItem("referralCode", ref); // store for later use (optional)
-    }
-  }, [location.search]);
-  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!phone || !password) {
-      setError("Please fill in all fields");
+      setError('Please fill in all fields');
       return;
     }
 
     setLoading(true);
-    setError("");
+    setError('');
 
     const success = await login(phone, password);
-
+    
     if (success) {
-      navigate("/dashboard");
+      navigate('/dashboard');
     } else {
-      setError("Invalid phone number or password");
+      setError('Invalid phone number or password');
     }
-
+    
     setLoading(false);
   };
 
@@ -55,22 +44,21 @@ export default function Login() {
               className="h-70 w-100 mb-2 object-contain"
             />
           </div>
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900"></h2>
+          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+      
+          </h2>
         </div>
-
+        
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
               {error}
             </div>
           )}
-
+          
           <div className="space-y-4">
             <div>
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
                 Phone Number
               </label>
               <input
@@ -84,12 +72,9 @@ export default function Login() {
                 placeholder="Enter your phone number"
               />
             </div>
-
+            
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
               </label>
               <input
@@ -115,21 +100,21 @@ export default function Login() {
                         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 
                         disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? "Signing in..." : "Log in"}
+              {loading ? 'Signing in...' : 'Log in'}
             </button>
+
           </div>
 
           <div className="text-center">
             <span className="text-sm text-gray-600">
-              Don't have an account?{" "}
-              <Link
-                to="/register"
-                className="font-medium text-blue-600 hover:text-blue-500"
-              >
+              Don't have an account?{' '}
+              <Link to="/register" className="font-medium text-blue-600 hover:text-blue-500">
                 Sign up
               </Link>
             </span>
           </div>
+
+          
         </form>
       </div>
     </div>

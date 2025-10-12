@@ -1,42 +1,57 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import { DollarSign } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import { DollarSign } from "lucide-react";
 
 export default function Register() {
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [referralCode, setReferralCode] = useState('');
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [referralCode, setReferralCode] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  
+  const [error, setError] = useState("");
+
   const { register } = useAuth();
   const navigate = useNavigate();
+
+  // ✅ Detect referral code from URL
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const ref = params.get("ref");
+    if (ref) {
+      setReferralCode(ref);
+      // localStorage.setItem("referralCode", ref); // store for later use (optional)
+    }
+  }, [location.search]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!phone || !password || !fullName) {
-      setError('Please fill in all required fields');
+      setError("Please fill in all required fields");
       return;
     }
 
     if (password.length < 6) {
-      setError('Password must be at least 6 characters long');
+      setError("Password must be at least 6 characters long");
       return;
     }
 
     setLoading(true);
-    setError('');
+    setError("");
 
-    const success = await register(phone, password, fullName, referralCode || undefined);
-    
+    const success = await register(
+      phone,
+      password,
+      fullName,
+      referralCode || undefined
+    );
+
     if (success) {
-      navigate('/login');
+      navigate("/login");
     } else {
-      setError('Registration failed. Phone number may already be in use.');
+      setError("Registration failed. Phone number may already be in use.");
     }
-    
+
     setLoading(false);
   };
 
@@ -58,17 +73,20 @@ export default function Register() {
             Join InvestPro and start earning
           </p>
         </div>
-        
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
               {error}
             </div>
           )}
-          
+
           <div className="space-y-4">
             <div>
-              <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="fullName"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Full Name *
               </label>
               <input
@@ -84,7 +102,10 @@ export default function Register() {
             </div>
 
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Phone Number *
               </label>
               <input
@@ -98,9 +119,12 @@ export default function Register() {
                 placeholder="Enter your phone number"
               />
             </div>
-            
+
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Password *
               </label>
               <input
@@ -116,7 +140,10 @@ export default function Register() {
             </div>
 
             <div>
-              <label htmlFor="referralCode" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="referralCode"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Referral Code (Optional)
               </label>
               <input
@@ -141,14 +168,17 @@ export default function Register() {
                         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 
                         disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Creating account...' : 'Create account'}
+              {loading ? "Creating account..." : "Create account"}
             </button>
           </div>
 
           <div className="text-center">
             <span className="text-sm text-gray-600">
-              Already have an account?{' '}
-              <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="font-medium text-blue-600 hover:text-blue-500"
+              >
                 Sign in
               </Link>
             </span>
