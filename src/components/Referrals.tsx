@@ -189,8 +189,8 @@ export default function Referrals() {
                   <div className="flex items-center">
                     <Gift className="h-8 w-8 text-yellow-600" />
                     <div className="ml-4">
-                      <p className="font-medium text-cyan-900">{referral.users.full_name}</p>
-                      <p className="text-sm text-white-600">
+                      <p className="font-medium text-cyan-400">{referral.users.full_name}</p>
+                      <p className="text-sm text-cyan-400">
                         Joined on {format(new Date(referral.created_at), 'MMM dd, yyyy')}
                       </p>
                     </div>
