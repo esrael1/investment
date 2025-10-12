@@ -209,7 +209,7 @@ export default function Tasks() {
                 <p className="text-gray-500 text-center">No tasks available</p>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {tasks.map(task => {
+                  {tasks.map(task index => {
                     const acceptedTask = accepted.includes(task.id);
                     const completed = isTaskCompletedToday(task.id, pkg.id);
                     const canDo = canComplete && !completed && tasksCompletedToday < maxDailyTasks;
