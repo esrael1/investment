@@ -180,7 +180,7 @@ export default function Tasks() {
             <div key={pkg.id} className="bg-white rounded-lg shadow border p-6">
               <div className="flex flex-col md:flex-row items-center justify-between p-4 mb-4 bg-white rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
   {/* Package Info */}
-  <div className="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4">
+  <div className="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 ">
     <div className="flex flex-col">
       <h3 className="text-xl font-bold text-purple-700">{pkg.packages?.name}</h3>
       <p className="text-gray-500 text-sm">
