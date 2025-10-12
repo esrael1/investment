@@ -195,7 +195,7 @@ export default function Tasks() {
 
           return (
             <div key={pkg.id} className="bg-gray-100 rounded-lg shadow border p-6">
-              <div className="flex flex-col md:flex-row items-center justify-between p-4 mb-4 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="flex flex-col md:flex-row items-center justify-between p-4 mb-4 rounded-2xl hover:shadow-xl transition-shadow duration-300">
                 {/* Package Info */}
                 <div className="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4">
                   <div className="flex flex-col">
@@ -223,9 +223,9 @@ export default function Tasks() {
                   </span>
 
                   {/* Progress Bar */}
-                  <div className="w-full md:w-48 h-3 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="w-full md:w-48 h-3 bg-white rounded-full overflow-hidden">
                     <div
-                      className="h-3 bg-gradient-to-r from-purple-400 to-purple-600"
+                      className="h-3 bg-gradient-to-r from-red-400 to-green-600"
                       style={{
                         width: `${
                           (tasksCompletedToday / maxDailyTasks) * 100
