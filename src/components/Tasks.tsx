@@ -215,49 +215,68 @@ export default function Tasks() {
                     const canDo = canComplete && !completed && tasksCompletedToday < maxDailyTasks;
 
                     return (
-                      <div key={task.id} className="border rounded-lg p-4">
-                        <h4 className="font-medium text-gray-900 mb-2">{task.title}</h4>
-                        <p className="text-sm text-gray-600 mb-3">{task.description}</p>
+                     <div className="space-y-4">
+  {tasks.map((task, index) => (
+    <div
+      key={task.id}
+      className="border border-gray-200 rounded-2xl p-4 hover:shadow-lg transition-shadow duration-300 bg-white"
+    >
+      {/* Task Number & Title */}
+      <h4 className="flex items-center font-semibold text-gray-900 mb-2 text-lg">
+        <span className="mr-2 text-purple-600 font-bold">{index + 1}.</span> {task.title}
+      </h4>
 
-                        {completed ? (
-                          <p className="text-green-600 font-medium flex items-center">
-                            <CheckSquare className="w-4 h-4 mr-1" /> Completed
-                          </p>
-                        ) : !acceptedTask ? (
-                          <button
-                            onClick={() => handleAcceptTask(task.id, pkg.id)}
-                            className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                          >
-                            Accept Task
-                          </button>
-                        ) : (
-                          <div className="space-y-3">
-                            <p className="text-sm text-gray-600">
-                              ✅ Follow, like, and comment on the post.  
-                              Then upload a screenshot below:
-                            </p>
-                            <input
-                              type="file"
-                              accept="image/*"
-                              onChange={e => handleFileUpload(task.id, e.target.files?.[0] || null)}
-                              className="block w-full text-sm text-gray-700 border rounded p-2"
-                            />
-                            <button
-                              onClick={() => handleCompleteTask(task, pkg)}
-                              disabled={!canDo || completing === task.id}
-                              className={`w-full py-2 rounded text-white font-medium ${
-                                completing === task.id
-                                  ? 'bg-gray-400'
-                                  : canDo
-                                  ? 'bg-green-600 hover:bg-green-700'
-                                  : 'bg-gray-300 cursor-not-allowed'
-                              }`}
-                            >
-                              {completing === task.id ? 'Completing...' : 'Submit & Complete'}
-                            </button>
-                          </div>
-                        )}
-                      </div>
+      {/* Task Description */}
+      <p className="text-gray-600 text-sm mb-3">{task.description}</p>
+
+      {/* Task Actions */}
+      {completed ? (
+        <p className="text-green-600 font-medium flex items-center">
+          <CheckSquare className="w-5 h-5 mr-1" /> Completed
+        </p>
+      ) : !acceptedTask ? (
+        <button
+          onClick={() => handleAcceptTask(task.id, pkg.id)}
+          className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+        >
+          Accept Task
+        </button>
+      ) : (
+        <div className="space-y-3">
+          <p className="text-gray-600 text-sm">
+            ✅ Follow, like, and comment on the post. Then upload a screenshot below:
+          </p>
+
+          {/* File Upload */}
+          <label className="block">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={e => handleFileUpload(task.id, e.target.files?.[0] || null)}
+              className="block w-full text-gray-700 text-sm border border-gray-300 rounded-lg p-2 cursor-pointer hover:border-purple-500 transition-colors"
+            />
+          </label>
+
+          {/* Submit Button */}
+          <button
+            onClick={() => handleCompleteTask(task, pkg)}
+            disabled={!canDo || completing === task.id}
+            className={`w-full py-2 rounded-lg text-white font-medium transition-colors duration-200 ${
+              completing === task.id
+                ? 'bg-gray-400 cursor-not-allowed'
+                : canDo
+                ? 'bg-green-600 hover:bg-green-700'
+                : 'bg-gray-300 cursor-not-allowed'
+            }`}
+          >
+            {completing === task.id ? 'Completing...' : 'Submit & Complete'}
+          </button>
+        </div>
+      )}
+    </div>
+  ))}
+</div>
+
                     );
                   })}
                 </div>
