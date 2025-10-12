@@ -216,7 +216,7 @@ export default function Tasks() {
 
                     return (
                       <div key={task.id} className="border rounded-lg p-4">
-                        <h4 className="font-medium text-gray-900 mb-2">{task.title}</h4>
+                        <h4 className="font-medium text-gray-900 mb-2">{index + 1}. {task.title}</h4>
                         <p className="text-sm text-gray-600 mb-3">{task.description}</p>
 
                         {completed ? (
