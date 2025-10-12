@@ -182,7 +182,7 @@ export default function Packages() {
               className="group relative bg-gradient-to-b from-red-100 to-cyan-400 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100"
             >
               <div
-                className="relative w-full h-100 bg-cover bg-center"
+                className="relative w-full  bg-cover bg-center"
                 style={{
                   backgroundImage: pkg.background_image
                     ? `url("${pkg.background_image}")`
