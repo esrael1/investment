@@ -58,6 +58,7 @@ export default function Layout({ children }: LayoutProps) {
           </div>
           <div className="flex items-center space-x-3">
             <div className="text-sm text-right">
+              <Users className="h-8 w-8 text-green-600" />
               <p className="font-medium">{user?.full_name}</p>
               {!user?.is_admin && (
                 <p className="text-white-900 font-semibold text-xs">
