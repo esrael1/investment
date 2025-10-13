@@ -553,7 +553,7 @@ export default function Wallet() {
                   type="number"
                   min="100"
                   max={user?.wallet_balance || 0}
-                  step="100"
+                  step="1"
                   value={withdrawAmount}
                   onChange={(e) => setWithdrawAmount(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 text-blue rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white-900"
@@ -566,7 +566,7 @@ export default function Wallet() {
                 <p className="text-sm text-yellow-800">
                   Available balance: ${user?.wallet_balance?.toFixed(2)}
                   <br />
-                  Your withdrawal request will be processed by an admin.
+                  Your withdrawal request has been received and is being processed. A 12% fee will be deducted from the total amount.
                 </p>
               </div>
 
