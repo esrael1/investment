@@ -241,14 +241,14 @@ export default function Dashboard() {
                         {userPackage.packages?.name}
                       </h4>
                       <p className="text-sm text-gray-600">
-                        Earned: ${userPackage.total_earned.toFixed(2)} | Tasks
+                        Earned: {userPackage.total_earned.toFixed(2)}  ETB| Tasks
                         Today: {userPackage.tasks_completed_today}/
                         {userPackage.packages?.daily_tasks}
                       </p>
                     </div>
                     <div className="text-right">
                       <p className="text-sm font-medium text-green-600">
-                        ${userPackage.packages?.daily_return}/day
+                        {userPackage.packages?.daily_return} ETB/day
                       </p>
                       <p className="text-xs text-gray-500">
                         Expires:{" "}
