@@ -151,7 +151,6 @@ export default function Dashboard() {
           <img src="gift.jpg" alt="gift" className="h-[500px] w-auto" />
           <img src="money.jpg" alt="money" className="h-[500px] w-auto" />
           <img src="bitconsak.jpg" alt="bitcoin" className="h-[500px] w-auto" />
-          {/* Duplicate images for continuous scroll */}
           <img src="openbox.jpg" alt="gift" className="h-[500px] w-auto" />
           <img src="wallet.jpg" alt="money" className="h-[500px] w-auto" />
           <img src="reward.jpg" alt="bitcoin" className="h-[500px] w-auto" />
@@ -181,13 +180,13 @@ export default function Dashboard() {
             <div className="ml-4">
               <p className="text-lg font-medium mb-2">Wallet Balance</p>
               <p className="text-3xl font-bold">
-                ${user?.wallet_balance?.toFixed(2) || "0.00"}
+                {user?.wallet_balance?.toFixed(2) || "0.00"} ETB
               </p>
             </div>
           </div>
         </div>
 
-        {/* <div className="bg-gradient-to-r from-red-400 to-bleue-400 text-white p-6 rounded-lg">
+        {/* <div classNaMe="bg-gradient-to-r from-red-400 to-bleue-400 text-white p-6 rounded-lg">
           <div className="flex items-center">
             <Package className="h-8 w-8 text-blue-600" />
             <div className="ml-4">
@@ -203,7 +202,7 @@ export default function Dashboard() {
             <div className="ml-4">
               <p className="text-lg font-medium mb-2">Total Earned</p>
               <p className="text-3xl font-bold">
-                ${stats.totalEarned.toFixed(2)}
+                {stats.totalEarned.toFixed(2)} ETB
               </p>
             </div>
           </div>
@@ -306,7 +305,7 @@ export default function Dashboard() {
                         transaction.type === "package_purchase"
                           ? "-"
                           : "+"}
-                        ${transaction.amount.toFixed(2)}
+                        {transaction.amount.toFixed(2)} ETB
                       </p>
                       <p className="text-xs text-gray-500">
                         {format(
