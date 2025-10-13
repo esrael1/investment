@@ -478,12 +478,12 @@ export default function Wallet() {
             >
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Deposit Amount ($)
+                  Deposit Amount (ETB)
                 </label>
                 <input
                   type="number"
                   min="1"
-                  step="0.01"
+                  step="1"
                   value={depositAmount}
                   onChange={(e) => setDepositAmount(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -509,8 +509,12 @@ export default function Wallet() {
 
               <div className="bg-blue-50 p-4 rounded-md">
                 <p className="text-sm text-blue-800">
-                  Please make your payment and upload a screenshot. Your deposit
-                  will be reviewed and approved by an admin.
+                  Please complete your payment and upload a clear screenshot of
+                  the transaction as proof of deposit. Once your payment has
+                  been submitted, our admin team will carefully review and
+                  verify the details. After successful verification, your
+                  deposit will be approved and reflected in your account
+                  balance.
                 </p>
               </div>
 
@@ -566,7 +570,11 @@ export default function Wallet() {
                 <p className="text-sm text-yellow-800">
                   Available balance: ${user?.wallet_balance?.toFixed(2)}
                   <br />
-🔐 For your security, each withdrawal request undergoes a short verification process. A 12% fee will be deducted, and your funds will be sent to your verified payment method after approval.                </p>
+                  🔐 For your security, each withdrawal request undergoes a
+                  short verification process. A 12% fee will be deducted, and
+                  your funds will be sent to your verified payment method after
+                  approval.{" "}
+                </p>
               </div>
 
               <div className="flex space-x-4">
