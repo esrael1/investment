@@ -58,8 +58,7 @@ export default function Layout({ children }: LayoutProps) {
           </div>
           <div className="flex items-center space-x-3">
             <div className="text-sm text-right">
-              <Users className="h-8 w-8 text-green-600" />
-              <p className="font-medium">{user?.full_name}</p>
+              <p className="font-medium"><img src="logo1.png" alt="" className="w-10" h-10/> {user?.full_name}</p>
               {!user?.is_admin && (
                 <p className="text-white-900 font-semibold text-xs">
                   {user?.wallet_balance?.toFixed(2) || '0.00'} ETB
