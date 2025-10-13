@@ -145,7 +145,7 @@ export default function Wallet() {
       setShowWithdrawModal(false);
       await fetchWalletData();
       alert(
-        "Withdrawal request submitted successfully! It will be processed by an admin."
+        "Withdrawal request submitted successfully! A 12% withdrawal fee will be deducted from the total amount.."
       );
     } catch (error) {
       console.error("Error submitting withdrawal:", error);
@@ -566,8 +566,7 @@ export default function Wallet() {
                 <p className="text-sm text-yellow-800">
                   Available balance: ${user?.wallet_balance?.toFixed(2)}
                   <br />
-                  Your withdrawal request has been received and is being processed. A 12% fee will be deducted from the total amount.
-                </p>
+🔐 For your security, each withdrawal request undergoes a short verification process. A 12% fee will be deducted, and your funds will be sent to your verified payment method after approval.                </p>
               </div>
 
               <div className="flex space-x-4">
