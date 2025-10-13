@@ -551,12 +551,12 @@ export default function Wallet() {
                 </label>
                 <input
                   type="number"
-                  min="1"
+                  min="100"
                   max={user?.wallet_balance || 0}
-                  step="0.01"
+                  step="100"
                   value={withdrawAmount}
                   onChange={(e) => setWithdrawAmount(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-blue-900"
+                  className="w-full px-3 py-2 border border-gray-300 text-blue rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white-900"
                   placeholder="Enter amount"
                   required
                 />
