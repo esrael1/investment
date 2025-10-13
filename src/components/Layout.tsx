@@ -42,7 +42,7 @@ export default function Layout({ children }: LayoutProps) {
     { path: '/admin/deposits', icon: DollarSign, label: 'Deposits' },
     { path: '/admin/withdrawals', icon: Wallet, label: 'Withdrawals' },
   ];
-
+ 
   const menuItems = user?.is_admin ? adminMenuItems : customerMenuItems;
 
   return (
