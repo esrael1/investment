@@ -9,7 +9,7 @@ export default function Tasks() {
   const [userPackages, setUserPackages] = useState<UserPackage[]>([]);
   const [availableTasks, setAvailableTasks] = useState<{
     [key: string]: Task[];
-  }>({});
+  }>({}); 
   const [acceptedTasks, setAcceptedTasks] = useState<{
     [key: string]: string[];
   }>({});
