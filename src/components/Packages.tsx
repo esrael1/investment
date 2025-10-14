@@ -249,7 +249,7 @@ export default function Packages() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Profit</span>
-                    <span className="font-semibold text-green-600">
+                    <span className="font-semibold text-green-900">
                       {(
                         pkg.daily_return * pkg.duration_days -
                         pkg.price
