@@ -133,7 +133,7 @@ export default function Dashboard() {
         {/* Overlay for better contrast */}
         <div className="absolute z-50 inset-0 pointer-events-none">
           <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
-            <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            <h1 className="text-8xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
               “Teach AI. Earn more.”
             </h1>
             <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
