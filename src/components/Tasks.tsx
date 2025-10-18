@@ -145,7 +145,7 @@ export default function Tasks() {
 
       await refreshUser();
       await fetchTasksData();
-      alert(`✅ Task completed! You earned $${task.reward_amount.toFixed(2)}`);
+      alert(`✅ Task completed! You earned ${task.reward_amount.toFixed(2)} ETB`);
     } catch (error) {
       console.error("Error completing task:", error);
       alert("❌ Failed to complete task. Please try again.");
@@ -289,6 +289,7 @@ export default function Tasks() {
                             <input
                               type="file"
                               accept="image/*"
+                              capture="environment"
                               onChange={(e) =>
                                 handleFileUpload(
                                   task.id,
