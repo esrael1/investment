@@ -118,32 +118,63 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6 relative">
-      {/* Popup Box */}
-      {popupOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div
-            className="absolute inset-0 bg-black opacity-50"
-            onClick={() => setPopupOpen(false)}
-          ></div>
-          <div className="relative bg-white rounded-lg shadow-lg p-6 max-w-md w-full z-50">
-            <button
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-              onClick={() => setPopupOpen(false)}
-            >
-              ✖
-            </button>
-            <p className="font-medium text-lg mb-4">
-              Welcome to your Dashboard! Check your <strong>wallet, packages, and transactions</strong> here.
-            </p>
-            <button
-              onClick={() => setPopupOpen(false)}
-              className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+     {/* Advanced Telegram Popup */}
+{popupOpen && (
+  <div className="fixed inset-0 flex items-center justify-center z-50 animate-fadeIn">
+    {/* Overlay */}
+    <div
+      className="absolute inset-0 bg-black opacity-60"
+      onClick={() => setPopupOpen(false)}
+    ></div>
+
+    {/* Modal Box */}
+    <div className="relative bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl shadow-2xl p-8 max-w-lg w-full z-50 transform transition-transform duration-300 scale-95 animate-scaleIn">
+      {/* Close Button */}
+      <button
+        className="absolute top-3 right-3 text-white hover:text-gray-200 text-xl font-bold"
+        onClick={() => setPopupOpen(false)}
+      >
+        ✖
+      </button>
+
+      {/* Content */}
+      <div className="text-center space-y-4">
+        <h2 className="text-2xl font-extrabold">
+          Join our Telegram Community!
+        </h2>
+        <p className="text-md">
+          Stay updated, get tips, and connect with other members instantly.
+        </p>
+        <button
+          onClick={() => window.open("https://t.me/YOUR_TELEGRAM_LINK", "_blank")}
+          className="mt-4 inline-block bg-gradient-to-r from-green-400 to-blue-500 hover:from-blue-500 hover:to-green-400 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+        >
+          Join Telegram
+        </button>
+        <p className="text-sm text-gray-200 mt-2">
+          Or click ✖ to close
+        </p>
+      </div>
+    </div>
+
+    {/* Tailwind Animations */}
+    <style>
+      {`
+        @keyframes fadeIn {
+          0% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+        @keyframes scaleIn {
+          0% { transform: scale(0.8); opacity: 0; }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-fadeIn { animation: fadeIn 0.3s ease-in-out; }
+        .animate-scaleIn { animation: scaleIn 0.4s ease-out; }
+      `}
+    </style>
+  </div>
+)}
+
 
       {/* Hero Section */}
       <div className="relative w-screen h-[600px] overflow-hidden">
