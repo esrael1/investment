@@ -163,6 +163,16 @@ export default function Dashboard() {
               width: max-content;
               animation: marquee 15s linear infinite;
             }
+
+            @keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
           `}
         </style>
       </div>
