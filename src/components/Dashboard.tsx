@@ -3,10 +3,11 @@ import { useAuth } from "../contexts/AuthContext";
 import { supabase, UserPackage, Transaction } from "../lib/supabase";
 import { Wallet, Package, Gift, CheckSquare, TrendingUp } from "lucide-react";
 import { format } from "date-fns";
-const [telegramDropdownOpen, setTelegramDropdownOpen] = useState(false);
 
 export default function Dashboard() {
   const { user } = useAuth();
+  const [telegramDropdownOpen, setTelegramDropdownOpen] = useState(false);
+
   const [stats, setStats] = useState({
     activePackages: 0,
     totalEarned: 0,
@@ -121,12 +122,12 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-  const shown = localStorage.getItem("telegramDropdownShown");
-  if (!shown) {
-    setTelegramDropdownOpen(true);
-    localStorage.setItem("telegramDropdownShown", "true");
-  }
-}, []);
+    const shown = localStorage.getItem("telegramDropdownShown");
+    if (!shown) {
+      setTelegramDropdownOpen(true);
+      localStorage.setItem("telegramDropdownShown", "true");
+    }
+  }, []);
 
 
   if (loading) {
@@ -316,7 +317,7 @@ export default function Dashboard() {
                         )}`}
                       >
                         {transaction.type === "withdrawal" ||
-                        transaction.type === "package_purchase"
+                          transaction.type === "package_purchase"
                           ? "-"
                           : "+"}
                         {transaction.amount.toFixed(2)} ETB
@@ -340,42 +341,41 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
-    {/* Telegram Dropdown */}
-<div className="relative mb-8">
-  <button
-    onClick={() => setTelegramDropdownOpen(!telegramDropdownOpen)}
-    className="flex items-center justify-between w-full max-w-md mx-auto px-6 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 transition-colors duration-300 focus:outline-none"
-  >
-    <span>Join our Telegram Community</span>
-    <svg
-      className={`w-5 h-5 transform transition-transform duration-300 ${
-        telegramDropdownOpen ? "rotate-180" : ""
-      }`}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
+    {/* Telegram Dropdown */ }
+  <div className="relative mb-8">
+    <button
+      onClick={() => setTelegramDropdownOpen(!telegramDropdownOpen)}
+      className="flex items-center justify-between w-full max-w-md mx-auto px-6 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 transition-colors duration-300 focus:outline-none"
     >
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-    </svg>
-  </button>
-
-  {telegramDropdownOpen && (
-    <div className="mt-2 max-w-md mx-auto bg-white rounded-lg shadow-lg p-6 space-y-4 text-gray-900 animate-fadeIn">
-      <p className="font-medium text-lg">
-        Connect with our Telegram channel to get **real-time updates**, tips, and exclusive content!
-      </p>
-      <a
-        href="https://t.me/YourTelegramLink"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block w-full text-center bg-blue-600 text-white font-bold px-4 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300"
+      <span>Join our Telegram Community</span>
+      <svg
+        className={`w-5 h-5 transform transition-transform duration-300 ${telegramDropdownOpen ? "rotate-180" : ""
+          }`}
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        Open Telegram
-      </a>
-    </div>
-  )}
-</div>
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+
+    {telegramDropdownOpen && (
+      <div className="mt-2 max-w-md mx-auto bg-white rounded-lg shadow-lg p-6 space-y-4 text-gray-900 animate-fadeIn">
+        <p className="font-medium text-lg">
+          Connect with our Telegram channel to get **real-time updates**, tips, and exclusive content!
+        </p>
+        <a
+          href="https://t.me/YourTelegramLink"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block w-full text-center bg-blue-600 text-white font-bold px-4 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300"
+        >
+          Open Telegram
+        </a>
+      </div>
+    )}
+  </div>
 
   );
 }
