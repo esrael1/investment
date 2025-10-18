@@ -131,7 +131,7 @@ export default function Dashboard() {
     <div className="space-y-6">
       <div className="relative w-screen h-[600px] overflow-hidden">
         {/* Overlay for better contrast */}
-        <div className="absolute z-50 inset-0 pointer-events-none">
+        <div className="absolute z-20 inset-0 pointer-events-none">
           <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
             <h1 className="text-7xl font-extrabold bg-gradient-to-r from-blue-900 via-indigo-700 to-purple-900 bg-clip-text text-transparent">
               “Teach AI. Earn more.”
@@ -141,7 +141,7 @@ export default function Dashboard() {
         </div>
 
         {/* Marquee container */}
-        <div className="flex z-20 animate-marquee space-x-0">
+        <div className="flex animate-marquee space-x-0">
           <img src="homepage image.png" alt="gift" className="h-[600px] w-auto" />
           <img src="robotmodel.png" alt="money" className="h-[600px] w-auto" />
           <img src="other ai.png" alt="bitcoin" className="h-[600px] w-auto" />
