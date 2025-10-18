@@ -134,7 +134,7 @@ export default function Dashboard() {
         <div className="absolute z-20 inset-0 pointer-events-none">
           <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
             <h1 className="text-7xl font-extrabold bg-gradient-to-r from-blue-900 via-white-700 to-purple-900 bg-clip-text text-transparent">
-              “Teach AI. Earn more.”
+              Train AI - Earn more.
             </h1>
             <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
           </div>
