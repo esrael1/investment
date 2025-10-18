@@ -118,6 +118,7 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6 relative">
+      
      {/* Advanced Telegram Popup */}
 {popupOpen && (
   <div className="fixed inset-0 flex items-center justify-center z-50 animate-fadeIn">
@@ -131,7 +132,7 @@ export default function Dashboard() {
     <div className="relative bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl shadow-2xl p-8 max-w-lg w-full z-50 transform transition-transform duration-300 scale-95 animate-scaleIn">
       {/* Close Button */}
       <button
-        className="absolute top-3 right-3 text-white hover:text-gray-200 text-xl font-bold"
+        className="absolute top-3 right-3 text-red hover:text-red-900 text-xl font-bold"
         onClick={() => setPopupOpen(false)}
       >
         ✖
