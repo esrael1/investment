@@ -304,7 +304,6 @@ export default function Tasks() {
                                 }}
                                 className="hidden"
                               />
-
                               <label
                                 htmlFor={`file-upload-${task.id}`}
                                 className="block w-full text-center bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-md cursor-pointer hover:bg-blue-700 transition-colors truncate"
@@ -312,6 +311,19 @@ export default function Tasks() {
                                 {selectedImageName ? `📁 ${selectedImageName}` : "📷 Upload or Capture Image"}
                               </label>
                             </div>
+
+                            <div className="max-w-md mx-auto mt-4">
+                              <label className="block text-gray-800 font-semibold mb-2 text-sm">
+                                📝 Describe Your Image
+                              </label>
+                              <textarea
+                                placeholder="Explain what’s in the image — for example, ‘a robot scanning objects on a desk’ or ‘a person using AI on a smartphone’..."
+                                className="w-full border border-gray-300 rounded-2xl p-3 text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 transition-all duration-200 resize-none hover:shadow-md"></textarea>
+                              <p className="text-xs text-gray-500 mt-1">
+                                ✨ The more detailed your description, the better AI learns.
+                              </p>
+                            </div>
+
 
 
 
