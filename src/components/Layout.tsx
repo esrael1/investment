@@ -53,7 +53,7 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex items-center">
             <img src="logo1.png" alt="" className="w-10" h-10/>
             <span className="ml-2 text-lg font-bold text-white-900 dark:text-white">
-              InvestPro
+              EnviroScan AI
             </span>
           </div>
           <div className="flex items-center space-x-3">
