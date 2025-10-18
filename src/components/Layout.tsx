@@ -69,8 +69,7 @@ export default function Layout({ children }: LayoutProps) {
                       .slice(0, 2) // take only first 2 letters (first + last)
                     : ""}
                 </span>
-
-                {/* Display full name normally */}
+                {/* 
                 <span>
                   {user?.full_name
                     ? user.full_name
@@ -81,7 +80,7 @@ export default function Layout({ children }: LayoutProps) {
                       )
                       .join(" ")
                     : ""}
-                </span>
+                </span> */}
               </p>
               {!user?.is_admin && (
                 <p className="text-white-900 font-semibold text-xs">
@@ -114,8 +113,8 @@ export default function Layout({ children }: LayoutProps) {
                 key={item.path}
                 to={item.path}
                 className={`flex flex-col items-center text-sm px-3 py-1 rounded transition-all duration-200 ${isActive
-                    ? 'bg-blue-100 text-blue-700 font-semibold dark:bg-blue-900 dark:text-blue-400'
-                    : 'text-gray-800 dark:text-gray-300'
+                  ? 'bg-blue-100 text-blue-700 font-semibold dark:bg-blue-900 dark:text-blue-400'
+                  : 'text-gray-800 dark:text-gray-300'
                   }`}
               >
                 <Icon className="h-6 w-6 mb-1" />

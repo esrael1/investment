@@ -173,7 +173,7 @@ export default function Dashboard() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div className="mb-12 bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
           <div className="flex items-center">
             <Wallet className="h-8 w-8 text-green-600" />
