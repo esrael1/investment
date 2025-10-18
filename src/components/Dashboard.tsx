@@ -128,8 +128,8 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="relative w-screen h-[500px] overflow-hidden">
+    <div className="space-y-0">
+      <div className="relative w-screen h-[600px] overflow-hidden">
         {/* Overlay for better contrast */}
         <div className="absolute z-50 inset-0 pointer-events-none">
           <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
