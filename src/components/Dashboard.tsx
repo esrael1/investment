@@ -141,7 +141,7 @@ export default function Dashboard() {
         </div>
 
         {/* Marquee container */}
-        <div className="flex z-20 animate-marquee space-x-6">
+        <div className="flex z-20 animate-marquee space-x-0">
           <img src="homepage image.png" alt="gift" className="h-[500px] w-auto" />
           <img src="robotmodel.png" alt="money" className="h-[500px] w-auto" />
           <img src="other ai.png" alt="bitcoin" className="h-[500px] w-auto" />
