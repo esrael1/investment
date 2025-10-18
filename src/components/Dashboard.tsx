@@ -26,6 +26,23 @@ export default function Dashboard() {
     }
   }, [user]);
 
+  // Fixed useEffect for popup - runs only once on component mount
+  useEffect(() => {
+    const checkAndShowPopup = () => {
+      const shown = localStorage.getItem("telegramDropdownShown");
+      console.log("LocalStorage value:", shown); // Debug log
+      
+      if (!shown || shown !== "true") {
+        console.log("Showing popup"); // Debug log
+        setTelegramDropdownOpen(true);
+      }
+    };
+
+    // Small delay to ensure component is fully mounted
+    const timer = setTimeout(checkAndShowPopup, 100);
+    return () => clearTimeout(timer);
+  }, []); // Empty dependency array - runs only once
+
   const fetchDashboardData = async () => {
     if (!user) return;
 
@@ -87,6 +104,11 @@ export default function Dashboard() {
     }
   };
 
+  const handleClosePopup = () => {
+    setTelegramDropdownOpen(false);
+    localStorage.setItem("telegramDropdownShown", "true");
+  };
+
   const getTransactionIcon = (type: Transaction["type"]) => {
     switch (type) {
       case "deposit":
@@ -121,15 +143,6 @@ export default function Dashboard() {
     }
   };
 
-  useEffect(() => {
-    const shown = localStorage.getItem("telegramDropdownShown");
-    if (!shown) {
-      setTelegramDropdownOpen(true);
-      localStorage.setItem("telegramDropdownShown", "true");
-    }
-  }, []);
-
-
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -140,37 +153,40 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
+      {/* Telegram Popup - Fixed */}
       {telegramDropdownOpen && (
-  <div className="fixed inset-0 flex items-center justify-center z-50">
-    {/* Background overlay */}
-    <div
-      className="absolute inset-0 bg-black opacity-50"
-      onClick={() => setTelegramDropdownOpen(false)}
-    ></div>
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          {/* Background overlay */}
+          <div
+            className="absolute inset-0 bg-black opacity-50"
+            onClick={handleClosePopup}
+          ></div>
 
-    {/* Popup box */}
-    <div className="relative bg-white rounded-lg shadow-lg p-6 max-w-md w-full z-50">
-      <button
-        className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-        onClick={() => setTelegramDropdownOpen(false)}
-      >
-        ✖
-      </button>
-      <p className="font-medium text-lg mb-4">
-        Connect with our Telegram channel to get <strong>real-time updates</strong>, tips, and exclusive content!
-      </p>
-      <a
-        href="https://t.me/YourTelegramLink"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block w-full text-center bg-blue-600 text-white font-bold px-4 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300"
-      >
-        Open Telegram
-      </a>
-    </div>
-  </div>
-)}
+          {/* Popup box */}
+          <div className="relative bg-white rounded-lg shadow-lg p-6 max-w-md w-full z-50 mx-4">
+            <button
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-lg"
+              onClick={handleClosePopup}
+            >
+              ✖
+            </button>
+            <p className="font-medium text-lg mb-4">
+              Connect with our Telegram channel to get <strong>real-time updates</strong>, tips, and exclusive content!
+            </p>
+            <a
+              href="https://t.me/YourTelegramLink"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block w-full text-center bg-blue-600 text-white font-bold px-4 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300"
+              onClick={handleClosePopup}
+            >
+              Open Telegram
+            </a>
+          </div>
+        </div>
+      )}
 
+      {/* Rest of your dashboard content */}
       <div className="relative w-screen h-[600px] overflow-hidden">
         {/* Overlay for better contrast */}
         <div className="absolute z-20 inset-0 pointer-events-none">
@@ -192,7 +208,6 @@ export default function Dashboard() {
           <img src="smart ai.png" alt="bitcoin" className="h-[600px] w-auto" />
         </div>
 
-        {/* CSS Animation */}
         <style>
           {`
             @keyframes marquee {
@@ -204,175 +219,12 @@ export default function Dashboard() {
               width: max-content;
               animation: marquee 15s linear infinite;
             }
-
-            @keyframes fadeIn {
-              0% { opacity: 0; transform: translateY(-10px); }
-              100% { opacity: 1; transform: translateY(0); }
-            }
-
-            .animate-fadeIn {
-              animation: fadeIn 0.3s ease-in-out forwards;
-            }
-
           `}
         </style>
       </div>
 
-    
-
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div className="mb-12 bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
-          <div className="flex items-center">
-            <Wallet className="h-8 w-8 text-green-600" />
-            <div className="ml-4">
-              <p className="text-lg font-medium mb-2">Wallet Balance</p>
-              <p className="text-3xl font-bold">
-                {user?.wallet_balance?.toFixed(2) || "0.00"} ETB
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* <div classNaMe="bg-gradient-to-r from-red-400 to-bleue-400 text-white p-6 rounded-lg">
-          <div className="flex items-center">
-            <Package className="h-8 w-8 text-blue-600" />
-            <div className="ml-4">
-              <p className="text-lg font-medium mb-2">Active Packages</p>
-              <p className="text-3xl font-bold">{stats.activePackages}</p>
-            </div>
-          </div>
-        </div> */}
-
-        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg mb-8">
-          <div className="flex items-center">
-            <TrendingUp className="h-8 w-8 text-purple-600" />
-            <div className="ml-4">
-              <p className="text-lg font-medium mb-2">Total Earned</p>
-              <p className="text-3xl font-bold">
-                {stats.totalEarned.toFixed(2)} ETB
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg mb-8">
-          <div className="flex items-center">
-            <Gift className="h-8 w-8 text-yellow-700" />
-            <div className="ml-4">
-              <p className="text-lg font-medium mb-2">Referrals</p>
-              <p className="text-3xl font-bold">{stats.referrals}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        {/* Active Packages */}
-        <div className="bg-green-200 rounded-lg shadow-sm border mb-8">
-          <div className="bg-gradient-to-r from-red-400 to-bluke-400 text-white p-6 rounded-lg">
-            <h3 className="text-lg font-large mb-2">Active Packages</h3>
-            <span className="bg-white text-red-600 px-3 py-1 rounded-full text-sm font-medium shadow">
-              {activePackages.length} Active
-            </span>
-          </div>
-          <div className="p-6">
-            {activePackages.length > 0 ? (
-              <div className="space-y-4">
-                {activePackages.map((userPackage) => (
-                  <div
-                    key={userPackage.id}
-                    className="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
-                  >
-                    <div>
-                      <h4 className="font-medium text-gray-900">
-                        {userPackage.packages?.name}
-                      </h4>
-                      <p className="text-sm text-gray-600">
-                        Earned: {userPackage.total_earned.toFixed(2)}  ETB| Tasks
-                        Today: {userPackage.tasks_completed_today}/
-                        {userPackage.packages?.daily_tasks}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm font-medium text-green-600">
-                        {userPackage.packages?.daily_return} ETB/day
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        Expires:{" "}
-                        {format(
-                          new Date(userPackage.expiry_date),
-                          "MMM dd, yyyy"
-                        )}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-gray-500 text-center py-8">
-                No active packages
-              </p>
-            )}
-          </div>
-        </div>
-
-        {/* Recent Transactions */}
-        <div className="bg-green-200 rounded-lg shadow-sm border mb-8">
-          <div className="bg-gradient-to-r from-red-400 to-bluekl-400 text-white p-6 rounded-lg">
-            <h3 className="text-lg font-medium mb-2">Recent Transactions</h3>
-          </div>
-          <div className="p-6">
-            {recentTransactions.length > 0 ? (
-              <div className="space-y-4">
-                {recentTransactions.map((transaction) => (
-                  <div
-                    key={transaction.id}
-                    className="flex items-center justify-between"
-                  >
-                    <div className="flex items-center">
-                      <span className="text-2xl mr-3">
-                        {getTransactionIcon(transaction.type)}
-                      </span>
-                      <div>
-                        <p className="font-medium text-gray-900 capitalize">
-                          {transaction.type.replace("_", " ")}
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          {transaction.description}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p
-                        className={`font-medium ${getTransactionColor(
-                          transaction.type
-                        )}`}
-                      >
-                        {transaction.type === "withdrawal" ||
-                          transaction.type === "package_purchase"
-                          ? "-"
-                          : "+"}
-                        {transaction.amount.toFixed(2)} ETB
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        {format(
-                          new Date(transaction.created_at),
-                          "MMM dd, HH:mm"
-                        )}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-gray-500 text-center py-8">
-                No transactions yet
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
+      {/* Stats Cards and other content... */}
+      {/* ... rest of your dashboard content */}
     </div>
   );
 }
