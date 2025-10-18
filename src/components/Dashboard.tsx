@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { supabase, UserPackage, Transaction } from "../lib/supabase";
-import { Wallet, Package, Gift, CheckSquare, TrendingUp } from "lucide-react";
+import { Wallet, Gift, TrendingUp } from "lucide-react";
 import { format } from "date-fns";
 
 export default function Dashboard() {
@@ -14,52 +14,24 @@ export default function Dashboard() {
     referrals: 0,
     tasksCompleted: 0,
   });
-  const [recentTransactions, setRecentTransactions] = useState<Transaction[]>(
-    []
-  );
+  const [recentTransactions, setRecentTransactions] = useState<Transaction[]>([]);
   const [activePackages, setActivePackages] = useState<UserPackage[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user) {
-      fetchDashboardData();
-    }
+    if (user) fetchDashboardData();
   }, [user]);
-
-  // Fixed useEffect for popup - runs only once on component mount
-  useEffect(() => {
-    const checkAndShowPopup = () => {
-      const shown = localStorage.getItem("telegramDropdownShown");
-      console.log("LocalStorage value:", shown); // Debug log
-      
-      if (!shown || shown !== "true") {
-        console.log("Showing popup"); // Debug log
-        setTelegramDropdownOpen(true);
-      }
-    };
-
-    // Small delay to ensure component is fully mounted
-    const timer = setTimeout(checkAndShowPopup, 100);
-    return () => clearTimeout(timer);
-  }, []); // Empty dependency array - runs only once
 
   const fetchDashboardData = async () => {
     if (!user) return;
 
     try {
-      // Fetch active packages
       const { data: packages } = await supabase
         .from("user_packages")
-        .select(
-          `
-          *,
-          packages (*)
-        `
-        )
+        .select("*, packages(*)")
         .eq("user_id", user.id)
         .eq("is_active", true);
 
-      // Fetch recent transactions
       const { data: transactions } = await supabase
         .from("transactions")
         .select("*")
@@ -67,19 +39,16 @@ export default function Dashboard() {
         .order("created_at", { ascending: false })
         .limit(5);
 
-      // Fetch referrals count
       const { count: referralsCount } = await supabase
         .from("referrals")
         .select("*", { count: "exact" })
         .eq("referrer_id", user.id);
 
-      // Fetch completed tasks count
       const { count: tasksCount } = await supabase
         .from("user_tasks")
         .select("*", { count: "exact" })
         .eq("user_id", user.id);
 
-      // Calculate total earned
       const totalEarned =
         transactions?.reduce((sum, t) => {
           if (t.type === "task_reward" || t.type === "referral_bonus") {
@@ -102,11 +71,6 @@ export default function Dashboard() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleClosePopup = () => {
-    setTelegramDropdownOpen(false);
-    localStorage.setItem("telegramDropdownShown", "true");
   };
 
   const getTransactionIcon = (type: Transaction["type"]) => {
@@ -143,6 +107,14 @@ export default function Dashboard() {
     }
   };
 
+  useEffect(() => {
+    const shown = localStorage.getItem("telegramDropdownShown");
+    if (!shown) {
+      setTelegramDropdownOpen(true);
+      localStorage.setItem("telegramDropdownShown", "true");
+    }
+  }, []);
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -153,20 +125,17 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      {/* Telegram Popup - Fixed */}
+      {/* Telegram Popup */}
       {telegramDropdownOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          {/* Background overlay */}
           <div
             className="absolute inset-0 bg-black opacity-50"
-            onClick={handleClosePopup}
+            onClick={() => setTelegramDropdownOpen(false)}
           ></div>
-
-          {/* Popup box */}
-          <div className="relative bg-white rounded-lg shadow-lg p-6 max-w-md w-full z-50 mx-4">
+          <div className="relative bg-white rounded-lg shadow-lg p-6 max-w-md w-full z-50">
             <button
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-lg"
-              onClick={handleClosePopup}
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+              onClick={() => setTelegramDropdownOpen(false)}
             >
               ✖
             </button>
@@ -178,7 +147,6 @@ export default function Dashboard() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block w-full text-center bg-blue-600 text-white font-bold px-4 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300"
-              onClick={handleClosePopup}
             >
               Open Telegram
             </a>
@@ -186,11 +154,10 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Rest of your dashboard content */}
-      <div className="relative w-screen h-[600px] overflow-hidden">
-        {/* Overlay for better contrast */}
+      {/* Hero Section */}
+      <div className="relative w-screen h-[600px]">
         <div className="absolute z-20 inset-0 pointer-events-none">
-          <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
+          <div className="text-center bg-gradient-to-br from-gray-100 via-gray-900 to-red-100 p-8 rounded-2xl">
             <h1 className="text-7xl font-extrabold bg-gradient-to-r from-yellow-900 via-blue-700 to-red-400 bg-clip-text text-transparent shadow-md">
               Train AI - Earn more.
             </h1>
@@ -198,7 +165,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Marquee container */}
         <div className="flex animate-marquee space-x-0">
           <img src="homepage image.png" alt="gift" className="h-[600px] w-auto" />
           <img src="robotmodel.png" alt="money" className="h-[600px] w-auto" />
@@ -223,8 +189,101 @@ export default function Dashboard() {
         </style>
       </div>
 
-      {/* Stats Cards and other content... */}
-      {/* ... rest of your dashboard content */}
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="mb-12 bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
+          <div className="flex items-center">
+            <Wallet className="h-8 w-8 text-green-600" />
+            <div className="ml-4">
+              <p className="text-lg font-medium mb-2">Wallet Balance</p>
+              <p className="text-3xl font-bold">{user?.wallet_balance?.toFixed(2) || "0.00"} ETB</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg mb-8">
+          <div className="flex items-center">
+            <TrendingUp className="h-8 w-8 text-purple-600" />
+            <div className="ml-4">
+              <p className="text-lg font-medium mb-2">Total Earned</p>
+              <p className="text-3xl font-bold">{stats.totalEarned.toFixed(2)} ETB</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg mb-8">
+          <div className="flex items-center">
+            <Gift className="h-8 w-8 text-yellow-700" />
+            <div className="ml-4">
+              <p className="text-lg font-medium mb-2">Referrals</p>
+              <p className="text-3xl font-bold">{stats.referrals}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Active Packages & Recent Transactions */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div className="bg-green-200 rounded-lg shadow-sm border mb-8">
+          <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
+            <h3 className="text-lg font-medium mb-2">Active Packages</h3>
+            <span className="bg-white text-red-600 px-3 py-1 rounded-full text-sm font-medium shadow">
+              {activePackages.length} Active
+            </span>
+          </div>
+          <div className="p-6">
+            {activePackages.length > 0 ? (
+              activePackages.map(pkg => (
+                <div key={pkg.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg mb-4">
+                  <div>
+                    <h4 className="font-medium text-gray-900">{pkg.packages?.name}</h4>
+                    <p className="text-sm text-gray-600">
+                      Earned: {pkg.total_earned.toFixed(2)} ETB | Tasks Today: {pkg.tasks_completed_today}/{pkg.packages?.daily_tasks}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-medium text-green-600">{pkg.packages?.daily_return} ETB/day</p>
+                    <p className="text-xs text-gray-500">
+                      Expires: {format(new Date(pkg.expiry_date), "MMM dd, yyyy")}
+                    </p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-500 text-center py-8">No active packages</p>
+            )}
+          </div>
+        </div>
+
+        <div className="bg-green-200 rounded-lg shadow-sm border mb-8">
+          <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
+            <h3 className="text-lg font-medium mb-2">Recent Transactions</h3>
+          </div>
+          <div className="p-6">
+            {recentTransactions.length > 0 ? (
+              recentTransactions.map(t => (
+                <div key={t.id} className="flex items-center justify-between mb-4">
+                  <div className="flex items-center">
+                    <span className="text-2xl mr-3">{getTransactionIcon(t.type)}</span>
+                    <div>
+                      <p className="font-medium text-gray-900 capitalize">{t.type.replace("_", " ")}</p>
+                      <p className="text-sm text-gray-600">{t.description}</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className={`font-medium ${getTransactionColor(t.type)}`}>
+                      {(t.type === "withdrawal" || t.type === "package_purchase" ? "-" : "+") + t.amount.toFixed(2)} ETB
+                    </p>
+                    <p className="text-xs text-gray-500">{format(new Date(t.created_at), "MMM dd, HH:mm")}</p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-500 text-center py-8">No transactions yet</p>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
