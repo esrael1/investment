@@ -5,11 +5,13 @@ import { CheckSquare, Gift, Upload } from "lucide-react";
 import { format, isToday } from "date-fns";
 
 export default function Tasks() {
+  const [selectedImageName, setSelectedImageName] = useState<string>("");
+
   const { user, refreshUser } = useAuth();
   const [userPackages, setUserPackages] = useState<UserPackage[]>([]);
   const [availableTasks, setAvailableTasks] = useState<{
     [key: string]: Task[];
-  }>({}); 
+  }>({});
   const [acceptedTasks, setAcceptedTasks] = useState<{
     [key: string]: string[];
   }>({});
@@ -75,7 +77,7 @@ export default function Tasks() {
     return (
       isNewDay ||
       userPackage.tasks_completed_today <
-        (userPackage.packages?.daily_tasks || 0)
+      (userPackage.packages?.daily_tasks || 0)
     );
   };
 
@@ -227,9 +229,8 @@ export default function Tasks() {
                     <div
                       className="h-3 bg-gradient-to-r from-red-400 to-green-600"
                       style={{
-                        width: `${
-                          (tasksCompletedToday / maxDailyTasks) * 100
-                        }%`,
+                        width: `${(tasksCompletedToday / maxDailyTasks) * 100
+                          }%`,
                       }}
                     ></div>
                   </div>
@@ -285,37 +286,45 @@ export default function Tasks() {
                             </p>
 
                             {/* Custom File Upload (Camera Enabled) */}
+
                             <div className="relative">
                               <input
                                 id={`file-upload-${task.id}`}
                                 type="file"
                                 accept="image/*"
                                 capture="environment"
-                                onChange={(e) =>
-                                  handleFileUpload(task.id, e.target.files?.[0] || null)
-                                }
-                                className="hidden" // hide default input
+                                onChange={(e) => {
+                                  const file = e.target.files?.[0] || null;
+                                  handleFileUpload(task.id, file);
+                                  if (file) {
+                                    setSelectedImageName(file.name);
+                                  } else {
+                                    setSelectedImageName("");
+                                  }
+                                }}
+                                className="hidden"
                               />
+
                               <label
                                 htmlFor={`file-upload-${task.id}`}
-                                className="block w-full text-center bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-md cursor-pointer hover:bg-blue-700 transition-colors"
+                                className="block w-full text-center bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-md cursor-pointer hover:bg-blue-700 transition-colors truncate"
                               >
-                                📷 Upload or Capture Image
+                                {selectedImageName ? `📁 ${selectedImageName}` : "📷 Upload or Capture Image"}
                               </label>
                             </div>
+
 
 
                             {/* Submit Button */}
                             <button
                               onClick={() => handleCompleteTask(task, pkg)}
                               disabled={!canDo || completing === task.id}
-                              className={`w-full py-2 rounded-lg text-white font-medium transition-colors duration-200 ${
-                                completing === task.id
+                              className={`w-full py-2 rounded-lg text-white font-medium transition-colors duration-200 ${completing === task.id
                                   ? "bg-gray-400 cursor-not-allowed"
                                   : canDo
-                                  ? "bg-green-600 hover:bg-green-700"
-                                  : "bg-gray-300 cursor-not-allowed"
-                              }`}
+                                    ? "bg-green-600 hover:bg-green-700"
+                                    : "bg-gray-300 cursor-not-allowed"
+                                }`}
                             >
                               {completing === task.id
                                 ? "Completing..."
