@@ -175,17 +175,53 @@ export default function Dashboard() {
             }
 
             @keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(-10px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
+              0% { opacity: 0; transform: translateY(-10px); }
+              100% { opacity: 1; transform: translateY(0); }
+            }
 
-.animate-fadeIn {
-  animation: fadeIn 0.3s ease-in-out forwards;
-}
+            .animate-fadeIn {
+              animation: fadeIn 0.3s ease-in-out forwards;
+            }
 
           `}
         </style>
       </div>
+
+      {/* Telegram Dropdown */ }
+  <div className="relative mb-8">
+    <button
+      onClick={() => setTelegramDropdownOpen(!telegramDropdownOpen)}
+      className="flex items-center justify-between w-full max-w-md mx-auto px-6 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 transition-colors duration-300 focus:outline-none"
+    >
+      <span>Join our Telegram Community</span>
+      <svg
+        className={`w-5 h-5 transform transition-transform duration-300 ${telegramDropdownOpen ? "rotate-180" : ""
+          }`}
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+
+    {telegramDropdownOpen && (
+      <div className="mt-2 max-w-md mx-auto bg-white rounded-lg shadow-lg p-6 space-y-4 text-gray-900 animate-fadeIn">
+        <p className="font-medium text-lg">
+          Connect with our Telegram channel to get **real-time updates**, tips, and exclusive content!
+        </p>
+        <a
+          href="https://t.me/YourTelegramLink"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block w-full text-center bg-blue-600 text-white font-bold px-4 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300"
+        >
+          Open Telegram
+        </a>
+      </div>
+    )}
+  </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -341,41 +377,5 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
-    {/* Telegram Dropdown */ }
-  <div className="relative mb-8">
-    <button
-      onClick={() => setTelegramDropdownOpen(!telegramDropdownOpen)}
-      className="flex items-center justify-between w-full max-w-md mx-auto px-6 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 transition-colors duration-300 focus:outline-none"
-    >
-      <span>Join our Telegram Community</span>
-      <svg
-        className={`w-5 h-5 transform transition-transform duration-300 ${telegramDropdownOpen ? "rotate-180" : ""
-          }`}
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-      </svg>
-    </button>
-
-    {telegramDropdownOpen && (
-      <div className="mt-2 max-w-md mx-auto bg-white rounded-lg shadow-lg p-6 space-y-4 text-gray-900 animate-fadeIn">
-        <p className="font-medium text-lg">
-          Connect with our Telegram channel to get **real-time updates**, tips, and exclusive content!
-        </p>
-        <a
-          href="https://t.me/YourTelegramLink"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block w-full text-center bg-blue-600 text-white font-bold px-4 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300"
-        >
-          Open Telegram
-        </a>
-      </div>
-    )}
-  </div>
-
   );
 }
