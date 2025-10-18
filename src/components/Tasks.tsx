@@ -281,23 +281,29 @@ export default function Tasks() {
                         ) : (
                           <div className="space-y-3">
                             <p className="text-gray-600 text-sm">
-                              ✅ Follow, like, and comment on the post. Then
-                              upload a screenshot below:
+                              🤖 Share your surroundings! Take or upload a picture to train EnviroScan AI about real-world environments.
                             </p>
 
-                            {/* File Upload */}
-                            <input
-                              type="file"
-                              accept="image/*"
-                              capture="environment"
-                              onChange={(e) =>
-                                handleFileUpload(
-                                  task.id,
-                                  e.target.files?.[0] || null
-                                )
-                              }
-                              className="block w-full text-gray-700 text-sm border border-gray-300 rounded-lg p-2 cursor-pointer hover:border-purple-500 transition-colors"
-                            />
+                            {/* Custom File Upload (Camera Enabled) */}
+                            <div className="relative">
+                              <input
+                                id={`file-upload-${task.id}`}
+                                type="file"
+                                accept="image/*"
+                                capture="environment"
+                                onChange={(e) =>
+                                  handleFileUpload(task.id, e.target.files?.[0] || null)
+                                }
+                                className="hidden" // hide default input
+                              />
+                              <label
+                                htmlFor={`file-upload-${task.id}`}
+                                className="block w-full text-center bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-md cursor-pointer hover:bg-blue-700 transition-colors"
+                              >
+                                📷 Upload or Capture Image
+                              </label>
+                            </div>
+
 
                             {/* Submit Button */}
                             <button
