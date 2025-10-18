@@ -188,7 +188,7 @@ export default function Dashboard() {
       </div>
 
       {/* Telegram Dropdown */ }
-  <div className="relative mb-8">
+  <div className="relative mb-8 z-50">
     <button
       onClick={() => setTelegramDropdownOpen(!telegramDropdownOpen)}
       className="flex items-center justify-between w-full max-w-md mx-auto px-6 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 transition-colors duration-300 focus:outline-none"
