@@ -142,12 +142,12 @@ export default function Dashboard() {
 
         {/* Marquee container */}
         <div className="flex z-20 animate-marquee space-x-6">
-          <img src="gift.jpg" alt="gift" className="h-[500px] w-auto" />
-          <img src="money.jpg" alt="money" className="h-[500px] w-auto" />
+          <img src="homepage image.png" alt="gift" className="h-[500px] w-auto" />
+          {/* <img src="money.jpg" alt="money" className="h-[500px] w-auto" />
           <img src="bitconsak.jpg" alt="bitcoin" className="h-[500px] w-auto" />
           <img src="openbox.jpg" alt="gift" className="h-[500px] w-auto" />
           <img src="wallet.jpg" alt="money" className="h-[500px] w-auto" />
-          <img src="reward.jpg" alt="bitcoin" className="h-[500px] w-auto" />
+          <img src="reward.jpg" alt="bitcoin" className="h-[500px] w-auto" /> */}
         </div>
 
         {/* CSS Animation */}
