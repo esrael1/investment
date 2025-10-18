@@ -120,6 +120,15 @@ export default function Dashboard() {
     }
   };
 
+  useEffect(() => {
+  const shown = localStorage.getItem("telegramDropdownShown");
+  if (!shown) {
+    setTelegramDropdownOpen(true);
+    localStorage.setItem("telegramDropdownShown", "true");
+  }
+}, []);
+
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
