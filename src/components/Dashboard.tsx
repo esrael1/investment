@@ -196,7 +196,7 @@ export default function Dashboard() {
           </div>
         </div> */}
 
-        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
+        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg mb-8">
           <div className="flex items-center">
             <TrendingUp className="h-8 w-8 text-purple-600" />
             <div className="ml-4">
@@ -208,7 +208,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
+        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg mb-8">
           <div className="flex items-center">
             <Gift className="h-8 w-8 text-yellow-700" />
             <div className="ml-4">
@@ -219,9 +219,9 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Active Packages */}
-        <div className="bg-green-200 rounded-lg shadow-sm border">
+        <div className="bg-green-200 rounded-lg shadow-sm border mb-8">
           <div className="bg-gradient-to-r from-red-400 to-bluke-400 text-white p-6 rounded-lg">
             <h3 className="text-lg font-large mb-2">Active Packages</h3>
             <span className="bg-white text-red-600 px-3 py-1 rounded-full text-sm font-medium shadow">
@@ -270,7 +270,7 @@ export default function Dashboard() {
         </div>
 
         {/* Recent Transactions */}
-        <div className="bg-green-200 rounded-lg shadow-sm border">
+        <div className="bg-green-200 rounded-lg shadow-sm border mb-8">
           <div className="bg-gradient-to-r from-red-400 to-bluekl-400 text-white p-6 rounded-lg">
             <h3 className="text-lg font-medium mb-2">Recent Transactions</h3>
           </div>
