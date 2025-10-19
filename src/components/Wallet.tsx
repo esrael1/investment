@@ -476,19 +476,39 @@ export default function Wallet() {
               }}
               className="p-6 space-y-4"
             >
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Deposit Amount (ETB)
-                </label>
-                <input
-                  type="number"
-                  value={depositAmount}
-                  onChange={(e) => setDepositAmount(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Enter amount"
-                  required
-                />
-              </div>
+             <div>
+  <label className="block text-sm font-medium text-gray-700 mb-2">
+    Deposit Amount (ETB)
+  </label>
+
+  <div className="flex flex-wrap gap-2 mb-3">
+    {[100, 1000, 2000, 3000, 4000, 5000, 6000, 10000].map((amount) => (
+      <button
+        key={amount}
+        type="button"
+        onClick={() => setDepositAmount(amount)}
+        className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 border 
+          ${
+            depositAmount === amount
+              ? "bg-blue-600 text-white border-blue-700 shadow-md"
+              : "bg-gray-100 hover:bg-blue-100 border-gray-300 text-gray-700"
+          }`}
+      >
+        {amount.toLocaleString()}
+      </button>
+    ))}
+  </div>
+
+  <input
+    type="number"
+    value={depositAmount}
+    onChange={(e) => setDepositAmount(e.target.value)}
+    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+    placeholder="Enter custom amount"
+    required
+  />
+</div>
+
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
