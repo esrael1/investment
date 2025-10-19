@@ -285,44 +285,80 @@ export default function Packages() {
 
 
 
-        {/* static package list */}
+       {/* package list */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {packages.map((pkg) => {
-          const isPurchased = isPackagePurchased(pkg.id);
-          const canAfford = user && user.wallet_balance >= pkg.price;
+            <div className="group relative bg-gradient-to-b from-red-100 to-cyan-400 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100">
+              <div className="relative w-full h-72 bg-cover bg-center">
 
-          return (
-            <div
-              key={pkg.id}
-              className="group relative bg-gradient-to-b from-red-100 to-cyan-400 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100"
-            >
-              <div
-                className="relative w-full h-72 bg-cover bg-center"
-                style={{
-                  backgroundImage: pkg.background_image
-                    ? `url("${pkg.background_image}")`
-                    : `linear-gradient(to right, #ce1c1cf3, #003cb3f1)`,
-                }}
-              >
-                <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+                <div className="absolute top-0 left-0 w-full h-full flex items-center justify-between">
                   <div className="backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-lg px-3 py-2 transition-all duration-300 shadow-md">
                     <h3 className="text-gray-900 font-bold uppercase tracking-wide drop-shadow-sm animate-glow">
-                      {pkg.name}
+                      8. Titanium
                     </h3>
                     <p className="text-white text-48 mt-0.5">
                       Price{" "}
                       <span className="text-white font-bold">
-                        {pkg.price}: ETB
+                        100000: ETB
                       </span>
                     </p>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
 
+              <div className="p-5 space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <span className="font-medium">Daily Return:</span>
+                  </div>
+                  <span className="text-green-600 font-semibold">
+                    8000 ETB
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center text-sm text-gray-600">
+                  <div className="flex items-center gap-1">
+                    <CheckSquare className="h-4 w-4 text-gray-400" />
+                    <span className="font-medium">Tasks:</span>
+                  </div>
+                  <span className="font-semibold text-gray-900">
+                    30
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center text-sm text-gray-600">
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4 text-gray-400" />
+                    <span className="font-medium">Duration:</span>
+                  </div>
+                  <span className="font-semibold text-gray-900">
+                    500 days
+                  </span>
+                </div>
+
+                <div className="text-sm space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Total Return</span>
+                    <span className="font-semibold text-green-600">
+                      40,000,000 ETB
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Profit</span>
+                    <span className="font-semibold text-green-900">
+                      39,900,000 ETB
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  className="w-full mt-4 py-3 px-4 rounded-lg font-semibold transition-all duration-300
+                    bg-gray-100 text-gray-400 cursor-not-allowed"
+                >
+                  Coming soon
+                </button>
+              </div>
+            </div>
+      </div>
 
 
       {packages.length === 0 && (
