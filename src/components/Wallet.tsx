@@ -392,30 +392,38 @@ export default function Wallet() {
                 Bank Accounts for Deposit
               </h4>
               {adminBankAccounts.length > 0 ? (
-                <ul className="space-y-2 text-gray-800 text-sm">
-                  {adminBankAccounts.map((account) => (
-                    <li
-                      key={account.id}
-                      className="border-b border-gray-300 pb-2 last:border-b-0 bg-green-500"
-                    >
-                      <p>
-                        <strong>Bank:</strong> {account.bank_name}
-                      </p>
-                      <p>
-                        <strong>Name:</strong> {account.account_holder}
-                      </p>
-                      <p>
-                        <strong>Account Number:</strong>{" "}
-                        {account.account_number}
-                      </p>
-                      {account.branch_name && (
-                        <p>
-                          <strong>Branch:</strong> {account.branch_name}
-                        </p>
-                      )}
-                    </li>
-                  ))}
-                </ul>
+                <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 text-gray-800">
+  {adminBankAccounts.map((account) => (
+    <li
+      key={account.id}
+      className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-xl p-4 shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+    >
+      <div className="flex items-center justify-between mb-2">
+        <h4 className="text-green-800 font-bold text-lg">
+          {account.bank_name}
+        </h4>
+        <span className="text-xs font-semibold bg-green-200 text-green-800 px-2 py-1 rounded-full">
+          Verified
+        </span>
+      </div>
+      <p className="text-sm">
+        <strong className="text-gray-700">Name:</strong>{" "}
+        <span className="text-gray-900">{account.account_holder}</span>
+      </p>
+      <p className="text-sm mt-1">
+        <strong className="text-gray-700">Account No:</strong>{" "}
+        <span className="text-gray-900">{account.account_number}</span>
+      </p>
+      {account.branch_name && (
+        <p className="text-sm mt-1">
+          <strong className="text-gray-700">Branch:</strong>{" "}
+          <span className="text-gray-900">{account.branch_name}</span>
+        </p>
+      )}
+    </li>
+  ))}
+</ul>
+
               ) : (
                 <p className="text-red-600">
                   No bank account information available.
