@@ -281,7 +281,7 @@ export default function Tasks() {
                           </button>
                         ) : (
                           <div className="space-y-3">
-                            <p className="text-gray-600 text-sm">
+                            <p className="text-cyan-600 text-sm">
                               🤖 Share your surroundings! Take or upload a picture to train EnviroScan AI about real-world environments.
                             </p>
 
