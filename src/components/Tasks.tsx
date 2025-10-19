@@ -313,13 +313,13 @@ export default function Tasks() {
                             </div>
 
                             <div className="max-w-md mx-auto mt-4">
-                              <label className="block text-gray-800 font-semibold mb-2 text-sm">
+                              <label className="block text-cyan-800 font-bold mb-2 text-sm">
                                 📝 Describe Your Image
                               </label>
                               <textarea
                                 placeholder="Explain what’s in the image — for example, ‘a robot scanning objects on a desk’ or ‘a person using AI on a smartphone’..."
                                 className="w-full border border-gray-300 rounded-2xl p-3 text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 transition-all duration-200 resize-none hover:shadow-md"></textarea>
-                              <p className="text-xs text-gray-500 mt-1">
+                              <p className="text-xs text-purple-500 mt-1">
                                 ✨ The more detailed your description, the better AI learns.
                               </p>
                             </div>
