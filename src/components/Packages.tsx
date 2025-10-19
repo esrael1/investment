@@ -285,7 +285,7 @@ export default function Packages() {
 
 
 
-       {/* package list */}
+       {/* coming soon package list */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             <div className="group relative bg-gradient-to-b from-red-100 to-cyan-400 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100">
               <div className="relative w-full h-72 bg-cover bg-center">
@@ -341,13 +341,13 @@ export default function Packages() {
                   <div className="flex justify-between">
                     <span className="text-gray-600">Total Return</span>
                     <span className="font-semibold text-green-600">
-                      40,000,000 ETB
+                      4,000,000 ETB
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Profit</span>
                     <span className="font-semibold text-green-900">
-                      39,900,000 ETB
+                      3,900,000 ETB
                     </span>
                   </div>
                 </div>
@@ -361,6 +361,242 @@ export default function Packages() {
               </div>
             </div>
       </div>
+
+
+          {/* coming soon package list */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div className="group relative bg-gradient-to-b from-red-100 to-cyan-400 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100">
+              <div className="relative w-full h-72 bg-cover bg-center">
+
+                <div className="absolute top-0 left-0 w-full h-72 flex items-center justify-center">
+                  <div className="relative backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-2xl transition-all duration-300 shadow-lg w-full h-72 flex flex-col items-center justify-center">
+                    <h3 className="text-gray-900 font-extrabold uppercase tracking-wide drop-shadow-sm animate-pulse text-xl mb-2">
+                      9. Crystal
+                    </h3>
+                    <p className="text-blue-700 text-lg mt-0.5">
+                      Price{" "}
+                      <span className="text-blue-900 font-bold">200,000 ETB</span>
+                    </p>
+                    <p className="text-4xl font-extrabold mt-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent animate-pulse">
+                      Coming Soon ...
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+              <div className="p-5 space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <span className="font-medium">Daily Return:</span>
+                  </div>
+                  <span className="text-green-600 font-semibold">
+                    12,000 ETB
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center text-sm text-gray-600">
+                  <div className="flex items-center gap-1">
+                    <CheckSquare className="h-4 w-4 text-gray-400" />
+                    <span className="font-medium">Tasks:</span>
+                  </div>
+                  <span className="font-semibold text-gray-900">
+                    32
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center text-sm text-gray-600">
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4 text-gray-400" />
+                    <span className="font-medium">Duration:</span>
+                  </div>
+                  <span className="font-semibold text-gray-900">
+                    600 days
+                  </span>
+                </div>
+
+                <div className="text-sm space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Total Return</span>
+                    <span className="font-semibold text-green-600">
+                      7,200,000 ETB
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Profit</span>
+                    <span className="font-semibold text-green-900">
+                      7,000,000 ETB
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  className="w-full mt-4 py-3 px-4 rounded-lg font-semibold transition-all duration-300
+                    bg-gray-100 text-gray-400 cursor-not-allowed"
+                >
+                  Coming soon
+                </button>
+              </div>
+            </div>
+      </div>
+
+
+    {/* coming soon package list */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div className="group relative bg-gradient-to-b from-red-100 to-cyan-400 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100">
+              <div className="relative w-full h-72 bg-cover bg-center">
+
+                <div className="absolute top-0 left-0 w-full h-72 flex items-center justify-center">
+                  <div className="relative backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-2xl transition-all duration-300 shadow-lg w-full h-72 flex flex-col items-center justify-center">
+                    <h3 className="text-gray-900 font-extrabold uppercase tracking-wide drop-shadow-sm animate-pulse text-xl mb-2">
+                      10. Legend package
+                    </h3>
+                    <p className="text-blue-700 text-lg mt-0.5">
+                      Price{" "}
+                      <span className="text-blue-900 font-bold">500,000 ETB</span>
+                    </p>
+                    <p className="text-4xl font-extrabold mt-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent animate-pulse">
+                      Coming Soon ...
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+              <div className="p-5 space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <span className="font-medium">Daily Return:</span>
+                  </div>
+                  <span className="text-green-600 font-semibold">
+                    30,000 ETB
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center text-sm text-gray-600">
+                  <div className="flex items-center gap-1">
+                    <CheckSquare className="h-4 w-4 text-gray-400" />
+                    <span className="font-medium">Tasks:</span>
+                  </div>
+                  <span className="font-semibold text-gray-900">
+                    30
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center text-sm text-gray-600">
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4 text-gray-400" />
+                    <span className="font-medium">Duration:</span>
+                  </div>
+                  <span className="font-semibold text-gray-900">
+                    510 days
+                  </span>
+                </div>
+
+                <div className="text-sm space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Total Return</span>
+                    <span className="font-semibold text-green-600">
+                      15,300,000 ETB
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Profit</span>
+                    <span className="font-semibold text-green-900">
+                      14,800,000 ETB
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  className="w-full mt-4 py-3 px-4 rounded-lg font-semibold transition-all duration-300
+                    bg-gray-100 text-gray-400 cursor-not-allowed"
+                >
+                  Coming soon
+                </button>
+              </div>
+            </div>
+      </div>
+
+
+
+          {/* coming soon package list */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div className="group relative bg-gradient-to-b from-red-100 to-cyan-400 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100">
+              <div className="relative w-full h-72 bg-cover bg-center">
+
+                <div className="absolute top-0 left-0 w-full h-72 flex items-center justify-center">
+                  <div className="relative backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-2xl transition-all duration-300 shadow-lg w-full h-72 flex flex-col items-center justify-center">
+                    <h3 className="text-gray-900 font-extrabold uppercase tracking-wide drop-shadow-sm animate-pulse text-xl mb-2">
+                      8. Mythic Package
+                    </h3>
+                    <p className="text-blue-700 text-lg mt-0.5">
+                      Price{" "}
+                      <span className="text-blue-900 font-bold">1,000,000 ETB</span>
+                    </p>
+                    <p className="text-4xl font-extrabold mt-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent animate-pulse">
+                      Coming Soon ...
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+              <div className="p-5 space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <span className="font-medium">Daily Return:</span>
+                  </div>
+                  <span className="text-green-600 font-semibold">
+                    200,000 ETB
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center text-sm text-gray-600">
+                  <div className="flex items-center gap-1">
+                    <CheckSquare className="h-4 w-4 text-gray-400" />
+                    <span className="font-medium">Tasks:</span>
+                  </div>
+                  <span className="font-semibold text-gray-900">
+                    50
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center text-sm text-gray-600">
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4 text-gray-400" />
+                    <span className="font-medium">Duration:</span>
+                  </div>
+                  <span className="font-semibold text-gray-900">
+                    300 days
+                  </span>
+                </div>
+
+                <div className="text-sm space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Total Return</span>
+                    <span className="font-semibold text-green-600">
+                      60,000,000 ETB
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Profit</span>
+                    <span className="font-semibold text-green-900">
+                      59,000,000 ETB
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  className="w-full mt-4 py-3 px-4 rounded-lg font-semibold transition-all duration-300
+                    bg-gray-100 text-gray-400 cursor-not-allowed"
+                >
+                  Coming soon
+                </button>
+              </div>
+            </div>
+      </div>
+      
 
 
       {packages.length === 0 && (
