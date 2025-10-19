@@ -491,7 +491,7 @@ export default function Wallet() {
           ${
             depositAmount === amount
               ? "bg-blue-600 text-white border-blue-700 shadow-md"
-              : "bg-gray-100 hover:bg-blue-100 border-gray-300 text-gray-700"
+              : "bg-green-100 hover:bg-blue-100 border-gray-300 text-gray-700"
           }`}
       >
         {amount.toLocaleString()}
@@ -503,7 +503,7 @@ export default function Wallet() {
     type="number"
     value={depositAmount}
     onChange={(e) => setDepositAmount(e.target.value)}
-    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+    className="w-full px-3 py-2 border border-gree-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
     placeholder="Enter custom amount"
     required
   />
@@ -525,17 +525,6 @@ export default function Wallet() {
                 />
               </div>
 
-              <div className="bg-blue-50 p-4 rounded-md">
-                <p className="text-sm text-blue-800">
-                  Please complete your payment and upload a clear screenshot of
-                  the transaction as proof of deposit. Once your payment has
-                  been submitted, our admin team will carefully review and
-                  verify the details. After successful verification, your
-                  deposit will be approved and reflected in your account
-                  balance.
-                </p>
-              </div>
-
               <div className="flex space-x-4">
                 <button
                   type="button"
@@ -551,6 +540,17 @@ export default function Wallet() {
                 >
                   {depositLoading ? "Submitting..." : "Submit Deposit"}
                 </button>
+              </div>
+              
+              <div className="bg-blue-50 p-4 rounded-md">
+                <p className="text-sm text-blue-800">
+                  Please complete your payment and upload a clear screenshot of
+                  the transaction as proof of deposit. Once your payment has
+                  been submitted, our admin team will carefully review and
+                  verify the details. After successful verification, your
+                  deposit will be approved and reflected in your account
+                  balance.
+                </p>
               </div>
             </form>
           </div>
