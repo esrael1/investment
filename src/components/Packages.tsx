@@ -301,6 +301,7 @@ export default function Packages() {
                         100000: ETB
                       </span>
                     </p>
+                    <center>comming soon</center>
                   </div>
                 </div>
               </div>
