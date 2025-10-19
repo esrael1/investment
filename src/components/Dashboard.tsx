@@ -147,7 +147,7 @@ export default function Dashboard() {
           Stay updated, get tips, and connect with other members instantly.
         </p>
         <button
-          onClick={() => window.open("https://t.me/YOUR_TELEGRAM_LINK", "_blank")}
+          onClick={() => window.open("https://t.me/+1KHuCJYmnZZhYTc0", "_blank")}
           className="mt-4 inline-block bg-gradient-to-r from-green-400 to-blue-500 hover:from-blue-500 hover:to-green-400 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
         >
           Join Telegram
