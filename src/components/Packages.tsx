@@ -316,61 +316,6 @@ export default function Packages() {
                       </span>
                     </p>
                   </div>
-
-                  {isPurchased && (
-                    <span className="px-1 py-1 bg-green-500/90 text-white text-xs font-semibold rounded-full shadow-md">
-                      Owned
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <div className="p-5 space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <span className="font-medium">Daily Return:</span>
-                  </div>
-                  <span className="text-green-600 font-semibold">
-                    {pkg.daily_return} ETB
-                  </span>
-                </div>
-
-                <div className="flex justify-between items-center text-sm text-gray-600">
-                  <div className="flex items-center gap-1">
-                    <CheckSquare className="h-4 w-4 text-gray-400" />
-                    <span className="font-medium">Tasks:</span>
-                  </div>
-                  <span className="font-semibold text-gray-900">
-                    {pkg.daily_tasks}
-                  </span>
-                </div>
-
-                <div className="flex justify-between items-center text-sm text-gray-600">
-                  <div className="flex items-center gap-1">
-                    <Clock className="h-4 w-4 text-gray-400" />
-                    <span className="font-medium">Duration:</span>
-                  </div>
-                  <span className="font-semibold text-gray-900">
-                    {pkg.duration_days} days
-                  </span>
-                </div>
-
-                <div className="text-sm space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Total Return</span>
-                    <span className="font-semibold text-green-600">
-                      {(pkg.daily_return * pkg.duration_days).toFixed(2)} ETB
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Profit</span>
-                    <span className="font-semibold text-green-900">
-                      {(
-                        pkg.daily_return * pkg.duration_days -
-                        pkg.price
-                      ).toFixed(2)} ETB
-                    </span>
-                  </div>
                 </div>
               </div>
             </div>
