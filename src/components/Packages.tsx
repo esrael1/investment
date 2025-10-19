@@ -290,20 +290,21 @@ export default function Packages() {
             <div className="group relative bg-gradient-to-b from-red-100 to-cyan-400 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100">
               <div className="relative w-full h-72 bg-cover bg-center">
 
-                <div className="absolute top-0 left-0 w-full h-72 flex items-center justify-between">
-                  <div className="backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-lg transition-all duration-300 shadow-md w-full h-72">
-                    <h3 className="text-gray-900 font-bold uppercase tracking-wide drop-shadow-sm animate-glow">
+                <div className="absolute top-0 left-0 w-full h-72 flex items-center justify-center">
+                  <div className="relative backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-2xl transition-all duration-300 shadow-lg w-full h-72 flex flex-col items-center justify-center">
+                    <h3 className="text-gray-900 font-extrabold uppercase tracking-wide drop-shadow-sm animate-pulse text-xl mb-2">
                       8. Titanium
                     </h3>
-                    <p className="text-white text-48 mt-0.5">
+                    <p className="text-blue-700 text-lg mt-0.5">
                       Price{" "}
-                      <span className="text-white font-bold">
-                        100000: ETB
-                      </span>
+                      <span className="text-blue-900 font-bold">100,000 ETB</span>
                     </p>
-                    <center>comming soon</center>
+                    <p className="text-4xl font-extrabold mt-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent animate-pulse">
+                      Coming Soon
+                    </p>
                   </div>
                 </div>
+
               </div>
 
               <div className="p-5 space-y-4">
