@@ -482,7 +482,7 @@ export default function Wallet() {
   </label>
 
   <div className="flex flex-wrap gap-2 mb-3">
-    {[100, 1000, 2000, 3000, 4000, 5000, 6000, 10000].map((amount) => (
+    {[700, 1500, 3000, 5000, 10000, 20000, 30000, 50000, 100000, 200000,500000, 1000000].map((amount) => (
       <button
         key={amount}
         type="button"
@@ -503,7 +503,7 @@ export default function Wallet() {
     type="number"
     value={depositAmount}
     onChange={(e) => setDepositAmount(e.target.value)}
-    className="w-full px-3 py-2 border border-gree-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+    className="w-full px-3 py-2 border border-green-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
     placeholder="Enter custom amount"
     required
   />
