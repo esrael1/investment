@@ -290,8 +290,8 @@ export default function Packages() {
             <div className="group relative bg-gradient-to-b from-red-100 to-cyan-400 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100">
               <div className="relative w-full h-72 bg-cover bg-center">
 
-                <div className="absolute top-0 left-0 w-full h-full flex items-center justify-between">
-                  <div className="backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-lg px-3 py-2 transition-all duration-300 shadow-md">
+                <div className="absolute top-0 left-0 w-full h-72 flex items-center justify-between">
+                  <div className="backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-lg transition-all duration-300 shadow-md w-full h-72">
                     <h3 className="text-gray-900 font-bold uppercase tracking-wide drop-shadow-sm animate-glow">
                       8. Titanium
                     </h3>
