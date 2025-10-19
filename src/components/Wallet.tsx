@@ -482,8 +482,6 @@ export default function Wallet() {
                 </label>
                 <input
                   type="number"
-                  min="1"
-                  step="1"
                   value={depositAmount}
                   onChange={(e) => setDepositAmount(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
