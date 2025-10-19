@@ -300,7 +300,7 @@ export default function Packages() {
                       <span className="text-blue-900 font-bold">100,000 ETB</span>
                     </p>
                     <p className="text-4xl font-extrabold mt-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent animate-pulse">
-                      Coming Soon
+                      Coming Soon ...
                     </p>
                   </div>
                 </div>
