@@ -194,7 +194,7 @@ export default function Packages() {
                     <h3 className="text-gray-900 font-bold uppercase tracking-wide drop-shadow-sm animate-glow">
                       {pkg.name}
                     </h3>
-                    <p className="text-white text-xs mt-0.5">
+                    <p className="text-white text-48 mt-0.5">
                       Price{" "}
                       <span className="text-white font-bold">
                         {pkg.price}: ETB
