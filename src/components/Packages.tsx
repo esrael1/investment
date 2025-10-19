@@ -293,7 +293,7 @@ export default function Packages() {
                 <div className="absolute top-0 left-0 w-full h-72 flex items-center justify-center">
                   <div className="relative backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-2xl transition-all duration-300 shadow-lg w-full h-72 flex flex-col items-center justify-center">
                     <h3 className="text-gray-900 font-extrabold uppercase tracking-wide drop-shadow-sm animate-pulse text-xl mb-2">
-                      8. Titanium
+                      8. Titanium Package
                     </h3>
                     <p className="text-blue-700 text-lg mt-0.5">
                       Price{" "}
@@ -371,7 +371,7 @@ export default function Packages() {
                 <div className="absolute top-0 left-0 w-full h-72 flex items-center justify-center">
                   <div className="relative backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-2xl transition-all duration-300 shadow-lg w-full h-72 flex flex-col items-center justify-center">
                     <h3 className="text-gray-900 font-extrabold uppercase tracking-wide drop-shadow-sm animate-pulse text-xl mb-2">
-                      9. Crystal
+                      9. Crystal packGE
                     </h3>
                     <p className="text-blue-700 text-lg mt-0.5">
                       Price{" "}
@@ -528,7 +528,7 @@ export default function Packages() {
                 <div className="absolute top-0 left-0 w-full h-72 flex items-center justify-center">
                   <div className="relative backdrop-blur-sm bg-purple/10 hover:bg-white/20 border border-white/20 rounded-2xl transition-all duration-300 shadow-lg w-full h-72 flex flex-col items-center justify-center">
                     <h3 className="text-gray-900 font-extrabold uppercase tracking-wide drop-shadow-sm animate-pulse text-xl mb-2">
-                      8. Mythic Package
+                      11. Mythic Package
                     </h3>
                     <p className="text-blue-700 text-lg mt-0.5">
                       Price{" "}
