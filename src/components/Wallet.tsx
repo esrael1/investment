@@ -487,7 +487,7 @@ export default function Wallet() {
         key={amount}
         type="button"
         onClick={() => setDepositAmount(amount)}
-        className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200 border 
+        className={`px-2 py-2 rounded-lg text-xs font-semibold transition-all duration-200 border 
           ${
             depositAmount === amount
               ? "bg-blue-600 text-white border-blue-700 shadow-md"
