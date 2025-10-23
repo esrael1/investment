@@ -302,14 +302,8 @@ export default function Tasks() {
                                     setSelectedImageName("");
                                   }
                                 }}
-                                className=""
+                                className="bg-gray-200"
                               />
-                              <label
-                                htmlFor={`file-upload-${task.id}`}
-                                className="block w-full text-center bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-md cursor-pointer hover:bg-blue-700 transition-colors truncate"
-                              >
-                                {selectedImageName ? `📁 ${selectedImageName}` : "📷 Upload Image"}
-                              </label>
                             </div>
 
                             <div className="max-w-md mx-auto mt-4">
