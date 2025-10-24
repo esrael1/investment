@@ -238,7 +238,7 @@ export default function Dashboard() {
       <span className="rotate-[-90deg]">Invest (ETB)</span>
     </th>
     <th className="border-[2px] border-yellow-400 py-2">
-      <span className="block origin-bottom-left rotate-[-90deg]">Daily Income (ETB)</span>
+      <span className=" origin-bottom-left rotate-[-90deg]">Daily Income (ETB)</span>
     </th>
     <th className="border-[2px] border-yellow-400 py-2">
       <span className="block origin-bottom-left rotate-[-90deg]">Period</span>
