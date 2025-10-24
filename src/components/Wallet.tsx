@@ -586,7 +586,7 @@ export default function Wallet() {
                   step="1"
                   value={withdrawAmount}
                   onChange={(e) => setWithdrawAmount(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 text-blue rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white-900"
+                  className="w-full px-3 py-2 border border-gray-300 text-green rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Enter amount"
                   required
                 />
