@@ -61,10 +61,13 @@ export default function Register() {
         <div className="text-center">
           <div className="flex justify-center">
             <img
-              src="logo.jpg"
+              src="logo1.jpg"
               alt="InvestPro Logo"
-              className="h-100 w-100 mb-2 object-contain"
+              className="h-70 w-70 rounded-[50%] object-contain"
             />
+            <h1 className="text-center text-5xl font-sans font-bold bg-gradient-to-r from-red-500 to-blue-500 bg-clip-text text-transparent">
+              EnviroScan AI
+            </h1>
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
             Create your account
