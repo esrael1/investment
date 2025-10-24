@@ -314,7 +314,7 @@ export default function Packages() {
                     <span className="font-medium">Daily Return:</span>
                   </div>
                   <span className="text-green-600 font-semibold">
-                    12,000 ETB
+                    25,000 ETB
                   </span>
                 </div>
 
@@ -324,7 +324,7 @@ export default function Packages() {
                     <span className="font-medium">Tasks:</span>
                   </div>
                   <span className="font-semibold text-gray-900">
-                    32
+                    23
                   </span>
                 </div>
 
@@ -334,7 +334,7 @@ export default function Packages() {
                     <span className="font-medium">Duration:</span>
                   </div>
                   <span className="font-semibold text-gray-900">
-                    600 days
+                    365 days
                   </span>
                 </div>
 
@@ -342,15 +342,15 @@ export default function Packages() {
                   <div className="flex justify-between">
                     <span className="text-gray-600">Total Return</span>
                     <span className="font-semibold text-green-600">
-                      7,200,000 ETB
+                      9,125,000 ETB
                     </span>
                   </div>
-                  <div className="flex justify-between">
+                  {/* <div className="flex justify-between">
                     <span className="text-gray-600">Profit</span>
                     <span className="font-semibold text-green-900">
                       7,000,000 ETB
-                    </span>
-                  </div>
+                    </span> 
+                  </div> */}
                 </div>
 
                 <button
@@ -392,7 +392,7 @@ export default function Packages() {
                     <span className="font-medium">Daily Return:</span>
                   </div>
                   <span className="text-green-600 font-semibold">
-                    30,000 ETB
+                    83,333.33 ETB
                   </span>
                 </div>
 
@@ -402,7 +402,7 @@ export default function Packages() {
                     <span className="font-medium">Tasks:</span>
                   </div>
                   <span className="font-semibold text-gray-900">
-                    30
+                    25
                   </span>
                 </div>
 
@@ -412,7 +412,7 @@ export default function Packages() {
                     <span className="font-medium">Duration:</span>
                   </div>
                   <span className="font-semibold text-gray-900">
-                    510 days
+                    365 days
                   </span>
                 </div>
 
@@ -420,15 +420,15 @@ export default function Packages() {
                   <div className="flex justify-between">
                     <span className="text-gray-600">Total Return</span>
                     <span className="font-semibold text-green-600">
-                      15,300,000 ETB
+                      30,416,666.66 ETB
                     </span>
                   </div>
-                  <div className="flex justify-between">
+                  {/* <div className="flex justify-between">
                     <span className="text-gray-600">Profit</span>
                     <span className="font-semibold text-green-900">
                       14,800,000 ETB
                     </span>
-                  </div>
+                  </div> */}
                 </div>
 
                 <button
@@ -491,7 +491,7 @@ export default function Packages() {
                     <span className="font-medium">Duration:</span>
                   </div>
                   <span className="font-semibold text-gray-900">
-                    300 days
+                    365 days
                   </span>
                 </div>
 
@@ -499,15 +499,15 @@ export default function Packages() {
                   <div className="flex justify-between">
                     <span className="text-gray-600">Total Return</span>
                     <span className="font-semibold text-green-600">
-                      60,000,000 ETB
+                      73,000,000 ETB
                     </span>
                   </div>
-                  <div className="flex justify-between">
+                  {/* <div className="flex justify-between">
                     <span className="text-gray-600">Profit</span>
                     <span className="font-semibold text-green-900">
                       59,000,000 ETB
                     </span>
-                  </div>
+                  </div> */}
                 </div>
 
                 <button
