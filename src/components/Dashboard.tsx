@@ -230,8 +230,7 @@ export default function Dashboard() {
 <table className="table-auto w-full text-center border-[3px] border-yellow-400 rounded-xl font-[Caveat_Brush] overflow-hidden">
   <thead className="bg-gradient-to-r from-purple-500 to-blue-500 text-yellow-400 text-lg">
     <tr>
-      <thead className="bg-gradient-to-r from-purple-500 to-blue-500 text-white font-[Caveat_Brush] text-lg">
-  <tr>
+      
     <th className="border-[2px] border-yellow-400 py-2 rounded-tl-xl">
       <span className="block origin-bottom-left rotate-[-45deg] translate-y-2">Package</span>
     </th>
@@ -247,8 +246,6 @@ export default function Dashboard() {
     <th className="border-[2px] border-yellow-400 py-2 rounded-tr-xl">
       <span className="block origin-bottom-left rotate-[-45deg] translate-y-2">Total Income (ETB)</span>
     </th>
-  </tr>
-</thead>
 </tr>
   </thead>
   <tbody>
