@@ -178,6 +178,11 @@ export default function Dashboard() {
         }
         .animate-fadeIn { animation: fadeIn 0.3s ease-in-out; }
         .animate-scaleIn { animation: scaleIn 0.4s ease-out; }
+
+        th, td, .caveat-text {
+          font-family: 'Caveat Brush', cursive;
+          font-stretch: condensed; /* or semi-condensed, extra-condensed */
+        }
       `}
     </style>
   </div>
