@@ -239,12 +239,15 @@ export default function Dashboard() {
   </thead>
   <tbody>
     {[
-      { name: "Bronze Package", invest: 500, daily: 100, period: "60 days", total: 3000 },
-      { name: "Silver Package", invest: 2000, daily: 500, period: "60 days", total: 15000 },
-      { name: "Gold Package", invest: 6000, daily: 1700, period: "60 days", total: 51000 },
-      { name: "Platinum Package", invest: 15000, daily: 5000, period: "60 days", total: 150000 },
-      { name: "Diamond Package", invest: 40000, daily: 15000, period: "60 days", total: 450000 },
-      { name: "VIP Package", invest: 80000, daily: 32000, period: "60 days", total: 960000 },
+      { name: "Bronze Package", invest: 700, daily: 25.98, period: "90 days", total: 2338.20 },
+      { name: "Silver Package", invest: 1500, daily: 60, period: "100 days", total: 6000 },
+      { name: "Gold Package", invest: 3000, daily: 130.90, period: "130 days", total: 17017 },
+      { name: "Platinum Package", invest: 5000, daily: 227.27, period: "150 days", total: 34090.50 },
+      { name: "Diamond Package", invest: 10000, daily: 500, period: "172 days", total: 86000 },
+      { name: "Emerald Package", invest: 20000, daily: 1111.11, period: "200 days", total: 222222 },
+      { name: "Saphire Package", invest: 30000, daily: 2000, period: "272 days", total: 544000 },
+      { name: "Ruby Package", invest: 50000, daily: 4166.66, period: "321 days", total: 1337497 },
+      { name: "Titanium Package", invest: 100000, daily: 10000, period: "365 days", total: 3650000 },
     ].map((pkg, idx) => (
       <tr
         key={pkg.name}
