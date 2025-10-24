@@ -597,7 +597,7 @@ export default function Wallet() {
                   Available balance: ${user?.wallet_balance?.toFixed(2)}
                   <br />
                   🔐 For your security, each withdrawal request undergoes a
-                  short verification process. A 12% fee will be deducted, and
+                  short verification process. A 13% fee will be deducted, and
                   your funds will be sent to your verified payment method after
                   approval.{" "}
                 </p>
