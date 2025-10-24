@@ -110,7 +110,7 @@ export default function Login() {
           <div className="text-center">
             <span className="text-sm text-gray-600">
               Don't have an account?{' '}
-              <Link to="/register" className="font-medium text-blue-600 hover:text-blue-500">
+              <Link to="/register" className="font-bold text-blue-600 hover:text-blue-500">
                 Register
               </Link>
             </span>
