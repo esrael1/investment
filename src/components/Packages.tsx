@@ -247,7 +247,7 @@ export default function Packages() {
                       {(pkg.daily_return * pkg.duration_days).toFixed(2)} ETB
                     </span>
                   </div>
-                  <div className="flex justify-between">
+                  {/* <div className="flex justify-between">
                     <span className="text-gray-600">Profit</span>
                     <span className="font-semibold text-green-900">
                       {(
@@ -255,7 +255,7 @@ export default function Packages() {
                         pkg.price
                       ).toFixed(2)} ETB
                     </span>
-                  </div>
+                  </div> */}
                 </div>
 
                 <button
