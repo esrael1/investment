@@ -217,6 +217,7 @@ export default function Dashboard() {
             }
               th, td, .caveat-text {
                 font-family: 'oswald';
+                letter-spacing: -0.02em;
                 font-stretch: extra-condensed; /* or semi-condensed, extra-condensed */
               }
           `}
