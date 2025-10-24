@@ -387,7 +387,7 @@ export default function Wallet() {
             </div>
 
             {/* Admin Bank Accounts Section */}
-            <div className="mb-4 p-4 bg-gray-50 rounded-md border border-gray-200 max-h-48">
+            <div className="mb-4 p-4 bg-gray-50 rounded-md border border-gray-200">
               <h4 className="text-md font-semibold mb-2 text-gray-700">
                 Bank Accounts for Deposit
               </h4>
