@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { supabase, UserPackage, Transaction } from "../lib/supabase";
 import { Wallet, Package, Gift, CheckSquare, TrendingUp } from "lucide-react";
 import { format } from "date-fns";
+import { Shield, Lock, FileText } from "lucide-react";
 
 export default function Dashboard() {
   const { user } = useAuth();
