@@ -361,7 +361,7 @@ export default function Wallet() {
                         transaction.type === "package_purchase"
                           ? "-"
                           : "+"}
-                        ${transaction.amount.toFixed(2)}
+                        {transaction.amount.toFixed(2)} ETB
                       </p>
                     </div>
                   </div>
