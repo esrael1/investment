@@ -51,7 +51,7 @@ export default function Layout({ children }: LayoutProps) {
       <header className="bg-cyan-600 dark:bg-cyan-800 shadow-sm border-b sticky top-0 z-30">
         <div className="flex justify-between items-center h-16 px-4">
           <div className="flex items-center">
-            <img src="logo1.png" alt="" className="w-10" h-10 />
+            <img src="logo1.jpg" alt="" className="w-10" h-10 />
             <span className="ml-2 text-lg font-bold text-white-900 dark:text-white">
               EnviroScan AI
             </span>
