@@ -40,7 +40,7 @@ export default function Login() {
             <img
               src="logo1.jpg"
               alt="InvestPro Logo"
-              className="h-70 w-100 rounded-[50%] object-contain"
+              className="h-70 w-70 rounded-[50%] object-contain"
             />
             <h1 className='text-center text-rom-purple-800 to-blue-800'>EnviroScan AI</h1>
           </div>
