@@ -425,6 +425,8 @@ export default function Dashboard() {
       <div className="mt-10 text-center border-t pt-6 text-gray-600 text-sm">
         <Lock className="inline-block w-5 h-5 mr-1 text-blue-500" />
         <span>EnviroScan AI © {new Date().getFullYear()} – All Rights Reserved.</span>
+        {/* add telegram link */}
+        <span><a href="https://t.me/EnviroScan_AI">Subscribe on telegram</a></span>
       </div>
     </div>
 
