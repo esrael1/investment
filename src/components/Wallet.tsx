@@ -568,7 +568,7 @@ export default function Wallet() {
       {/* Withdraw Modal */}
       {showWithdrawModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="rounded-lg max-w-md w-full">
+          <div className="bg-white rounded-lg max-w-md w-full">
             <div className="p-6 border-b">
               <h3 className="text-lg font-semibold text-gray-900">
                 Request Withdrawal
@@ -586,7 +586,7 @@ export default function Wallet() {
                   step="1"
                   value={withdrawAmount}
                   onChange={(e) => setWithdrawAmount(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 text-green rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 text-green-900  border border-green-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Enter amount"
                   required
                 />
@@ -594,7 +594,7 @@ export default function Wallet() {
 
               <div className="bg-yellow-50 p-4 rounded-md">
                 <p className="text-sm text-yellow-800">
-                  Available balance: ${user?.wallet_balance?.toFixed(2)}
+                  Available balance: {user?.wallet_balance?.toFixed(2)} ETB
                   <br />
                   🔐 For your security, each withdrawal request undergoes a
                   short verification process. A 13% fee will be deducted, and
