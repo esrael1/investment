@@ -229,7 +229,7 @@ export default function Dashboard() {
 
 <table className="table-auto w-full text-center border-[3px] border-yellow-400 rounded-xl font-[Caveat_Brush] overflow-hidden">
   <thead className="bg-gradient-to-r from-purple-500 to-blue-500 text-yellow-400 text-lg">
-    <tr>
+    <tr className="text-black">
       <th className="border-[2px] border-yellow-400  py-2 rounded-tl-xl">Package</th>
       <th className="border-[2px] border-yellow-400  py-2">Invest (ETB)</th>
       <th className="border-[2px] border-yellow-400  py-2">Daily Income (ETB)</th>
