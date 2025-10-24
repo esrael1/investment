@@ -223,6 +223,65 @@ export default function Dashboard() {
 
 
 
+<table class="table-auto border-collapse border border-gray-300 w-full text-center">
+  <thead class="bg-yellow-200">
+    <tr>
+      <th class="border border-gray-300 px-4 py-2">Package</th>
+      <th class="border border-gray-300 px-4 py-2">Invest (ETB)</th>
+      <th class="border border-gray-300 px-4 py-2">Daily Income (ETB)</th>
+      <th class="border border-gray-300 px-4 py-2">Period</th>
+      <th class="border border-gray-300 px-4 py-2">Total Income (ETB)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="bg-white">
+      <td class="border border-gray-300 px-4 py-2">Bronze Package</td>
+      <td class="border border-gray-300 px-4 py-2">500</td>
+      <td class="border border-gray-300 px-4 py-2">100</td>
+      <td class="border border-gray-300 px-4 py-2">60 days</td>
+      <td class="border border-gray-300 px-4 py-2 font-bold text-red-600">3,000</td>
+    </tr>
+    <tr class="bg-gray-50">
+      <td class="border border-gray-300 px-4 py-2">Silver Package</td>
+      <td class="border border-gray-300 px-4 py-2">2,000</td>
+      <td class="border border-gray-300 px-4 py-2">500</td>
+      <td class="border border-gray-300 px-4 py-2">60 days</td>
+      <td class="border border-gray-300 px-4 py-2 font-bold text-red-600">15,000</td>
+    </tr>
+    <tr class="bg-white">
+      <td class="border border-gray-300 px-4 py-2">Gold Package</td>
+      <td class="border border-gray-300 px-4 py-2">6,000</td>
+      <td class="border border-gray-300 px-4 py-2">1,700</td>
+      <td class="border border-gray-300 px-4 py-2">60 days</td>
+      <td class="border border-gray-300 px-4 py-2 font-bold text-red-600">51,000</td>
+    </tr>
+    <tr class="bg-gray-50">
+      <td class="border border-gray-300 px-4 py-2">Platinum Package</td>
+      <td class="border border-gray-300 px-4 py-2">15,000</td>
+      <td class="border border-gray-300 px-4 py-2">5,000</td>
+      <td class="border border-gray-300 px-4 py-2">60 days</td>
+      <td class="border border-gray-300 px-4 py-2 font-bold text-red-600">150,000</td>
+    </tr>
+    <tr class="bg-white">
+      <td class="border border-gray-300 px-4 py-2">Diamond Package</td>
+      <td class="border border-gray-300 px-4 py-2">40,000</td>
+      <td class="border border-gray-300 px-4 py-2">15,000</td>
+      <td class="border border-gray-300 px-4 py-2">60 days</td>
+      <td class="border border-gray-300 px-4 py-2 font-bold text-red-600">450,000</td>
+    </tr>
+    <tr class="bg-gray-50">
+      <td class="border border-gray-300 px-4 py-2">VIP Package</td>
+      <td class="border border-gray-300 px-4 py-2">80,000</td>
+      <td class="border border-gray-300 px-4 py-2">32,000</td>
+      <td class="border border-gray-300 px-4 py-2">60 days</td>
+      <td class="border border-gray-300 px-4 py-2 font-bold text-red-600">960,000</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
 
 
 
