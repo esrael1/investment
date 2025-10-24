@@ -62,7 +62,7 @@ export default function Register() {
           <div className="flex flex-col justify-center items-center">
             <img
               src="logo1.jpg"
-              alt="InvestPro Logo"
+              alt="enviroscan Ai"
               className="h-70 w-70 rounded-[50%] object-contain"
             />
             <h1 className="text-center text-5xl font-sans font-bold bg-gradient-to-r from-red-500 to-blue-500 bg-clip-text text-transparent">

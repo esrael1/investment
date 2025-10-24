@@ -248,6 +248,9 @@ export default function Dashboard() {
       { name: "Saphire Package", invest: 30000, daily: 2000, period: "272 days", total: 544000 },
       { name: "Ruby Package", invest: 50000, daily: 4166.66, period: "321 days", total: 1337497 },
       { name: "Titanium Package", invest: 100000, daily: 10000, period: "365 days", total: 3650000 },
+      { name: "Crystal Package", invest: 200000, daily: 25000, period: "365 days", total: 91250000 },
+      { name: "Legend Package", invest: 500000, daily: 83333.33, period: "365 days", total: 30416666.66 },
+      { name: "Mythic Package", invest: 1000000, daily: 200000, period: "365 days", total: 73000000 },
     ].map((pkg, idx) => (
       <tr
         key={pkg.name}
