@@ -51,17 +51,40 @@ export default function Layout({ children }: LayoutProps) {
       <header className="bg-cyan-600 dark:bg-cyan-800 shadow-sm border-b sticky top-0 z-30">
         <div className="flex justify-between items-center h-16 px-4">
           <div className="flex items-center">
-            <img src="logo1.png" alt="" className="w-10" h-10/>
+            <img src="logo1.png" alt="" className="w-10" h-10 />
             <span className="ml-2 text-lg font-bold text-white-900 dark:text-white">
-              InvestPro
+              EnviroScan AI
             </span>
           </div>
           <div className="flex items-center space-x-3">
             <div className="text-sm text-right">
-              <p className="font-medium">{user?.full_name}</p>
+              <p className="font-medium flex items-center space-x-2">
+                {/* Blue circle with initials */}
+                <span className="bg-blue-500 text-white font-bold rounded-full w-10 h-10 flex items-center justify-center uppercase">
+                  {user?.full_name
+                    ? user.full_name
+                      .split(" ")
+                      .map((name) => name[0])
+                      .join("")
+                      .slice(0, 2) // take only first 2 letters (first + last)
+                    : ""}
+                </span>
+                {/* 
+                <span>
+                  {user?.full_name
+                    ? user.full_name
+                      .split(" ")
+                      .map(
+                        (name) =>
+                          name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
+                      )
+                      .join(" ")
+                    : ""}
+                </span> */}
+              </p>
               {!user?.is_admin && (
-                <p className="text-green-600 font-semibold text-xs">
-                  ${user?.wallet_balance?.toFixed(2) || '0.00'}
+                <p className="text-white-900 font-semibold text-xs">
+                  {user?.wallet_balance?.toFixed(2) || '0.00'} ETB
                 </p>
               )}
             </div>
@@ -89,11 +112,10 @@ export default function Layout({ children }: LayoutProps) {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex flex-col items-center text-sm px-3 py-1 rounded transition-all duration-200 ${
-                  isActive
-                    ? 'bg-blue-100 text-blue-700 font-semibold dark:bg-blue-900 dark:text-blue-400'
-                    : 'text-gray-800 dark:text-gray-300'
-                }`}
+                className={`flex flex-col items-center text-sm px-3 py-1 rounded transition-all duration-200 ${isActive
+                  ? 'bg-blue-100 text-blue-700 font-semibold dark:bg-blue-900 dark:text-blue-400'
+                  : 'text-gray-800 dark:text-gray-300'
+                  }`}
               >
                 <Icon className="h-6 w-6 mb-1" />
                 <span className="text-xs font-medium leading-tight select-none">

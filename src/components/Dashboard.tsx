@@ -12,11 +12,10 @@ export default function Dashboard() {
     referrals: 0,
     tasksCompleted: 0,
   });
-  const [recentTransactions, setRecentTransactions] = useState<Transaction[]>(
-    []
-  );
+  const [recentTransactions, setRecentTransactions] = useState<Transaction[]>([]);
   const [activePackages, setActivePackages] = useState<UserPackage[]>([]);
   const [loading, setLoading] = useState(true);
+  const [popupOpen, setPopupOpen] = useState(true); // <-- Popup state
 
   useEffect(() => {
     if (user) {
@@ -28,19 +27,12 @@ export default function Dashboard() {
     if (!user) return;
 
     try {
-      // Fetch active packages
       const { data: packages } = await supabase
         .from("user_packages")
-        .select(
-          `
-          *,
-          packages (*)
-        `
-        )
+        .select("*, packages (*)")
         .eq("user_id", user.id)
         .eq("is_active", true);
 
-      // Fetch recent transactions
       const { data: transactions } = await supabase
         .from("transactions")
         .select("*")
@@ -48,19 +40,16 @@ export default function Dashboard() {
         .order("created_at", { ascending: false })
         .limit(5);
 
-      // Fetch referrals count
       const { count: referralsCount } = await supabase
         .from("referrals")
         .select("*", { count: "exact" })
         .eq("referrer_id", user.id);
 
-      // Fetch completed tasks count
       const { count: tasksCount } = await supabase
         .from("user_tasks")
         .select("*", { count: "exact" })
         .eq("user_id", user.id);
 
-      // Calculate total earned
       const totalEarned =
         transactions?.reduce((sum, t) => {
           if (t.type === "task_reward" || t.type === "referral_bonus") {
@@ -128,36 +117,85 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="relative w-screen h-[500px] overflow-hidden">
-        {/* Overlay for better contrast */}
-        <div className="absolute z-50 inset-0 pointer-events-none">
+    <div className="space-y-6 relative">
+      
+     {/* Advanced Telegram Popup */}
+{popupOpen && (
+  <div className="fixed inset-0 flex items-center justify-center z-50 animate-fadeIn">
+    {/* Overlay */}
+    <div
+      className="absolute inset-0 bg-black opacity-60"
+      onClick={() => setPopupOpen(false)}
+    ></div>
+
+    {/* Modal Box */}
+    <div className="relative bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl shadow-2xl p-8 max-w-lg w-full z-50 transform transition-transform duration-300 scale-95 animate-scaleIn">
+      {/* Close Button */}
+      <button
+        className="absolute top-3 right-3 text-red hover:text-red-900 text-xl font-bold"
+        onClick={() => setPopupOpen(false)}
+      >
+        ✖
+      </button>
+
+      {/* Content */}
+      <div className="text-center space-y-4">
+        <h2 className="text-2xl font-extrabold">
+          Join our Telegram Community!
+        </h2>
+        <p className="text-md">
+          Stay updated, get tips, and connect with other members instantly.
+        </p>
+        <button
+          onClick={() => window.open("https://t.me/+1KHuCJYmnZZhYTc0", "_blank")}
+          className="mt-4 inline-block bg-gradient-to-r from-green-400 to-blue-500 hover:from-blue-500 hover:to-green-400 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+        >
+          Join Telegram
+        </button>
+        <p className="text-sm text-gray-200 mt-2">
+          Or click ✖ to close
+        </p>
+      </div>
+    </div>
+
+    {/* Tailwind Animations */}
+    <style>
+      {`
+        @keyframes fadeIn {
+          0% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+        @keyframes scaleIn {
+          0% { transform: scale(0.8); opacity: 0; }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-fadeIn { animation: fadeIn 0.3s ease-in-out; }
+        .animate-scaleIn { animation: scaleIn 0.4s ease-out; }
+      `}
+    </style>
+  </div>
+)}
+
+
+      {/* Hero Section */}
+      <div className="relative w-screen h-[600px] overflow-hidden">
+        <div className="absolute z-20 inset-0 pointer-events-none">
           <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
-            <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-              Welcome back, {user?.full_name || "Investor"}!
+            <h1 className="text-7xl font-extrabold bg-gradient-to-r from-yellow-900 via-blue-700 to-red-400 bg-clip-text text-transparent shadow-md">
+              Train AI - Earn more.
             </h1>
-            <p className="mt-3 text-gray-300 text-lg tracking-wide">
-              Here's your{" "}
-              <span className="font-semibold text-indigo-400">
-                investment overview
-              </span>
-            </p>
             <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
           </div>
         </div>
-
-        {/* Marquee container */}
-        <div className="flex z-20 animate-marquee space-x-6">
-          <img src="gift.jpg" alt="gift" className="h-[500px] w-auto" />
-          <img src="money.jpg" alt="money" className="h-[500px] w-auto" />
-          <img src="bitconsak.jpg" alt="bitcoin" className="h-[500px] w-auto" />
-          {/* Duplicate images for continuous scroll */}
-          <img src="openbox.jpg" alt="gift" className="h-[500px] w-auto" />
-          <img src="wallet.jpg" alt="money" className="h-[500px] w-auto" />
-          <img src="reward.jpg" alt="bitcoin" className="h-[500px] w-auto" />
+        <div className="flex animate-marquee space-x-0">
+          <img src="homepage image.png" alt="gift" className="h-[600px] w-auto" />
+          <img src="robotmodel.png" alt="money" className="h-[600px] w-auto" />
+          <img src="other ai.png" alt="bitcoin" className="h-[600px] w-auto" />
+          <img src="the other one.png" alt="gift" className="h-[600px] w-auto" />
+          <img src="niceimage.png" alt="money" className="h-[600px] w-auto" />
+          <img src="smart ai.png" alt="bitcoin" className="h-[600px] w-auto" />
         </div>
 
-        {/* CSS Animation */}
         <style>
           {`
             @keyframes marquee {
@@ -174,42 +212,32 @@ export default function Dashboard() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="mb-12 bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
           <div className="flex items-center">
             <Wallet className="h-8 w-8 text-green-600" />
             <div className="ml-4">
               <p className="text-lg font-medium mb-2">Wallet Balance</p>
               <p className="text-3xl font-bold">
-                ${user?.wallet_balance?.toFixed(2) || "0.00"}
+                {user?.wallet_balance?.toFixed(2) || "0.00"} ETB
               </p>
             </div>
           </div>
         </div>
 
-        {/* <div className="bg-gradient-to-r from-red-400 to-bleue-400 text-white p-6 rounded-lg">
-          <div className="flex items-center">
-            <Package className="h-8 w-8 text-blue-600" />
-            <div className="ml-4">
-              <p className="text-lg font-medium mb-2">Active Packages</p>
-              <p className="text-3xl font-bold">{stats.activePackages}</p>
-            </div>
-          </div>
-        </div> */}
-
-        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
+        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg mb-8">
           <div className="flex items-center">
             <TrendingUp className="h-8 w-8 text-purple-600" />
             <div className="ml-4">
               <p className="text-lg font-medium mb-2">Total Earned</p>
               <p className="text-3xl font-bold">
-                ${stats.totalEarned.toFixed(2)}
+                {stats.totalEarned.toFixed(2)} ETB
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
+        <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg mb-8">
           <div className="flex items-center">
             <Gift className="h-8 w-8 text-yellow-700" />
             <div className="ml-4">
@@ -220,10 +248,11 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Active Packages & Transactions */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Active Packages */}
-        <div className="bg-green-200 rounded-lg shadow-sm border">
-          <div className="bg-gradient-to-r from-red-400 to-bluke-400 text-white p-6 rounded-lg">
+        <div className="bg-green-200 rounded-lg shadow-sm border mb-8">
+          <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
             <h3 className="text-lg font-large mb-2">Active Packages</h3>
             <span className="bg-white text-red-600 px-3 py-1 rounded-full text-sm font-medium shadow">
               {activePackages.length} Active
@@ -242,86 +271,62 @@ export default function Dashboard() {
                         {userPackage.packages?.name}
                       </h4>
                       <p className="text-sm text-gray-600">
-                        Earned: ${userPackage.total_earned.toFixed(2)} | Tasks
-                        Today: {userPackage.tasks_completed_today}/
-                        {userPackage.packages?.daily_tasks}
+                        Earned: {userPackage.total_earned.toFixed(2)} ETB | Tasks Today:{" "}
+                        {userPackage.tasks_completed_today}/{userPackage.packages?.daily_tasks}
                       </p>
                     </div>
                     <div className="text-right">
                       <p className="text-sm font-medium text-green-600">
-                        ${userPackage.packages?.daily_return}/day
+                        {userPackage.packages?.daily_return} ETB/day
                       </p>
                       <p className="text-xs text-gray-500">
-                        Expires:{" "}
-                        {format(
-                          new Date(userPackage.expiry_date),
-                          "MMM dd, yyyy"
-                        )}
+                        Expires: {format(new Date(userPackage.expiry_date), "MMM dd, yyyy")}
                       </p>
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <p className="text-gray-500 text-center py-8">
-                No active packages
-              </p>
+              <p className="text-gray-500 text-center py-8">No active packages</p>
             )}
           </div>
         </div>
 
         {/* Recent Transactions */}
-        <div className="bg-green-200 rounded-lg shadow-sm border">
-          <div className="bg-gradient-to-r from-red-400 to-bluekl-400 text-white p-6 rounded-lg">
+        <div className="bg-green-200 rounded-lg shadow-sm border mb-8">
+          <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
             <h3 className="text-lg font-medium mb-2">Recent Transactions</h3>
           </div>
           <div className="p-6">
             {recentTransactions.length > 0 ? (
               <div className="space-y-4">
                 {recentTransactions.map((transaction) => (
-                  <div
-                    key={transaction.id}
-                    className="flex items-center justify-between"
-                  >
+                  <div key={transaction.id} className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <span className="text-2xl mr-3">
-                        {getTransactionIcon(transaction.type)}
-                      </span>
+                      <span className="text-2xl mr-3">{getTransactionIcon(transaction.type)}</span>
                       <div>
                         <p className="font-medium text-gray-900 capitalize">
                           {transaction.type.replace("_", " ")}
                         </p>
-                        <p className="text-sm text-gray-600">
-                          {transaction.description}
-                        </p>
+                        <p className="text-sm text-gray-600">{transaction.description}</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p
-                        className={`font-medium ${getTransactionColor(
-                          transaction.type
-                        )}`}
-                      >
-                        {transaction.type === "withdrawal" ||
-                        transaction.type === "package_purchase"
+                      <p className={`font-medium ${getTransactionColor(transaction.type)}`}>
+                        {transaction.type === "withdrawal" || transaction.type === "package_purchase"
                           ? "-"
                           : "+"}
-                        ${transaction.amount.toFixed(2)}
+                        {transaction.amount.toFixed(2)} ETB
                       </p>
                       <p className="text-xs text-gray-500">
-                        {format(
-                          new Date(transaction.created_at),
-                          "MMM dd, HH:mm"
-                        )}
+                        {format(new Date(transaction.created_at), "MMM dd, HH:mm")}
                       </p>
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <p className="text-gray-500 text-center py-8">
-                No transactions yet
-              </p>
+              <p className="text-gray-500 text-center py-8">No transactions yet</p>
             )}
           </div>
         </div>

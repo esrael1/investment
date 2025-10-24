@@ -88,7 +88,7 @@ export default function Referrals() {
           Referral Program
         </h1>
         <p className="mt-3 text-gray-300 text-lg tracking-wide">
-          <span className="font-semibold text-indigo-400">Invite friends and earn 10% for each successful referral</span>
+          <span className="font-semibold text-indigo-400">Invite friends and earn 10% Birr for each successful referral</span>
         </p>
         <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
       </div>
@@ -131,11 +131,11 @@ export default function Referrals() {
                 type="text"
                 value={user?.referral_code || ''}
                 readOnly
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-md bg-blue-500"
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-md bg-cyan-500"
               />
               <button
                 onClick={copyReferralCode}
-                className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700"
+                className="flex items-center px-4 py-2 bg-cyan-300 text-white rounded-md hover:bg-blue-700"
               >
                 <Copy className="h-4 w-4 mr-2" />
                 {copied ? 'Copied!' : 'Copy'}
@@ -152,7 +152,7 @@ export default function Referrals() {
                 type="text"
                 value={`${window.location.origin}/register?ref=${user?.referral_code || ''}`}
                 readOnly
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-md bg-blue-500"
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-md bg-cyan-300"
               />
               <button
                 onClick={copyReferralLink}
@@ -189,14 +189,14 @@ export default function Referrals() {
                   <div className="flex items-center">
                     <Gift className="h-8 w-8 text-yellow-600" />
                     <div className="ml-4">
-                      <p className="font-medium text-white-900">{referral.users.full_name}</p>
-                      <p className="text-sm text-white-600">
+                      <p className="font-medium text-cyan-400">{referral.users.full_name}</p>
+                      <p className="text-sm text-cyan-400">
                         Joined on {format(new Date(referral.created_at), 'MMM dd, yyyy')}
                       </p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-medium text-green-600">+${referral.bonus_amount.toFixed(2)}</p>
+                    <p className="font-medium text-green-600">+{referral.bonus_amount.toFixed(2)} ETB</p>
                     <p className="text-sm text-white-500">Bonus earned</p>
                   </div>
                 </div>

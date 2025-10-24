@@ -145,7 +145,7 @@ export default function Wallet() {
       setShowWithdrawModal(false);
       await fetchWalletData();
       alert(
-        "Withdrawal request submitted successfully! It will be processed by an admin."
+        "Withdrawal request submitted successfully! A 12% withdrawal fee will be deducted from the total amount.."
       );
     } catch (error) {
       console.error("Error submitting withdrawal:", error);
@@ -201,8 +201,8 @@ export default function Wallet() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <div className="inset-0 relative pointer-events-none">
-          <div className="absolute z-50 bottom-0 flex space-x-4">
+        <div className="inset-0 relative">
+          <div className="absolute z-50 bottom-0 left-center flex space-x-4">
             <button
               onClick={() => setShowDepositModal(true)}
               className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
@@ -361,7 +361,7 @@ export default function Wallet() {
                         transaction.type === "package_purchase"
                           ? "-"
                           : "+"}
-                        ${transaction.amount.toFixed(2)}
+                        {transaction.amount.toFixed(2)} ETB
                       </p>
                     </div>
                   </div>
@@ -392,32 +392,40 @@ export default function Wallet() {
                 Bank Accounts for Deposit
               </h4>
               {adminBankAccounts.length > 0 ? (
-                <ul className="space-y-2 text-gray-800 text-sm">
-                  {adminBankAccounts.map((account) => (
-                    <li
-                      key={account.id}
-                      className="border-b border-gray-300 pb-2 last:border-b-0 bg-green-500"
-                    >
-                      <p>
-                        <strong>Bank:</strong> {account.bank_name}
-                      </p>
-                      <p>
-                        <strong>Name:</strong> {account.account_holder}
-                      </p>
-                      <p>
-                        <strong>Account Number:</strong>{" "}
-                        {account.account_number}
-                      </p>
-                      {account.branch_name && (
-                        <p>
-                          <strong>Branch:</strong> {account.branch_name}
-                        </p>
-                      )}
-                    </li>
-                  ))}
-                </ul>
+                <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 text-gray-800">
+  {adminBankAccounts.map((account) => (
+    <li
+      key={account.id}
+      className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-xl p-4 shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+    >
+      <div className="flex items-center justify-between mb-2">
+        <h4 className="text-green-800 font-bold text-lg">
+          {account.bank_name}
+        </h4>
+        <span className="text-xs font-semibold bg-green-200 text-green-800 px-2 py-1 rounded-full">
+          Verified
+        </span>
+      </div>
+      <p className="text-sm">
+        <strong className="text-gray-700">Name:</strong>{" "}
+        <span className="text-gray-900">{account.account_holder}</span>
+      </p>
+      <p className="text-sm mt-1">
+        <strong className="text-gray-700">Account No:</strong>{" "}
+        <span className="text-gray-900">{account.account_number}</span>
+      </p>
+      {account.branch_name && (
+        <p className="text-sm mt-1">
+          <strong className="text-gray-700">Branch:</strong>{" "}
+          <span className="text-gray-900">{account.branch_name}</span>
+        </p>
+      )}
+    </li>
+  ))}
+</ul>
+
               ) : (
-                <p className="text-gray-500 bg-blue-900">
+                <p className="text-red-600">
                   No bank account information available.
                 </p>
               )}
@@ -476,21 +484,39 @@ export default function Wallet() {
               }}
               className="p-6 space-y-4"
             >
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Deposit Amount ($)
-                </label>
-                <input
-                  type="number"
-                  min="1"
-                  step="0.01"
-                  value={depositAmount}
-                  onChange={(e) => setDepositAmount(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-blue-900"
-                  placeholder="Enter amount"
-                  required
-                />
-              </div>
+             <div>
+  <label className="block text-sm font-medium text-gray-700 mb-2">
+    Deposit Amount (ETB)
+  </label>
+
+  <div className="flex flex-wrap gap-2 mb-3">
+    {[700, 1500, 3000, 5000, 10000, 20000, 30000, 50000, 100000, 200000,500000, 1000000].map((amount) => (
+      <button
+        key={amount}
+        type="button"
+        onClick={() => setDepositAmount(amount)}
+        className={`px-2 py-2 rounded-lg text-xs font-semibold transition-all duration-200 border 
+          ${
+            depositAmount === amount
+              ? "bg-blue-600 text-white border-blue-700 shadow-md"
+              : "bg-green-100 hover:bg-blue-100 border-gray-300 text-gray-700"
+          }`}
+      >
+        {amount.toLocaleString()}
+      </button>
+    ))}
+  </div>
+
+  <input
+    type="number"
+    value={depositAmount}
+    onChange={(e) => setDepositAmount(e.target.value)}
+    className="w-full px-3 py-2 text-green-900  border border-green-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+    placeholder="Enter custom amount"
+    required
+  />
+</div>
+
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -503,15 +529,8 @@ export default function Wallet() {
                   onChange={(e) =>
                     setDepositScreenshot(e.target.files?.[0] || null)
                   }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-blue-900"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 />
-              </div>
-
-              <div className="bg-blue-50 p-4 rounded-md">
-                <p className="text-sm text-blue-800">
-                  Please make your payment and upload a screenshot. Your deposit
-                  will be reviewed and approved by an admin.
-                </p>
               </div>
 
               <div className="flex space-x-4">
@@ -529,6 +548,17 @@ export default function Wallet() {
                 >
                   {depositLoading ? "Submitting..." : "Submit Deposit"}
                 </button>
+              </div>
+              
+              <div className="bg-blue-50 p-4 rounded-md">
+                <p className="text-sm text-blue-800">
+                  Please complete your payment and upload a clear screenshot of
+                  the transaction as proof of deposit. Once your payment has
+                  been submitted, our admin team will carefully review and
+                  verify the details. After successful verification, your
+                  deposit will be approved and reflected in your account
+                  balance.
+                </p>
               </div>
             </form>
           </div>
@@ -551,12 +581,12 @@ export default function Wallet() {
                 </label>
                 <input
                   type="number"
-                  min="1"
+                  min="100"
                   max={user?.wallet_balance || 0}
-                  step="0.01"
+                  step="1"
                   value={withdrawAmount}
                   onChange={(e) => setWithdrawAmount(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-blue-900"
+                  className="w-full px-3 py-2 border border-gray-300 text-blue rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white-900"
                   placeholder="Enter amount"
                   required
                 />
@@ -566,7 +596,10 @@ export default function Wallet() {
                 <p className="text-sm text-yellow-800">
                   Available balance: ${user?.wallet_balance?.toFixed(2)}
                   <br />
-                  Your withdrawal request will be processed by an admin.
+                  🔐 For your security, each withdrawal request undergoes a
+                  short verification process. A 12% fee will be deducted, and
+                  your funds will be sent to your verified payment method after
+                  approval.{" "}
                 </p>
               </div>
 
