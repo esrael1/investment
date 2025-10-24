@@ -221,61 +221,41 @@ export default function Dashboard() {
 
 
 
-<table className="table-auto border-collapse border border-gray-300 w-full text-center">
-  <thead className="bg-gradient-to-r from-purple-500 to-blue-500 text-white">
+<table className="table-auto w-full text-center border-[3px] border-yellow-400 rounded-xl font-[Caveat_Brush] overflow-hidden">
+  <thead className="bg-gradient-to-r from-purple-500 to-blue-500 text-yellow-400 text-lg">
     <tr>
-      <th className="border border-gray-300 px-4 py-2">Package</th>
-      <th className="border border-gray-300 px-4 py-2">Invest (ETB)</th>
-      <th className="border border-gray-300 px-4 py-2">Daily Income (ETB)</th>
-      <th className="border border-gray-300 px-4 py-2">Period</th>
-      <th className="border border-gray-300 px-4 py-2">Total Income (ETB)</th>
+      <th className="border-[2px] border-yellow-400 px-4 py-2 rounded-tl-xl">Package</th>
+      <th className="border-[2px] border-yellow-400 px-4 py-2">Invest (ETB)</th>
+      <th className="border-[2px] border-yellow-400 px-4 py-2">Daily Income (ETB)</th>
+      <th className="border-[2px] border-yellow-400 px-4 py-2">Period</th>
+      <th className="border-[2px] border-yellow-400 px-4 py-2 rounded-tr-xl">Total Income (ETB)</th>
     </tr>
   </thead>
   <tbody>
-    <tr className="bg-white">
-      <td className="border border-gray-300 px-4 py-2">Bronze Package</td>
-      <td className="border border-gray-300 px-4 py-2">500</td>
-      <td className="border border-gray-300 px-4 py-2">100</td>
-      <td className="border border-gray-300 px-4 py-2">60 days</td>
-      <td className="border border-gray-300 px-4 py-2 font-bold text-red-600">3,000</td>
-    </tr>
-    <tr className="bg-gray-50">
-      <td className="border border-gray-300 px-4 py-2">Silver Package</td>
-      <td className="border border-gray-300 px-4 py-2">2,000</td>
-      <td className="border border-gray-300 px-4 py-2">500</td>
-      <td className="border border-gray-300 px-4 py-2">60 days</td>
-      <td className="border border-gray-300 px-4 py-2 font-bold text-red-600">15,000</td>
-    </tr>
-    <tr className="bg-white">
-      <td className="border border-gray-300 px-4 py-2">Gold Package</td>
-      <td className="border border-gray-300 px-4 py-2">6,000</td>
-      <td className="border border-gray-300 px-4 py-2">1,700</td>
-      <td className="border border-gray-300 px-4 py-2">60 days</td>
-      <td className="border border-gray-300 px-4 py-2 font-bold text-red-600">51,000</td>
-    </tr>
-    <tr className="bg-gray-50">
-      <td className="border border-gray-300 px-4 py-2">Platinum Package</td>
-      <td className="border border-gray-300 px-4 py-2">15,000</td>
-      <td className="border border-gray-300 px-4 py-2">5,000</td>
-      <td className="border border-gray-300 px-4 py-2">60 days</td>
-      <td className="border border-gray-300 px-4 py-2 font-bold text-red-600">150,000</td>
-    </tr>
-    <tr className="bg-white">
-      <td className="border border-gray-300 px-4 py-2">Diamond Package</td>
-      <td className="border border-gray-300 px-4 py-2">40,000</td>
-      <td className="border border-gray-300 px-4 py-2">15,000</td>
-      <td className="border border-gray-300 px-4 py-2">60 days</td>
-      <td className="border border-gray-300 px-4 py-2 font-bold text-red-600">450,000</td>
-    </tr>
-    <tr className="bg-gray-50">
-      <td className="border border-gray-300 px-4 py-2">VIP Package</td>
-      <td className="border border-gray-300 px-4 py-2">80,000</td>
-      <td className="border border-gray-300 px-4 py-2">32,000</td>
-      <td className="border border-gray-300 px-4 py-2">60 days</td>
-      <td className="border border-gray-300 px-4 py-2 font-bold text-red-600">960,000</td>
-    </tr>
+    {[
+      { name: "Bronze Package", invest: 500, daily: 100, period: "60 days", total: 3000 },
+      { name: "Silver Package", invest: 2000, daily: 500, period: "60 days", total: 15000 },
+      { name: "Gold Package", invest: 6000, daily: 1700, period: "60 days", total: 51000 },
+      { name: "Platinum Package", invest: 15000, daily: 5000, period: "60 days", total: 150000 },
+      { name: "Diamond Package", invest: 40000, daily: 15000, period: "60 days", total: 450000 },
+      { name: "VIP Package", invest: 80000, daily: 32000, period: "60 days", total: 960000 },
+    ].map((pkg, idx) => (
+      <tr
+        key={pkg.name}
+        className={`${
+          idx % 2 === 0 ? "bg-gradient-to-r from-purple-100 to-blue-100" : "bg-gradient-to-r from-purple-200 to-blue-200"
+        }`}
+      >
+        <td className="border-[2px] border-yellow-400 px-4 py-2">{pkg.name}</td>
+        <td className="border-[2px] border-yellow-400 px-4 py-2">{pkg.invest}</td>
+        <td className="border-[2px] border-yellow-400 px-4 py-2">{pkg.daily}</td>
+        <td className="border-[2px] border-yellow-400 px-4 py-2">{pkg.period}</td>
+        <td className="border-[2px] border-yellow-400 px-4 py-2 font-bold text-red-600">{pkg.total.toLocaleString()}</td>
+      </tr>
+    ))}
   </tbody>
 </table>
+
 
 
 
