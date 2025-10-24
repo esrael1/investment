@@ -232,19 +232,19 @@ export default function Dashboard() {
     <tr>
       
     <th className="border-[2px] border-yellow-400 py-2 rounded-tl-xl">
-      <span className="block origin-bottom-left rotate-[-95deg] translate-y-2">Package</span>
+      <span className="block origin-bottom-left rotate-[-90deg] translate-y-2">Package</span>
     </th>
     <th className="border-[2px] border-yellow-400 py-2">
-      <span className="block origin-bottom-left rotate-[-95deg] translate-y-2">Invest (ETB)</span>
+      <span className="block origin-bottom-left rotate-[-90deg] translate-y-2">Invest (ETB)</span>
     </th>
     <th className="border-[2px] border-yellow-400 py-2">
-      <span className="block origin-bottom-left rotate-[-95deg] translate-y-2">Daily Income (ETB)</span>
+      <span className="block origin-bottom-left rotate-[-90deg] translate-y-2">Daily Income (ETB)</span>
     </th>
     <th className="border-[2px] border-yellow-400 py-2">
-      <span className="block origin-bottom-left rotate-[-45deg] translate-y-2">Period</span>
+      <span className="block origin-bottom-left rotate-[-90deg] translate-y-2">Period</span>
     </th>
     <th className="border-[2px] border-yellow-400 py-2 rounded-tr-xl">
-      <span className="block origin-bottom-left rotate-[-45deg] translate-y-2">Total Income (ETB)</span>
+      <span className="block origin-bottom-left rotate-[-90deg] translate-y-2">Total Income (ETB)</span>
     </th>
 </tr>
   </thead>
