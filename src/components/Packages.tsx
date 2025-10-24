@@ -46,7 +46,7 @@ export default function Packages() {
     }
   };
 
-  // ✅ New: Reward referrer with 10% bonus on every purchase
+  // ✅ New: Reward referrer with 15% bonus on every purchase
   const rewardReferrerForPurchase = async (purchasingUserId, packagePrice) => {
     try {
       // Check if user was referred
@@ -62,7 +62,7 @@ export default function Packages() {
       }
 
       const { referrer_id, bonus_amount } = referralData;
-      const bonus = Number(packagePrice) * 0.1; // 10% bonus
+      const bonus = Number(packagePrice) * 0.15; // 15% bonus
 
       // Update total bonus for this referral
       const { error: updateError } = await supabase
