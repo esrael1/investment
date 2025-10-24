@@ -230,23 +230,12 @@ export default function Dashboard() {
 <table className="table-auto w-full text-center border-[3px] border-yellow-400 rounded-xl font-[Caveat_Brush] overflow-hidden">
   <thead className="bg-gradient-to-r from-purple-500 to-blue-500 text-yellow-400 text-lg">
     <tr>
-      
-    <th className="border-[2px] border-yellow-400 py-2 rounded-tl-xl">
-      <span className="rotate-[-90deg]">Package</span>
-    </th>
-    <th className="border-[2px] border-yellow-400 py-2">
-      <span className="rotate-[-90deg]">Invest (ETB)</span>
-    </th>
-    <th className="border-[2px] border-yellow-400 py-2">
-      <span className=" origin-bottom-left rotate-[-90deg]">Daily Income (ETB)</span>
-    </th>
-    <th className="border-[2px] border-yellow-400 py-2">
-      <span className="block origin-bottom-left rotate-[-90deg]">Period</span>
-    </th>
-    <th className="border-[2px] border-yellow-400 py-2 rounded-tr-xl">
-      <span className="block origin-bottom-left rotate-[-90deg]">Total Income (ETB)</span>
-    </th>
-</tr>
+      <th className="border-[2px] border-yellow-400  py-2 rounded-tl-xl">Package</th>
+      <th className="border-[2px] border-yellow-400  py-2">Invest (ETB)</th>
+      <th className="border-[2px] border-yellow-400  py-2">Daily Income (ETB)</th>
+      <th className="border-[2px] border-yellow-400  py-2">Period</th>
+      <th className="border-[2px] border-yellow-400  py-2 rounded-tr-xl">Total Income (ETB)</th>
+    </tr>
   </thead>
   <tbody>
     {[
