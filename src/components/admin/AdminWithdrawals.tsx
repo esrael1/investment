@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 
+const user = useAuth();
 
 const AdminWithdrawals = () => {
   const [withdrawals, setWithdrawals] = useState([]);
