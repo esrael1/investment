@@ -230,11 +230,11 @@ export default function Dashboard() {
 <table className="table-auto w-full text-center border-[3px] border-yellow-400 rounded-xl font-[Caveat_Brush] overflow-hidden">
   <thead className="bg-gradient-to-r from-purple-500 to-blue-500 text-yellow-400 text-lg">
     <tr>
-      <th className="border-[2px] border-yellow-400 px-4 py-2 rounded-tl-xl">Package</th>
-      <th className="border-[2px] border-yellow-400 px-4 py-2">Invest (ETB)</th>
-      <th className="border-[2px] border-yellow-400 px-4 py-2">Daily Income (ETB)</th>
-      <th className="border-[2px] border-yellow-400 px-4 py-2">Period</th>
-      <th className="border-[2px] border-yellow-400 px-4 py-2 rounded-tr-xl">Total Income (ETB)</th>
+      <th className="border-[2px] border-yellow-400  py-2 rounded-tl-xl">Package</th>
+      <th className="border-[2px] border-yellow-400  py-2">Invest (ETB)</th>
+      <th className="border-[2px] border-yellow-400  py-2">Daily Income (ETB)</th>
+      <th className="border-[2px] border-yellow-400  py-2">Period</th>
+      <th className="border-[2px] border-yellow-400  py-2 rounded-tr-xl">Total Income (ETB)</th>
     </tr>
   </thead>
   <tbody>
@@ -252,11 +252,11 @@ export default function Dashboard() {
           idx % 2 === 0 ? "bg-gradient-to-r from-purple-100 to-blue-100" : "bg-gradient-to-r from-purple-200 to-blue-200"
         }`}
       >
-        <td className="border-[2px] border-yellow-400 px-4 py-2">{pkg.name}</td>
-        <td className="border-[2px] border-yellow-400 px-4 py-2">{pkg.invest}</td>
-        <td className="border-[2px] border-yellow-400 px-4 py-2">{pkg.daily}</td>
-        <td className="border-[2px] border-yellow-400 px-4 py-2">{pkg.period}</td>
-        <td className="border-[2px] border-yellow-400 px-4 py-2 font-bold text-red-600">{pkg.total.toLocaleString()}</td>
+        <td className="border-[2px] border-yellow-400  py-2">{pkg.name}</td>
+        <td className="border-[2px] border-yellow-400  py-2">{pkg.invest}</td>
+        <td className="border-[2px] border-yellow-400  py-2">{pkg.daily}</td>
+        <td className="border-[2px] border-yellow-400  py-2">{pkg.period}</td>
+        <td className="border-[2px] border-yellow-400  py-2 font-bold text-red-600">{pkg.total.toLocaleString()}</td>
       </tr>
     ))}
   </tbody>
