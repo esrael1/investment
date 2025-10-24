@@ -145,7 +145,7 @@ export default function Wallet() {
       setShowWithdrawModal(false);
       await fetchWalletData();
       alert(
-        "Withdrawal request submitted successfully! A 12% withdrawal fee will be deducted from the total amount.."
+        "Withdrawal request submitted successfully! A 13% withdrawal fee will be deducted from the total amount.."
       );
     } catch (error) {
       console.error("Error submitting withdrawal:", error);
@@ -387,7 +387,7 @@ export default function Wallet() {
             </div>
 
             {/* Admin Bank Accounts Section */}
-            <div className="mb-4 p-4 bg-gray-50 rounded-md border border-gray-200 max-h-48 overflow-auto">
+            <div className="mb-4 p-4 bg-gray-50 rounded-md border border-gray-200 max-h-48">
               <h4 className="text-md font-semibold mb-2 text-gray-700">
                 Bank Accounts for Deposit
               </h4>
