@@ -89,7 +89,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       // If user was referred, create referral bonus
       if (referrerId) {
-        const bonusAmount = 10; // $10 referral bonus
+        const bonusAmount = 0; // ETB 0 referral bonus
         
         // Add referral record
         await supabase.from('referrals').insert({
