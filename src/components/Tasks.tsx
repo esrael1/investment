@@ -302,7 +302,7 @@ export default function Tasks() {
                                     setSelectedImageName("");
                                   }
                                 }}
-                                className="bg-gray-200"
+                                className="border border-gray-200 color-black"
                               />
                             </div>
 
