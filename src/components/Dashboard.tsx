@@ -220,11 +220,11 @@ export default function Dashboard() {
 
 
 
-<div className="max-w-5xl mx-auto px-6 py-12 bg-white/90 rounded-3xl shadow-lg border border-gray-100 backdrop-blur-sm">
+<div className="max-w-5xl mx-auto px-6 py-12 bg-cyan-100 rounded-3xl shadow-lg border border-gray-100 backdrop-blur-sm">
       <div className="flex items-center gap-3 mb-8">
         <Shield className="w-8 h-8 text-blue-600" />
         <h1 className="text-3xl font-bold text-gray-900">
-          🔒 EnviroScan AI Privacy Policy & Platform Rules
+          Privacy Policy & Platform Rules
         </h1>
       </div>
 
