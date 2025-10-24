@@ -103,8 +103,10 @@ const AdminWithdrawals = () => {
         <div className="space-y-4">
           {withdrawals.map((withdrawal) => (
             <div key={withdrawal.id} className="border p-4 rounded shadow-sm bg-blue-500">
-              <p><strong>Amount:</strong> ${withdrawal.amount}</p>
+              <p><strong>Withdraw Request:</strong> {withdrawal.amount} birr</p>
+              <p><strong>Will Pay:</strong> <span className="text-bold text-green-900 bg-white">{withdrawal.amount - (withdrawal.amount * 0.13). toFixed(0) }</span> birr</p>
               <p><strong>User ID:</strong> {withdrawal.user_id}</p>
+              <p><strong>User Name:</strong> {withdrawal.name}</p>
               <p><strong>Status:</strong> {withdrawal.status}</p>
 
               {/* Customer Bank Info */}

@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { supabase, UserPackage, Transaction } from "../lib/supabase";
 import { Wallet, Package, Gift, CheckSquare, TrendingUp } from "lucide-react";
 import { format } from "date-fns";
+import { Shield, Lock, FileText } from "lucide-react";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -152,6 +153,12 @@ export default function Dashboard() {
         >
           Join Telegram
         </button>
+        <button
+          onClick={() => window.open("https://t.me/EnviroScan_AI", "_blank")}
+          className="mt-4 inline-block bg-gradient-to-r from-green-400 to-blue-500 hover:from-blue-500 hover:to-green-400 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+        >
+          Subscribe Telegram Channel
+        </button>
         <p className="text-sm text-gray-200 mt-2">
           Or click ✖ to close
         </p>
@@ -171,6 +178,7 @@ export default function Dashboard() {
         }
         .animate-fadeIn { animation: fadeIn 0.3s ease-in-out; }
         .animate-scaleIn { animation: scaleIn 0.4s ease-out; }
+
       `}
     </style>
   </div>
@@ -207,9 +215,277 @@ export default function Dashboard() {
               width: max-content;
               animation: marquee 15s linear infinite;
             }
+              th, td, .caveat-text {
+                font-family: 'oswald';
+                letter-spacing: -0.02em;
+                font-stretch: extra-condensed; /* or semi-condensed, extra-condensed */
+              }
           `}
         </style>
       </div>
+
+
+
+
+<table className="table-auto w-full text-center border-[3px] border-yellow-400 rounded-xl font-[Caveat_Brush] overflow-hidden">
+  <thead className="bg-gradient-to-r from-purple-500 to-blue-500 text-yellow-400 text-lg">
+    <tr className="text-[12px]">
+      <th className="border-[2px] border-yellow-400  py-2 rounded-tl-xl">Package</th>
+      <th className="border-[2px] border-yellow-400  py-2">Invest</th>
+      <th className="border-[2px] border-yellow-400  py-2">Daily Income</th>
+      <th className="border-[2px] border-yellow-400  py-2">Period</th>
+      <th className="border-[2px] border-yellow-400  py-2 rounded-tr-xl">Total Income</th>
+    </tr>
+  </thead>
+  <tbody>
+    {[
+      { name: "Bronze Package", invest: 700, daily: 25.98, period: "90 days", total: 2338.20 },
+      { name: "Silver Package", invest: 1500, daily: 60, period: "100 days", total: 6000 },
+      { name: "Gold Package", invest: 3000, daily: 130.90, period: "130 days", total: 17017 },
+      { name: "Platinum Package", invest: 5000, daily: 227.27, period: "150 days", total: 34090.50 },
+      { name: "Diamond Package", invest: 10000, daily: 500, period: "172 days", total: 86000 },
+      { name: "Emerald Package", invest: 20000, daily: 1111.11, period: "200 days", total: 222222 },
+      { name: "Saphire Package", invest: 30000, daily: 2000, period: "272 days", total: 544000 },
+      { name: "Ruby Package", invest: 50000, daily: 4166.66, period: "321 days", total: 1337497 },
+      { name: "Titanium Package", invest: 100000, daily: 10000, period: "365 days", total: 3650000 },
+    ].map((pkg, idx) => (
+      <tr
+        key={pkg.name}
+        className={`${
+          idx % 2 === 0 ? "text-[10px] bg-gradient-to-r from-purple-100 to-blue-100 text-cyan-900" : "bg-gradient-to-r text-[10px] from-purple-200 to-blue-200 text-cyan-900"
+        }`}
+      >
+        <td className="border-[2px] border-yellow-400  py-2">{pkg.name}</td>
+        <td className="border-[2px] border-yellow-400  py-2">{pkg.invest}</td>
+        <td className="border-[2px] border-yellow-400  py-2">{pkg.daily}</td>
+        <td className="border-[2px] border-yellow-400  py-2">{pkg.period}</td>
+        <td className="border-[2px] border-yellow-400  py-2 font-bold text-red-600">{pkg.total.toLocaleString()}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+
+
+
+
+
+<div className="max-w-5xl mx-auto px-6 py-12 bg-cyan-100  rounded-3xl shadow-lg border border-gray-100 backdrop-blur-sm">
+      <div className="flex items-center gap-3 mb-8">
+        <Shield className="w-8 h-8 text-blue-600" />
+        <h1 className="text-3xl font-bold text-gray-900">
+          Privacy Policy & Platform Rules
+        </h1>
+      </div>
+
+      <div className="space-y-8 text-gray-700 leading-relaxed text-justify">
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">1. Introduction</h2>
+          <p>
+            EnviroScan AI is committed to protecting your privacy and ensuring
+            that your personal data and contributions are handled securely and
+            transparently. This document explains how we collect, use, and
+            protect your data, as well as the rules all users must follow when
+            participating in our AI training platform.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">2. Purpose of Data Collection</h2>
+          <p>
+            The primary purpose of EnviroScan AI is to gather authentic environmental image and video
+            data from users worldwide. These contributions are used to train
+            artificial intelligence systems that can recognize real-world
+            environments, objects, and human activities more accurately and ethically.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">3. User Consent</h2>
+          <p>
+            By registering and using the platform, you agree to our terms, rules, and privacy
+            practices. You consent to the collection and processing of your personal information
+            and the images or videos you upload, which are used strictly for AI training and research
+            purposes.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">4. Personal Data We Collect</h2>
+          <p>
+            We collect basic personal data such as your full name, email address, profile photo
+            (optional), and wallet or payment information for withdrawals. Additionally, we store
+            your uploaded environmental images, descriptions, and other task-related data that
+            contribute to AI learning.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">5. Image and Video Data Usage</h2>
+          <p>
+            Every image or video uploaded to EnviroScan AI becomes part of our training dataset. This
+            data may be processed by AI algorithms, securely stored in cloud infrastructure, and used
+            for research, model improvement, or academic collaboration — always in compliance with
+            privacy standards.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">6. Ownership and Rights</h2>
+          <p>
+            While you retain ownership of your original media, by uploading content to EnviroScan AI
+            you grant us a non-exclusive, royalty-free license to use, process, and analyze your data
+            for AI training and model development purposes. Your content will never be sold or shared
+            with third parties for unrelated commercial use.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">7. Data Storage and Security</h2>
+          <p>
+            All user data is stored securely using encrypted databases and protected server
+            infrastructure. We employ modern cybersecurity measures such as SSL encryption,
+            token-based authentication, and periodic security audits to prevent unauthorized access
+            or misuse of data.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">8. User Identity Protection</h2>
+          <p>
+            EnviroScan AI never publicly displays your personal identity alongside your uploaded
+            data. All visual and textual submissions are anonymized before being used in AI model
+            training. Your name, email, and wallet details remain private and inaccessible to
+            external parties.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">9. Image Capture Guidelines</h2>
+          <p>
+            Users must capture or upload images that represent their natural environment — such as
+            landscapes, buildings, roads, trees, or other non-sensitive areas. Uploading private
+            individuals, personal documents, or restricted government areas is strictly prohibited.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">10. Ethical and Legal Responsibilities</h2>
+          <p>
+            All users must comply with local laws when capturing images. It is your responsibility to
+            ensure that no copyright, privacy, or security regulations are violated. EnviroScan AI
+            will not be responsible for any unlawful content uploaded by users.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">11. Content Moderation</h2>
+          <p>
+            To maintain high-quality data for AI training, all submissions go through automated and
+            manual review. Content that is inappropriate, fake, AI-generated, or irrelevant to
+            environmental learning may be rejected. Repeated violations can result in suspension or
+            account termination.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">12. Earning Rules</h2>
+          <p>
+            Users earn rewards based on their active training package and the number of approved
+            image submissions. Each valid contribution is reviewed before reward approval. Fraudulent,
+            repetitive, or low-quality submissions may lead to deductions or account penalties.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">13. Withdrawal and Financial Policy</h2>
+          <p>
+            Users can withdraw their earnings once they meet the platform’s minimum threshold.
+            EnviroScan AI processes payments through secure channels. However, users are responsible
+            for providing correct wallet or bank details to avoid transaction failures.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">14. Account Security</h2>
+          <p>
+            You are responsible for maintaining the confidentiality of your login credentials.
+            EnviroScan AI will never ask for your password or payment PIN. Any suspicious activity
+            should be reported immediately to the platform’s support team for investigation.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">15. Data Retention Period</h2>
+          <p>
+            We retain your uploaded data for as long as it is necessary for AI model development and
+            system training. If you decide to delete your account, we will anonymize or permanently
+            remove your personal information from our servers within a defined time frame.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">16. User Rights</h2>
+          <p>
+            You have full rights to access, correct, or delete your personal information at any time.
+            Requests related to data removal or modification can be made directly through your account
+            settings or by contacting our support center.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">17. Age Requirement</h2>
+          <p>
+            EnviroScan AI is open to individuals aged 18 years or older. Users under this age must
+            obtain consent from a legal guardian before participating. This ensures ethical and safe
+            participation in our AI training ecosystem.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">18. Prohibited Actions</h2>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>AI-generated or manipulated media.</li>
+            <li>Content with violent, offensive, or sexual themes.</li>
+            <li>Duplicated submissions or spam.</li>
+            <li>Images violating privacy or copyright laws.</li>
+          </ul>
+          <p className="mt-2">Violators may face temporary suspension or permanent banning.</p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">19. Platform Integrity</h2>
+          <p>
+            To maintain fairness, EnviroScan AI reserves the right to audit user activities, track
+            submission patterns, and enforce disciplinary actions when rules are violated. Automated
+            monitoring ensures transparent reward distribution and system integrity.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">20. Future Policy Updates</h2>
+          <p>
+            EnviroScan AI may update these privacy rules as our technology evolves. Any major changes
+            will be communicated to users through email or Telegram announcements. Continued use of
+            the platform signifies your acceptance of the revised terms.
+          </p>
+        </section>
+      </div>
+
+      <div className="mt-10 text-center border-t pt-6 text-gray-600 text-sm">
+        <Lock className="inline-block w-5 h-5 mr-1 text-blue-500" />
+        <span>EnviroScan AI © {new Date().getFullYear()} – All Rights Reserved.</span>
+        {/* add telegram link */}
+        <span> <a href="https://t.me/EnviroScan_AI">Subscribe on telegram</a></span>
+      </div>
+    </div>
+
+
+
+
+
+
+
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -292,7 +568,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Recent Transactions */}
+        {/* Recent Transactions
         <div className="bg-green-200 rounded-lg shadow-sm border mb-8">
           <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
             <h3 className="text-lg font-medium mb-2">Recent Transactions</h3>
@@ -329,7 +605,7 @@ export default function Dashboard() {
               <p className="text-gray-500 text-center py-8">No transactions yet</p>
             )}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -59,18 +59,18 @@ export default function Register() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <div className="flex justify-center">
+          <div className="flex flex-col justify-center items-center">
             <img
-              src="logo.jpg"
+              src="logo1.jpg"
               alt="InvestPro Logo"
-              className="h-100 w-100 mb-2 object-contain"
+              className="h-70 w-70 rounded-[50%] object-contain"
             />
+            <h1 className="text-center text-5xl font-sans font-bold bg-gradient-to-r from-red-500 to-blue-500 bg-clip-text text-transparent">
+              EnviroScan AI
+            </h1>
           </div>
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            Create your account
-          </h2>
           <p className="mt-2 text-sm text-gray-600">
-            Join InvestPro and start earning
+            Join EnviroScan AI and start earning
           </p>
         </div>
 
@@ -177,9 +177,9 @@ export default function Register() {
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="font-medium text-blue-600 hover:text-blue-500"
+                className="font-bold text-blue-600 hover:text-blue-500"
               >
-                Sign in
+                Log in
               </Link>
             </span>
           </div>

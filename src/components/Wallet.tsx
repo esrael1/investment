@@ -577,7 +577,7 @@ export default function Wallet() {
             <form onSubmit={handleWithdraw} className="p-6 space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Withdrawal Amount ($)
+                  Withdrawal Amount (ETB)
                 </label>
                 <input
                   type="number"
@@ -586,7 +586,7 @@ export default function Wallet() {
                   step="1"
                   value={withdrawAmount}
                   onChange={(e) => setWithdrawAmount(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 text-blue rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white-900"
+                  className="w-full px-3 py-2 text-green-900  border border-green-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Enter amount"
                   required
                 />
@@ -594,10 +594,10 @@ export default function Wallet() {
 
               <div className="bg-yellow-50 p-4 rounded-md">
                 <p className="text-sm text-yellow-800">
-                  Available balance: ${user?.wallet_balance?.toFixed(2)}
+                  Available balance: {user?.wallet_balance?.toFixed(2)} ETB
                   <br />
                   🔐 For your security, each withdrawal request undergoes a
-                  short verification process. A 12% fee will be deducted, and
+                  short verification process. A 13% fee will be deducted, and
                   your funds will be sent to your verified payment method after
                   approval.{" "}
                 </p>

@@ -33,15 +33,18 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <div className="flex flex-col items-center justify-center">
             <img
-              src="logo.jpg"
+              src="logo1.jpg"
               alt="InvestPro Logo"
-              className="h-70 w-100 mb-2 object-contain"
+              className="h-70 w-70 rounded-[50%] object-contain"
             />
+            <h1 className="text-center text-5xl font-sans font-bold bg-gradient-to-r from-red-500 to-blue-500 bg-clip-text text-transparent">
+              EnviroScan AI
+            </h1>
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
       
@@ -107,8 +110,8 @@ export default function Login() {
           <div className="text-center">
             <span className="text-sm text-gray-600">
               Don't have an account?{' '}
-              <Link to="/register" className="font-medium text-blue-600 hover:text-blue-500">
-                Sign up
+              <Link to="/register" className="font-bold text-blue-600 hover:text-blue-500">
+                Register
               </Link>
             </span>
           </div>
