@@ -216,7 +216,7 @@ export default function Dashboard() {
               animation: marquee 15s linear infinite;
             }
               th, td, .caveat-text {
-                font-family: 'Caveat Brush';
+                font-family: 'oswald';
                 font-stretch: extra-condensed; /* or semi-condensed, extra-condensed */
               }
           `}
