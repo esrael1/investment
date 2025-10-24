@@ -153,6 +153,12 @@ export default function Dashboard() {
         >
           Join Telegram
         </button>
+        <button
+          onClick={() => window.open("https://t.me/EnviroScan_AI", "_blank")}
+          className="mt-4 inline-block bg-gradient-to-r from-green-400 to-blue-500 hover:from-blue-500 hover:to-green-400 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+        >
+          Subscribe Telegram Channel
+        </button>
         <p className="text-sm text-gray-200 mt-2">
           Or click ✖ to close
         </p>
@@ -426,7 +432,7 @@ export default function Dashboard() {
         <Lock className="inline-block w-5 h-5 mr-1 text-blue-500" />
         <span>EnviroScan AI © {new Date().getFullYear()} – All Rights Reserved.</span>
         {/* add telegram link */}
-        <span><a href="https://t.me/EnviroScan_AI">Subscribe on telegram</a></span>
+        <span> <a href="https://t.me/EnviroScan_AI">Subscribe on telegram</a></span>
       </div>
     </div>
 
