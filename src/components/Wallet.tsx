@@ -577,7 +577,7 @@ export default function Wallet() {
             <form onSubmit={handleWithdraw} className="p-6 space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Withdrawal Amount ($)
+                  Withdrawal Amount (ETB)
                 </label>
                 <input
                   type="number"
