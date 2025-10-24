@@ -516,7 +516,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Recent Transactions */}
+        Recent Transactions
         <div className="bg-green-200 rounded-lg shadow-sm border mb-8">
           <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
             <h3 className="text-lg font-medium mb-2">Recent Transactions</h3>
