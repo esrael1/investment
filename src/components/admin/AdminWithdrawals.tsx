@@ -109,7 +109,15 @@ const AdminWithdrawals = () => {
               <p><strong>Withdraw Request:</strong> {withdrawal.amount} birr</p>
               <p><strong>Will Pay:</strong> {withdrawal.amount - (withdrawal.amount * 0.13). toFixed(0) } birr</p>
               <p><strong>User ID:</strong> {withdrawal.user_id}</p>
-              <p><strong>User Name:</strong> {user.full_name}</p>
+              <p className="text-gray-800 text-sm">
+                <strong className="font-semibold text-blue-700">User Name:</strong>{" "}
+                {user?.full_name
+                  ? user.full_name
+                      .split(" ")
+                      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                      .join(" ")
+                  : "N/A"}
+              </p>
               <p><strong>Status:</strong> {withdrawal.status}</p>
 
               {/* Customer Bank Info */}
