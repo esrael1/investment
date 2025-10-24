@@ -229,12 +229,12 @@ export default function Dashboard() {
 
 <table className="table-auto w-full text-center border-[3px] border-yellow-400 rounded-xl font-[Caveat_Brush] overflow-hidden">
   <thead className="bg-gradient-to-r from-purple-500 to-blue-500 text-yellow-400 text-lg">
-    <tr className="text-black">
+    <tr>
       <th className="border-[2px] border-yellow-400  py-2 rounded-tl-xl">Package</th>
-      <th className="border-[2px] border-yellow-400  py-2">Invest (ETB)</th>
-      <th className="border-[2px] border-yellow-400  py-2">Daily Income (ETB)</th>
+      <th className="border-[2px] border-yellow-400  py-2">Invest</th>
+      <th className="border-[2px] border-yellow-400  py-2">Daily Income</th>
       <th className="border-[2px] border-yellow-400  py-2">Period</th>
-      <th className="border-[2px] border-yellow-400  py-2 rounded-tr-xl">Total Income (ETB)</th>
+      <th className="border-[2px] border-yellow-400  py-2 rounded-tr-xl">Total Income</th>
     </tr>
   </thead>
   <tbody>
@@ -249,7 +249,7 @@ export default function Dashboard() {
       <tr
         key={pkg.name}
         className={`${
-          idx % 2 === 0 ? "bg-gradient-to-r from-purple-100 to-blue-100" : "bg-gradient-to-r from-purple-200 to-blue-200"
+          idx % 2 === 0 ? "bg-gradient-to-r from-purple-100 to-blue-100 text-cyan-900" : "bg-gradient-to-r from-purple-200 to-blue-200 text-cyan-900"
         }`}
       >
         <td className="border-[2px] border-yellow-400  py-2">{pkg.name}</td>
