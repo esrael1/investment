@@ -249,7 +249,7 @@ export default function Dashboard() {
       <tr
         key={pkg.name}
         className={`${
-          idx % 2 === 0 ? "bg-gradient-to-r from-purple-100 to-blue-100 text-cyan-900" : "bg-gradient-to-r from-purple-200 to-blue-200 text-cyan-900"
+          idx % 2 === 0 ? "text-[10px] bg-gradient-to-r from-purple-100 to-blue-100 text-cyan-900" : "bg-gradient-to-r text-[10px] from-purple-200 to-blue-200 text-cyan-900"
         }`}
       >
         <td className="border-[2px] border-yellow-400  py-2">{pkg.name}</td>
