@@ -232,10 +232,10 @@ export default function Dashboard() {
     <tr>
       
     <th className="border-[2px] border-yellow-400 py-2 rounded-tl-xl">
-      <span className="block origin-bottom-left rotate-[-90deg]">Package</span>
+      <span className="rotate-[-90deg]">Package</span>
     </th>
     <th className="border-[2px] border-yellow-400 py-2">
-      <span className="block origin-bottom-left rotate-[-90deg]">Invest (ETB)</span>
+      <span className="rotate-[-90deg]">Invest (ETB)</span>
     </th>
     <th className="border-[2px] border-yellow-400 py-2">
       <span className="block origin-bottom-left rotate-[-90deg]">Daily Income (ETB)</span>
