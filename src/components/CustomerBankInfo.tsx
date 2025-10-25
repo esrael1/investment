@@ -114,7 +114,7 @@ const CustomerBankInfo = () => {
           {/* Bank Name */}
           <div>
             <label className="block text-sm font-medium mb-1 sm:mb-2 text-gray-700">
-              Bank Name
+              Bank Name / Telebirr / Mpesa
             </label>
             <input
               type="text"
@@ -130,7 +130,7 @@ const CustomerBankInfo = () => {
           {/* Account Number */}
           <div>
             <label className="block text-sm font-medium mb-1 sm:mb-2 text-gray-700">
-              Account Number
+              Account Number/ Phone Number
             </label>
             <input
               type="text"
@@ -146,7 +146,7 @@ const CustomerBankInfo = () => {
           {/* Account Holder */}
           <div>
             <label className="block text-sm font-medium mb-1 sm:mb-2 text-gray-700">
-              Account Holder Name
+               Name
             </label>
             <input
               type="text"
