@@ -519,19 +519,33 @@ export default function Wallet() {
 
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Payment Screenshot <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  required
-                  onChange={(e) =>
-                    setDepositScreenshot(e.target.files?.[0] || null)
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
+  <label className="block text-sm font-medium text-gray-700 mb-2">
+    Payment Screenshot <span className="text-red-600">*</span>
+  </label>
+  <input
+    type="file"
+    accept="image/*"
+    required
+    onChange={(e) => {
+      const file = e.target.files?.[0] || null;
+      setDepositScreenshot(file);
+      if (file) {
+        const previewUrl = URL.createObjectURL(file);
+        const previewImg = document.getElementById("imagePreview") as HTMLImageElement;
+        if (previewImg) previewImg.src = previewUrl;
+      }
+    }}
+    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+  />
+
+  <img
+    id="imagePreview"
+    alt="Preview"
+    className="mt-3 w-full max-w-xs rounded-lg border border-gray-300 shadow-md hidden"
+    onLoad={(e) => e.currentTarget.classList.remove("hidden")}
+  />
+</div>
+
 
               <div className="flex space-x-4">
                 <button
