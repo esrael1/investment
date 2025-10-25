@@ -31,7 +31,7 @@ export default function Register() {
       return;
     }
 
-    if(phone.length < 10) {
+    if(phone.length < 10 || phone.length > 10) {
       setError("phone number must be start with 09 and must be equal to 10");
       return;
     }
