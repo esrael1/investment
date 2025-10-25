@@ -392,7 +392,7 @@ export default function Wallet() {
                 Bank Accounts for Deposit
               </h4>
               {adminBankAccounts.length > 0 ? (
-                <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 text-gray-800">
+                <ul className="grid gap-4 sm:grid-cols-2 text-gray-800">
   {adminBankAccounts.map((account) => (
     <li
       key={account.id}
