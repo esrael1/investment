@@ -601,7 +601,7 @@ export default function Wallet() {
                 <p className="text-sm text-yellow-800">
                   Available balance: {user?.wallet_balance?.toFixed(2)} ETB
                   <br />
-                  🔐 For your security, each withdrawal request undergoes a
+                  For your security, each withdrawal request undergoes a
                   short verification process. A 13% fee will be deducted, and
                   your funds will be sent to your verified payment method after
                   approval. Any types of cheating activity leads to Acount bane!!!{" "}
