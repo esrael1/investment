@@ -656,7 +656,7 @@ export default function Wallet() {
               </h2>
               <button
                 onClick={() => setWithdrawHistoryModal(false)}
-                className="text-white bg-white/20 hover:bg-white/30 p-1 rounded-full"
+                className="text-red bg-white/20 hover:bg-white/30 p-1 rounded-full"
               >
                 ✕
               </button>
@@ -685,8 +685,8 @@ export default function Wallet() {
                       className="flex justify-between items-center bg-gradient-to-r from-gray-50 to-white rounded-xl shadow-sm border border-gray-100 p-4 hover:shadow-md transition"
                     >
                       <div>
-                        <p className="font-semibold text-gray-800">
-                          Asked:{" "}
+                        <p className="font-semibold text-sm text-gray-800">
+                          Requested Amount:{" "}
                           <span className="text-gray-900">
                             {withdrawal.amount.toFixed(2)} ETB
                           </span>
@@ -705,15 +705,15 @@ export default function Wallet() {
                       {/* Smart Status Badge */}
                       <div className="flex items-center gap-2">
                         {withdrawal.status === "paid" ? (
-                          <span className="flex items-center gap-1 bg-green-100 text-green-700 text-sm font-medium px-3 py-1 rounded-full border border-green-200 shadow-sm">
+                          <span className="flex items-center gap-1 bg-green-100 text-green-700 text-sm font-medium py-1 rounded-full border border-green-200 shadow-sm">
                             ✅ Successful
                           </span>
                         ) : withdrawal.status === "pending" ? (
-                          <span className="flex items-center gap-1 bg-yellow-100 text-yellow-700 text-sm font-medium px-3 py-1 rounded-full border border-yellow-200 shadow-sm animate-pulse">
+                          <span className="flex items-center gap-1 bg-yellow-100 text-yellow-700 text-sm font-medium py-1 rounded-full border border-yellow-200 shadow-sm animate-pulse">
                             ⏳ Pending
                           </span>
                         ) : (
-                          <span className="flex items-center gap-1 bg-red-100 text-red-700 text-sm font-medium px-3 py-1 rounded-full border border-red-200 shadow-sm">
+                          <span className="flex items-center gap-1 bg-red-100 text-red-700 text-sm font-medium py-1 rounded-full border border-red-200 shadow-sm">
                             ❌ Rejected
                           </span>
                         )}
