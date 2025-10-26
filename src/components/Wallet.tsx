@@ -668,15 +668,15 @@ export default function Wallet() {
                       key={withdrawal.id}
                       className="flex items-center justify-between"
                     >
-                      <div>
-                        <p className="font-medium text-gray-900">
+                      <div className="bg-yellow-50 p-4 rounded-md">
+                        <p className="text-sm text-yellow-800">
                           requisted amount {withdrawal.amount.toFixed(2)}  ETB
                         </p>
-                        <p className="font-medium text-gray-900">
+                        <p className="text-sm text-yellow-800">
                           actual paid amount {(withdrawal.amount * 0.13).toFixed(2)} ETB
                         </p>
 
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-yellow-800">
                           {format(
                             new Date(withdrawal.created_at),
                             "MMM dd, HH:mm"
