@@ -682,9 +682,10 @@ export default function Wallet() {
                             "MMM dd, HH:mm"
                           )}
                         </p>
-                      </div>
                       {getStatusBadge(withdrawal.status = "paid")}
                     </div>
+                      </div>
+
                   ))}
                 </div>
               ) : (
