@@ -363,9 +363,9 @@ export default function Wallet() {
                     <div className="text-right">
                       <p
                         className={`text-sm font-medium ${transaction.type === "withdrawal" ||
-                            transaction.type === "package_purchase"
-                            ? "text-red-600"
-                            : "text-green-600"
+                          transaction.type === "package_purchase"
+                          ? "text-red-600"
+                          : "text-green-600"
                           }`}
                       >
                         {transaction.type === "withdrawal" ||
@@ -512,7 +512,7 @@ export default function Wallet() {
                           : "bg-green-100 hover:bg-blue-100 border-gray-300 text-gray-700"
                         }`}
                     >
-                    {amount.toLocaleString()}
+                      {amount.toLocaleString()}
                     </button>
                   ))}
                 </div>
@@ -646,7 +646,7 @@ export default function Wallet() {
 
       {/* withdarw history Modal */}
       {showWithdrawHistoryModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center flex justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-md w-full">
             <div className="p-6 border-b">
               <h3 className="text-lg font-semibold text-gray-900">
@@ -655,55 +655,54 @@ export default function Wallet() {
             </div>
           </div>
           <div>
-
-              <div className="bg-yellow-50 p-4 rounded-md">
-                <p className="text-sm text-yellow-800">
-                  Available balance: {user?.wallet_balance?.toFixed(2)} ETB
-                </p>
-              </div>
- <div className="p-6">
-            {withdrawals.length > 0 ? (
-              <div className="space-y-4">
-                {withdrawals.slice(0, 5).map((withdrawal) => (
-                  <div
-                    key={withdrawal.id}
-                    className="flex items-center justify-between"
-                  >
-                    <div>
-                      <p className="font-medium text-gray-900">
-                       requisted amount {withdrawal.amount.toFixed(2)}  ETB
-                      </p>
-                     <p className="font-medium text-gray-900">
-                       actual paid amount {(withdrawal.amount * 0.13).toFixed(2)} ETB
-                      </p>
-
-                      <p className="text-sm text-gray-600">
-                        {format(
-                          new Date(withdrawal.created_at),
-                          "MMM dd, HH:mm"
-                        )}
-                      </p>
-                    </div>
-                    {getStatusBadge(withdrawal.status="paid")}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-gray-500 text-center py-4">
-                No withdrawals  history yet
+            <div className="bg-yellow-50 p-4 rounded-md">
+              <p className="text-sm text-yellow-800">
+                Available balance: {user?.wallet_balance?.toFixed(2)} ETB
               </p>
-            )}
-          </div>
-              <div className="flex space-x-4">
-                <button
-                  type="button"
-                  onClick={() => setWithdrawHistoryModal(false)}
-                  className="flex-1 py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
-                >
-                  Cancel
-                </button>
-              </div>
             </div>
+            <div className="p-6">
+              {withdrawals.length > 0 ? (
+                <div className="space-y-4">
+                  {withdrawals.slice(0, 5).map((withdrawal) => (
+                    <div
+                      key={withdrawal.id}
+                      className="flex items-center justify-between"
+                    >
+                      <div>
+                        <p className="font-medium text-gray-900">
+                          requisted amount {withdrawal.amount.toFixed(2)}  ETB
+                        </p>
+                        <p className="font-medium text-gray-900">
+                          actual paid amount {(withdrawal.amount * 0.13).toFixed(2)} ETB
+                        </p>
+
+                        <p className="text-sm text-gray-600">
+                          {format(
+                            new Date(withdrawal.created_at),
+                            "MMM dd, HH:mm"
+                          )}
+                        </p>
+                      </div>
+                      {getStatusBadge(withdrawal.status = "paid")}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-500 text-center py-4">
+                  No withdrawals  history yet
+                </p>
+              )}
+            </div>
+            <div className="flex space-x-4">
+              <button
+                type="button"
+                onClick={() => setWithdrawHistoryModal(false)}
+                className="flex-1 py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
