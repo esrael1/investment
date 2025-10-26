@@ -13,6 +13,7 @@ export default function Wallet() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [showDepositModal, setShowDepositModal] = useState(false);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
+  const [showWithdrawHistoryModal, setWithdrawHistoryModal] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const [depositAmount, setDepositAmount] = useState("");
@@ -286,6 +287,14 @@ export default function Wallet() {
             <h3 className="text-lg font-semibold text-white-900">
               Recent Withdrawals
             </h3>
+            <button
+              onClick={() => setShowWithdrawModal(true)}
+              className="flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+            >
+              <Download className="h-4 w-4 mr-2" />
+              Detail
+            </button>
+
           </div>
           <div className="p-6">
             {withdrawals.length > 0 ? (
@@ -674,6 +683,46 @@ export default function Wallet() {
           </div>
         </div>
       )}
+
+
+
+      {/* withdarw history Modal */}
+      {showWithdrawHistoryModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg max-w-md w-full">
+            <div className="p-6 border-b">
+              <h3 className="text-lg font-semibold text-gray-900">
+                Withdrawal Hisory
+              </h3>
+            </div>
+              </div>
+
+              <div className="bg-yellow-50 p-4 rounded-md">
+                <p className="text-sm text-yellow-800">
+                  Available balance: {user?.wallet_balance?.toFixed(2)} ETB
+                  <br />
+                  For your security, each withdrawal request undergoes a
+                  short verification process. A 13% fee will be deducted, and
+                  your funds will be sent to your verified payment method after
+                  approval. Any types of cheating activity leads to Acount bane!!!{" "}
+                </p>
+              </div>
+
+              <div className="flex space-x-4">
+                <button
+                  type="button"
+                  onClick={() => setWithdrawHistoryModal(false)}
+                  className="flex-1 py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+               
+              
+          </div>
+        </div>
+      )}
+
+
     </div>
   );
 }
