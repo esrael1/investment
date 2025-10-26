@@ -653,7 +653,7 @@ export default function Wallet() {
                 Withdrawal Hisory
               </h3>
             </div>
-          </div>
+          
           <div>
             <div className="bg-yellow-50 p-4 rounded-md">
               <p className="text-sm text-yellow-800">
@@ -703,6 +703,7 @@ export default function Wallet() {
               </button>
             </div>
           </div>
+        </div>
         </div>
       )}
 
