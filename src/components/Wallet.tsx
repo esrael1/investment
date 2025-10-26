@@ -287,13 +287,13 @@ export default function Wallet() {
             <h3 className="text-lg font-semibold text-white-900">
               Recent Withdrawals
             </h3>
-            <button
+            <span
               onClick={() => setWithdrawHistoryModal(true)}
               className="flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
             >
               <Download className="h-4 w-4 mr-2" />
               Detail
-            </button>
+            </span>
 
           </div>
           <div className="p-6">
