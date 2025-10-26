@@ -673,7 +673,7 @@ export default function Wallet() {
                           requisted amount {withdrawal.amount.toFixed(2)}  ETB
                         </p>
                         <p className="text-sm text-yellow-800">
-                          actual paid amount {(withdrawal.amount * 0.13).toFixed(2)} ETB
+                          actual paid amount {(withdrawal.amount - withdrawal.amount * 0.13).toFixed(2)} ETB
                         </p>
 
                         <p className="text-sm text-yellow-800">
@@ -682,10 +682,9 @@ export default function Wallet() {
                             "MMM dd, HH:mm"
                           )}
                         </p>
+                      </div>
                       {getStatusBadge(withdrawal.status = "paid")}
                     </div>
-                      </div>
-
                   ))}
                 </div>
               ) : (
