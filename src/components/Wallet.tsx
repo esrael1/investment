@@ -654,7 +654,7 @@ export default function Wallet() {
               </h3>
             </div>
           
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-auto">
   {/* Header */}
   <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-4 flex justify-between items-center">
     <h2 className="text-lg font-bold tracking-wide">💸 Successful Withdrawals</h2>
