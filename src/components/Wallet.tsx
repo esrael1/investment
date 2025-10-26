@@ -288,7 +288,7 @@ export default function Wallet() {
               Recent Withdrawals
             </h3>
             <button
-              onClick={() => setShowWithdrawModal(true)}
+              onClick={() => setWithdrawHistoryModal(true)}
               className="flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
             >
               <Download className="h-4 w-4 mr-2" />
