@@ -650,7 +650,7 @@ export default function Wallet() {
           <div className="bg-white rounded-2xl max-w-lg w-full shadow-2xl transform transition-all duration-300 scale-100 animate-fadeIn">
 
             {/* Header */}
-            <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-4 flex justify-between items-center rounded-t-2xl">
+            <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-1 py-4 flex justify-between items-center rounded-t-2xl">
               <h2 className="text-lg font-bold flex items-center gap-2">
                 💸 Withdrawal History
               </h2>
@@ -663,7 +663,7 @@ export default function Wallet() {
             </div>
 
             {/* Available Balance */}
-            <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 border-b border-yellow-200 px-6 py-4 flex justify-between items-center">
+            <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 border-b border-yellow-200 px-1 py-4 flex justify-between items-center">
               <p className="text-yellow-800 font-medium">
                 Available Balance:{" "}
                 <span className="font-bold text-yellow-900">
@@ -676,13 +676,13 @@ export default function Wallet() {
             </div>
 
             {/* Scrollable List */}
-            <div className="py-6 px-2 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+            <div className="py-6 px-1 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
               {withdrawals.length > 0 ? (
                 <div className="space-y-5">
                   {withdrawals.map((withdrawal) => (
                     <div
                       key={withdrawal.id}
-                      className="flex justify-between items-center bg-gradient-to-r from-gray-50 to-white rounded-xl shadow-sm border border-gray-100 p-4 hover:shadow-md transition"
+                      className="flex justify-between items-center bg-gradient-to-r from-gray-50 to-white rounded-xl shadow-sm border border-gray-100 py-4 px-1 hover:shadow-md transition"
                     >
                       <div>
                         <p className="font-semibold text-sm text-gray-800">
