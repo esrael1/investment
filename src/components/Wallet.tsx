@@ -545,7 +545,7 @@ export default function Wallet() {
                           : "bg-green-100 hover:bg-blue-100 border-gray-300 text-gray-700"
                         }`}
                     >
-452                      {amount.toLocaleString()}
+                    {amount.toLocaleString()}
                     </button>
                   ))}
                 </div>
