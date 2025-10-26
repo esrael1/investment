@@ -329,50 +329,6 @@ export default function Wallet() {
 
 
 
-
-        {/* Recent Withdrawals */}
-        <div className="bg-gray-200 rounded-lg shadow-sm border">
-          <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
-            <h3 className="text-lg font-semibold text-white-900">
-             Withdrawals history
-            </h3>
-          </div>
-          <div className="p-6">
-            {withdrawals.length > 0 ? (
-              <div className="space-y-4">
-                {withdrawals.slice(0, 5).map((withdrawal) => (
-                  <div
-                    key={withdrawal.id}
-                    className="flex items-center justify-between"
-                  >
-                    <div>
-                      <p className="font-medium text-gray-900">
-                       requisted amount {withdrawal.amount.toFixed(2)}  ETB
-                      </p>
-                     <p className="font-medium text-gray-900">
-                       actual paid amount {(withdrawal.amount * 0.13).toFixed(2)} ETB
-                      </p>
-
-                      <p className="text-sm text-gray-600">
-                        {format(
-                          new Date(withdrawal.created_at),
-                          "MMM dd, HH:mm"
-                        )}
-                      </p>
-                    </div>
-                    {getStatusBadge(withdrawal.status="paid")}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-gray-500 text-center py-4">
-                No withdrawals  history yet
-              </p>
-            )}
-          </div>
-        </div>
-
-
         {/* Recent Transactions */}
         <div className="bg-gray-200 rounded-lg shadow-sm border">
           <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
@@ -695,7 +651,8 @@ export default function Wallet() {
                 Withdrawal Hisory
               </h3>
             </div>
-              </div>
+            <div>
+            
 
               <div className="bg-yellow-50 p-4 rounded-md">
                 <p className="text-sm text-yellow-800">
@@ -718,6 +675,7 @@ export default function Wallet() {
                 </button>
                
               
+              </div>
           </div>
         </div>
       )}
