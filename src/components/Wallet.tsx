@@ -676,7 +676,7 @@ export default function Wallet() {
             </div>
 
             {/* Scrollable List */}
-            <div className="p-6 max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+            <div className="py-6 px-2 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
               {withdrawals.length > 0 ? (
                 <div className="space-y-5">
                   {withdrawals.map((withdrawal) => (
@@ -692,7 +692,7 @@ export default function Wallet() {
                           </span>
                         </p>
                         <p className="text-sm text-gray-600">
-                          Paid:{" "}
+                          Paid Amount:{" "}
                           <span className="font-semibold text-green-600">
                             {(withdrawal.amount - withdrawal.amount * 0.13).toFixed(2)} ETB
                           </span>
@@ -705,15 +705,15 @@ export default function Wallet() {
                       {/* Smart Status Badge */}
                       <div className="flex items-center gap-2">
                         {withdrawal.status === "paid" ? (
-                          <span className="flex items-center gap-1 bg-green-100 text-green-700 text-sm font-medium py-1 rounded-full border border-green-200 shadow-sm">
+                          <span className="flex items-center gap-1 text-green-700 text-sm font-medium py-1 ">
                             ✅ Successful
                           </span>
                         ) : withdrawal.status === "pending" ? (
-                          <span className="flex items-center gap-1 bg-yellow-100 text-yellow-700 text-sm font-medium py-1 rounded-full border border-yellow-200 shadow-sm animate-pulse">
+                          <span className="flex items-center gap-1 text-yellow-700 text-sm font-medium py-1 animate-pulse">
                             ⏳ Pending
                           </span>
                         ) : (
-                          <span className="flex items-center gap-1 bg-red-100 text-red-700 text-sm font-medium py-1 rounded-full border border-red-200 shadow-sm">
+                          <span className="flex items-center gap-1 text-red-700 text-sm font-medium py-1 ">
                             ❌ Rejected
                           </span>
                         )}
