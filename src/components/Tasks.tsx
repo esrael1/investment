@@ -28,45 +28,85 @@ export default function Tasks() {
     }
   }, [user]);
 
-  const fetchTasksData = async () => {
-    if (!user) return;
-    try {
-      const { data: packages } = await supabase
-        .from("user_packages")
-        .select(`*, packages (*)`)
-        .eq("user_id", user.id)
-        .eq("is_active", true)
-        .gte("expiry_date", new Date().toISOString());
+ 
+  
 
-      const tasksData: { [key: string]: Task[] } = {};
-      if (packages) {
-        for (const pkg of packages) {
-          const { data: tasks } = await supabase
-            .from("tasks")
-            .select("*")
-            .eq("package_id", pkg.package_id)
-            .eq("is_active", true);
-          if (tasks) tasksData[pkg.id] = tasks;
+
+const fetchTasksData = async () => {
+  if (!user) return;
+  setLoading(true);
+
+  try {
+    // 1️⃣ Get active packages
+    const { data: packages } = await supabase
+      .from("user_packages")
+      .select(`*, packages (*)`)
+      .eq("user_id", user.id)
+      .eq("is_active", true)
+      .gte("expiry_date", new Date().toISOString());
+
+    const tasksData: { [key: string]: Task[] } = {};
+
+    // 2️⃣ Reset daily progress if new day
+    if (packages) {
+      for (const pkg of packages) {
+        const lastTaskDate = pkg.last_task_date
+          ? new Date(pkg.last_task_date)
+          : null;
+
+        const isNewDay =
+          !lastTaskDate || lastTaskDate.toDateString() !== new Date().toDateString();
+
+        if (isNewDay) {
+          // Reset daily counters in Supabase
+          await supabase
+            .from("user_packages")
+            .update({
+              tasks_completed_today: 0,
+              last_task_date: new Date().toISOString().split("T")[0],
+            })
+            .eq("id", pkg.id);
+
+          // Also update locally so UI shows correct state
+          pkg.tasks_completed_today = 0;
+          pkg.last_task_date = new Date().toISOString().split("T")[0];
         }
+
+        // 3️⃣ Fetch available tasks for this package
+        const { data: tasks } = await supabase
+          .from("tasks")
+          .select("*")
+          .eq("package_id", pkg.package_id)
+          .eq("is_active", true);
+
+        if (tasks) tasksData[pkg.id] = tasks;
       }
-
-      const today = new Date().toISOString().split("T")[0];
-      const { data: completed } = await supabase
-        .from("user_tasks")
-        .select(`*, tasks (*)`)
-        .eq("user_id", user.id)
-        .gte("completed_at", `${today}T00:00:00Z`)
-        .lte("completed_at", `${today}T23:59:59Z`);
-
-      setUserPackages(packages || []);
-      setAvailableTasks(tasksData);
-      setCompletedTasks(completed || []);
-    } catch (error) {
-      console.error("Error fetching tasks data:", error);
-    } finally {
-      setLoading(false);
     }
-  };
+
+    // 4️⃣ Get today’s completed tasks
+    const today = new Date().toISOString().split("T")[0];
+    const { data: completed } = await supabase
+      .from("user_tasks")
+      .select(`*, tasks (*)`)
+      .eq("user_id", user.id)
+      .gte("completed_at", `${today}T00:00:00Z`)
+      .lte("completed_at", `${today}T23:59:59Z`);
+
+    // 5️⃣ Update states
+    setUserPackages(packages || []);
+    setAvailableTasks(tasksData);
+    setCompletedTasks(completed || []);
+  } catch (error) {
+    console.error("Error fetching tasks data:", error);
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+
+
+
 
   const canCompleteTask = (userPackage: UserPackage) => {
     const today = new Date();
@@ -237,7 +277,7 @@ export default function Tasks() {
                 </div>
               </div>
 
-              {tasks.length === 0 ? (
+              {tasks.length === 0 ? ( 
                 <p className="text-gray-500 text-center">No tasks available</p>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -317,9 +357,6 @@ export default function Tasks() {
                                 ✨ The more detailed your description, the better AI learns.
                               </p>
                             </div>
-
-
-
 
                             {/* Submit Button */}
                             <button
