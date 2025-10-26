@@ -294,12 +294,11 @@ export default function Dashboard() {
         </section>
 
         <section>
-          <h2 className="font-semibold text-xl text-gray-900 mb-2">2. Purpose of Data Collection</h2>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">2. Ethical and Legal Responsibilities</h2>
           <p>
-            The primary purpose of EnviroScan AI is to gather authentic environmental image and video
-            data from users worldwide. These contributions are used to train
-            artificial intelligence systems that can recognize real-world
-            environments, objects, and human activities more accurately and ethically.
+            All users must comply with local laws when capturing images. It is your responsibility to
+            ensure that no copyright, privacy, or security regulations are violated. EnviroScan AI
+            will not be responsible for any unlawful content uploaded by users.
           </p>
         </section>
 
@@ -373,11 +372,12 @@ export default function Dashboard() {
         </section>
 
         <section>
-          <h2 className="font-semibold text-xl text-gray-900 mb-2">10. Ethical and Legal Responsibilities</h2>
+          <h2 className="font-semibold text-xl text-gray-900 mb-2">10. Purpose of Data Collection </h2>
           <p>
-            All users must comply with local laws when capturing images. It is your responsibility to
-            ensure that no copyright, privacy, or security regulations are violated. EnviroScan AI
-            will not be responsible for any unlawful content uploaded by users.
+            The primary purpose of EnviroScan AI is to gather authentic environmental image and video
+            data from users worldwide. These contributions are used to train
+            artificial intelligence systems that can recognize real-world
+            environments, objects, and human activities more accurately and ethically.
           </p>
         </section>
 

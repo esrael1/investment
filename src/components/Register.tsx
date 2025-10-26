@@ -26,8 +26,13 @@ export default function Register() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!phone || !password || !fullName) {
+    if (!phone || !password || !fullName){
       setError("Please fill in all required fields");
+      return;
+    }
+
+    if(phone.length < 10 || phone.length > 10) {
+      setError("phone number must be start with 09 and must be equal to 10");
       return;
     }
 

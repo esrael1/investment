@@ -88,68 +88,90 @@ const CustomerBankInfo = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-sm border">
-      <h2 className="text-2xl font-bold mb-4">My Bank Account</h2>
+    <div className="max-w-lg mx-auto p-4 sm:p-6 bg-white rounded-2xl shadow-md border border-gray-200">
+      <h2 className="text-xl sm:text-2xl font-bold mb-4 text-center text-gray-800">
+        My Bank Account
+      </h2>
 
       {message && (
         <p
-          className={`mb-4 text-sm rounded px-4 py-2 ${
-            message.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-          }`}
+          className={`mb-4 text-sm sm:text-base rounded-lg px-4 py-2 text-center font-medium transition-all ${message.type === 'success'
+              ? 'bg-green-100 text-green-800 border border-green-300'
+              : 'bg-red-100 text-red-800 border border-red-300'
+            }`}
         >
           {message.text}
         </p>
       )}
 
       {loading ? (
-        <p>Loading bank info...</p>
+        <p className="text-center text-gray-600">Loading bank info...</p>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 sm:space-y-5 text-gray-700"
+        >
+          {/* Bank Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Bank Name</label>
+            <label className="block text-sm font-medium mb-1 sm:mb-2 text-gray-700">
+              Bank Name / Telebirr / Mpesa
+            </label>
             <input
               type="text"
               value={bankInfo.bank_name}
-              onChange={(e) => setBankInfo({ ...bankInfo, bank_name: e.target.value })}
-              className="mt-1 block w-full border border-gray-300 rounded p-2"
+              onChange={(e) =>
+                setBankInfo({ ...bankInfo, bank_name: e.target.value })
+              }
+              className="w-full px-3 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base"
               required
             />
           </div>
 
+          {/* Account Number */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Account Number</label>
+            <label className="block text-sm font-medium mb-1 sm:mb-2 text-gray-700">
+              Account Number/ Phone Number
+            </label>
             <input
               type="text"
               value={bankInfo.account_number}
-              onChange={(e) => setBankInfo({ ...bankInfo, account_number: e.target.value })}
-              className="mt-1 block w-full border border-gray-300 rounded p-2"
+              onChange={(e) =>
+                setBankInfo({ ...bankInfo, account_number: e.target.value })
+              }
+              className="w-full px-3 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base"
               required
             />
           </div>
 
+          {/* Account Holder */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Account Holder Name</label>
+            <label className="block text-sm font-medium mb-1 sm:mb-2 text-gray-700">
+               Name
+            </label>
             <input
               type="text"
               value={bankInfo.account_holder}
-              onChange={(e) => setBankInfo({ ...bankInfo, account_holder: e.target.value })}
-              className="mt-1 block w-full border border-gray-300 rounded p-2"
+              onChange={(e) =>
+                setBankInfo({ ...bankInfo, account_holder: e.target.value })
+              }
+              className="w-full px-3 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base"
               required
             />
           </div>
 
+          {/* Submit Button */}
           <button
             type="submit"
             disabled={saving}
-            className={`bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 ${
-              saving ? 'opacity-50 cursor-not-allowed' : ''
-            }`}
+            className={`w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold px-4 py-2.5 sm:px-6 rounded-lg shadow-md hover:shadow-lg transition-all hover:from-blue-700 hover:to-purple-700 ${saving ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
           >
             {saving ? 'Saving...' : 'Save Bank Info'}
           </button>
         </form>
       )}
     </div>
+
   );
 };
 
