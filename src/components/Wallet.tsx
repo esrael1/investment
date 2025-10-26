@@ -283,19 +283,19 @@ export default function Wallet() {
 
         {/* Recent Withdrawals */}
         <div className="bg-gray-200 rounded-lg shadow-sm border">
-          <div className="bg-gradient-to-r from-red-400 to-blue-400 text-white p-6 rounded-lg">
-            <h3 className="text-lg font-semibold text-white-900">
+          <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white p-6 rounded-lg flex justify-between items-center">
+            <h3 className="text-lg font-semibold">
               Recent Withdrawals
             </h3>
-            <span
+            <button
               onClick={() => setWithdrawHistoryModal(true)}
-              className="flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+              className="flex items-center px-4 py-2 bg-white text-green-700 font-medium rounded-md hover:bg-green-100 transition"
             >
               <Download className="h-4 w-4 mr-2" />
               Detail
-            </span>
-
+            </button>
           </div>
+
           <div className="p-6">
             {withdrawals.length > 0 ? (
               <div className="space-y-4">
