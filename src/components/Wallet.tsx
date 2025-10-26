@@ -654,55 +654,98 @@ export default function Wallet() {
               </h3>
             </div>
           
-          <div>
-            <div className="bg-yellow-50 p-4 rounded-md">
-              <p className="text-sm text-yellow-800">
-                Available balance: {user?.wallet_balance?.toFixed(2)} ETB
+          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+  {/* Header */}
+  <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-4 flex justify-between items-center">
+    <h2 className="text-lg font-bold tracking-wide">💸 Successful Withdrawals</h2>
+    <span className="text-sm opacity-90">Latest 5 Transactions</span>
+  </div>
+
+  {/* Available Balance */}
+  <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 border-b border-yellow-200 px-6 py-4 flex justify-between items-center">
+    <p className="text-yellow-800 font-medium">
+      Available Balance:{" "}
+      <span className="font-bold text-yellow-900">
+        {user?.wallet_balance?.toFixed(2)} ETB
+      </span>
+    </p>
+    <span className="bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full border border-green-200">
+      Active Wallet
+    </span>
+  </div>
+
+  {/* Withdrawal History */}
+  <div className="p-6">
+    {withdrawals.length > 0 ? (
+      <div className="space-y-5">
+        {withdrawals.slice(0, 5).map((withdrawal) => (
+          <div
+            key={withdrawal.id}
+            className="flex justify-between items-center bg-gradient-to-r from-gray-50 to-white rounded-xl shadow-sm border border-gray-100 p-4 hover:shadow-md transition"
+          >
+            <div>
+              <p className="font-semibold text-gray-800">
+                Asked:{" "}
+                <span className="text-gray-900">
+                  {withdrawal.amount.toFixed(2)} ETB
+                </span>
+              </p>
+              <p className="text-sm text-gray-600">
+                Paid:{" "}
+                <span className="font-semibold text-green-600">
+                  {(withdrawal.amount - withdrawal.amount * 0.13).toFixed(2)} ETB
+                </span>
+              </p>
+              <p className="text-xs text-gray-400 mt-1">
+                {format(new Date(withdrawal.created_at), "MMM dd, yyyy • HH:mm")}
               </p>
             </div>
-            <div className="p-6">
-              {withdrawals.length > 0 ? (
-                <div className="space-y-4">
-                  {withdrawals.slice(0, 5).map((withdrawal) => (
-                    <div
-                      key={withdrawal.id}
-                      className="flex items-center justify-between"
-                    >
-                      <div className="bg-yellow-50 p-4 rounded-md">
-                        <p className="text-sm text-yellow-800">
-                          ask amount {withdrawal.amount.toFixed(2)}  ETB
-                        </p>
-                        <p className="text-sm text-yellow-800">
-                          paid amount {(withdrawal.amount - withdrawal.amount * 0.13).toFixed(2)} ETB
-                        </p>
 
-                        <p className="text-sm text-yellow-800">
-                          {format(
-                            new Date(withdrawal.created_at),
-                            "MMM dd, HH:mm"
-                          )}
-                        </p>
-                      </div>
-                      {getStatusBadge(withdrawal.status)}
-                    </div>
-                  ))}
-                </div>
+            {/* Status badge */}
+            <div className="flex items-center gap-2">
+              {withdrawal.status === "paid" ? (
+                <span className="flex items-center gap-1 bg-green-100 text-green-700 text-sm font-medium px-3 py-1 rounded-full border border-green-200 shadow-sm">
+                  ✅ Successful
+                </span>
+              ) : withdrawal.status === "pending" ? (
+                <span className="flex items-center gap-1 bg-yellow-100 text-yellow-700 text-sm font-medium px-3 py-1 rounded-full border border-yellow-200 shadow-sm">
+                  ⏳ Pending
+                </span>
               ) : (
-                <p className="text-gray-500 text-center py-4">
-                  No withdrawals  history yet
-                </p>
+                <span className="flex items-center gap-1 bg-red-100 text-red-700 text-sm font-medium px-3 py-1 rounded-full border border-red-200 shadow-sm">
+                  ❌ Rejected
+                </span>
               )}
             </div>
-            <div className="flex space-x-4">
-              <button
-                type="button"
-                onClick={() => setWithdrawHistoryModal(false)}
-                className="flex-1 py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
-              >
-                Cancel
-              </button>
-            </div>
           </div>
+        ))}
+      </div>
+    ) : (
+      <p className="text-gray-500 text-center py-6 italic">
+        No withdrawal history yet 🚫
+      </p>
+    )}
+  </div>
+
+  {/* Footer */}
+  <div className="bg-green-50 border-t border-green-100 text-center py-4">
+    <p className="text-green-700 font-semibold text-sm">
+      ✅ All successful withdrawals are processed securely and verified in real-time.
+    </p>
+  </div>
+
+  {/* Buttons */}
+  <div className="flex space-x-4 p-6 border-t border-gray-100">
+    <button
+      type="button"
+      onClick={() => setWithdrawHistoryModal(false)}
+      className="flex-1 py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 font-medium"
+    >
+      Close
+    </button>
+  </div>
+</div>
+
         </div>
         </div>
       )}
