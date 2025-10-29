@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { supabase, UserPackage, Task, UserTask } from "../lib/supabase";
-import { CheckSquare, Gift, Upload } from "lucide-react";
+import { CheckSquare } from "lucide-react";
 import { format, isToday } from "date-fns";
 
 export default function Tasks() {
@@ -9,115 +9,82 @@ export default function Tasks() {
 
   const { user, refreshUser } = useAuth();
   const [userPackages, setUserPackages] = useState<UserPackage[]>([]);
-  const [availableTasks, setAvailableTasks] = useState<{
-    [key: string]: Task[];
-  }>({});
-  const [acceptedTasks, setAcceptedTasks] = useState<{
-    [key: string]: string[];
-  }>({});
+  const [availableTasks, setAvailableTasks] = useState<{ [key: string]: Task[] }>({});
+  const [acceptedTasks, setAcceptedTasks] = useState<{ [key: string]: string[] }>({});
   const [completedTasks, setCompletedTasks] = useState<UserTask[]>([]);
-  const [uploadFiles, setUploadFiles] = useState<{
-    [key: string]: File | null;
-  }>({});
+  const [uploadFiles, setUploadFiles] = useState<{ [key: string]: File | null }>({});
   const [loading, setLoading] = useState(true);
-  const [completing, setCompleting] = useState<string | null>(null);
+  const [completing, setCompleting] = useState<string | null>(null); // only one submission allowed
 
   useEffect(() => {
-    if (user) {
-      fetchTasksData();
-    }
+    if (user) fetchTasksData();
   }, [user]);
 
- 
-  
+  const fetchTasksData = async () => {
+    if (!user) return;
+    setLoading(true);
+    try {
+      const { data: packages } = await supabase
+        .from("user_packages")
+        .select(`*, packages (*)`)
+        .eq("user_id", user.id)
+        .eq("is_active", true)
+        .gte("expiry_date", new Date().toISOString());
 
+      const tasksData: { [key: string]: Task[] } = {};
 
-const fetchTasksData = async () => {
-  if (!user) return;
-  setLoading(true);
+      if (packages) {
+        for (const pkg of packages) {
+          const lastTaskDate = pkg.last_task_date ? new Date(pkg.last_task_date) : null;
+          const isNewDay = !lastTaskDate || lastTaskDate.toDateString() !== new Date().toDateString();
 
-  try {
-    // 1️⃣ Get active packages
-    const { data: packages } = await supabase
-      .from("user_packages")
-      .select(`*, packages (*)`)
-      .eq("user_id", user.id)
-      .eq("is_active", true)
-      .gte("expiry_date", new Date().toISOString());
+          if (isNewDay) {
+            await supabase
+              .from("user_packages")
+              .update({
+                tasks_completed_today: 0,
+                last_task_date: new Date().toISOString().split("T")[0],
+              })
+              .eq("id", pkg.id);
 
-    const tasksData: { [key: string]: Task[] } = {};
+            pkg.tasks_completed_today = 0;
+            pkg.last_task_date = new Date().toISOString().split("T")[0];
+          }
 
-    // 2️⃣ Reset daily progress if new day
-    if (packages) {
-      for (const pkg of packages) {
-        const lastTaskDate = pkg.last_task_date
-          ? new Date(pkg.last_task_date)
-          : null;
+          const { data: tasks } = await supabase
+            .from("tasks")
+            .select("*")
+            .eq("package_id", pkg.package_id)
+            .eq("is_active", true);
 
-        const isNewDay =
-          !lastTaskDate || lastTaskDate.toDateString() !== new Date().toDateString();
-
-        if (isNewDay) {
-          // Reset daily counters in Supabase
-          await supabase
-            .from("user_packages")
-            .update({
-              tasks_completed_today: 0,
-              last_task_date: new Date().toISOString().split("T")[0],
-            })
-            .eq("id", pkg.id);
-
-          // Also update locally so UI shows correct state
-          pkg.tasks_completed_today = 0;
-          pkg.last_task_date = new Date().toISOString().split("T")[0];
+          if (tasks) tasksData[pkg.id] = tasks;
         }
-
-        // 3️⃣ Fetch available tasks for this package
-        const { data: tasks } = await supabase
-          .from("tasks")
-          .select("*")
-          .eq("package_id", pkg.package_id)
-          .eq("is_active", true);
-
-        if (tasks) tasksData[pkg.id] = tasks;
       }
+
+      const today = new Date().toISOString().split("T")[0];
+      const { data: completed } = await supabase
+        .from("user_tasks")
+        .select(`*, tasks (*)`)
+        .eq("user_id", user.id)
+        .gte("completed_at", `${today}T00:00:00Z`)
+        .lte("completed_at", `${today}T23:59:59Z`);
+
+      setUserPackages(packages || []);
+      setAvailableTasks(tasksData);
+      setCompletedTasks(completed || []);
+    } catch (error) {
+      console.error("Error fetching tasks data:", error);
+    } finally {
+      setLoading(false);
     }
-
-    // 4️⃣ Get today’s completed tasks
-    const today = new Date().toISOString().split("T")[0];
-    const { data: completed } = await supabase
-      .from("user_tasks")
-      .select(`*, tasks (*)`)
-      .eq("user_id", user.id)
-      .gte("completed_at", `${today}T00:00:00Z`)
-      .lte("completed_at", `${today}T23:59:59Z`);
-
-    // 5️⃣ Update states
-    setUserPackages(packages || []);
-    setAvailableTasks(tasksData);
-    setCompletedTasks(completed || []);
-  } catch (error) {
-    console.error("Error fetching tasks data:", error);
-  } finally {
-    setLoading(false);
-  }
-};
-
-
-
-
-
+  };
 
   const canCompleteTask = (userPackage: UserPackage) => {
-    const today = new Date();
-    const lastTaskDate = userPackage.last_task_date
-      ? new Date(userPackage.last_task_date)
-      : null;
+    const lastTaskDate = userPackage.last_task_date ? new Date(userPackage.last_task_date) : null;
     const isNewDay = !lastTaskDate || !isToday(lastTaskDate);
     return (
       isNewDay ||
-      userPackage.tasks_completed_today <
-      (userPackage.packages?.daily_tasks || 0)
+      userPackage.tasks_completed_today < (userPackage.packages?.daily_tasks || 0)
     );
   };
 
@@ -134,13 +101,12 @@ const fetchTasksData = async () => {
 
   const handleCompleteTask = async (task: Task, userPackage: UserPackage) => {
     if (!user) return;
-    if (!uploadFiles[task.id])
-      return alert("Please upload a screenshot first.");
+    if (!uploadFiles[task.id]) return alert("Please upload a screenshot first.");
 
+    // 🚫 disable all other buttons
     setCompleting(task.id);
 
     try {
-      // Upload screenshot to Supabase storage
       const file = uploadFiles[task.id];
       const filePath = `${user.id}/${Date.now()}_${file?.name}`;
       const { error: uploadError } = await supabase.storage
@@ -153,7 +119,6 @@ const fetchTasksData = async () => {
         .from("task_screenshots")
         .getPublicUrl(filePath).data.publicUrl;
 
-      // Insert user task record
       const { error: taskError } = await supabase.from("user_tasks").insert({
         user_id: user.id,
         task_id: task.id,
@@ -164,7 +129,6 @@ const fetchTasksData = async () => {
 
       if (taskError) throw taskError;
 
-      // Update user balance
       const { error: balanceError } = await supabase.rpc("increment_balance", {
         user_id: user.id,
         amount: task.reward_amount,
@@ -172,7 +136,6 @@ const fetchTasksData = async () => {
 
       if (balanceError) throw balanceError;
 
-      // Update package stats
       const newTasksCompleted = userPackage.tasks_completed_today + 1;
       const { error: packageError } = await supabase
         .from("user_packages")
@@ -192,7 +155,7 @@ const fetchTasksData = async () => {
       console.error("Error completing task:", error);
       alert("❌ Failed to complete task. Please try again.");
     } finally {
-      setCompleting(null);
+      setCompleting(null); // ✅ re-enable all buttons
     }
   };
 
@@ -201,13 +164,12 @@ const fetchTasksData = async () => {
       (ct) => ct.task_id === taskId && ct.user_package_id === userPackageId
     );
 
-  if (loading) {
+  if (loading)
     return (
       <div className="flex items-center justify-center h-64">
         <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600"></div>
       </div>
     );
-  }
 
   return (
     <div className="space-y-6">
@@ -238,46 +200,38 @@ const fetchTasksData = async () => {
           return (
             <div key={pkg.id} className="bg-gray-100 rounded-lg shadow border p-6">
               <div className="flex flex-col md:flex-row items-center justify-between p-4 mb-4 rounded-2xl hover:shadow-xl transition-shadow duration-300">
-                {/* Package Info */}
-                <div className="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4">
-                  <div className="flex flex-col">
-                    <h3 className="text-xl font-bold text-purple-700">
-                      {pkg.packages?.name}
-                    </h3>
-                    <p className="text-gray-500 text-sm">
-                      Daily Return:{" "}
-                      <span className="font-semibold text-green-600">
-                        {pkg.packages?.daily_return} Birr
-                      </span>
-                      <br />
-                      <span className="text-gray-400 text-xs">
-                        Expires:{" "}
-                        {format(new Date(pkg.expiry_date), "MMM dd, yyyy")}
-                      </span>
-                    </p>
-                  </div>
+                <div className="flex flex-col">
+                  <h3 className="text-xl font-bold text-purple-700">
+                    {pkg.packages?.name}
+                  </h3>
+                  <p className="text-gray-500 text-sm">
+                    Daily Return:{" "}
+                    <span className="font-semibold text-green-600">
+                      {pkg.packages?.daily_return} Birr
+                    </span>
+                    <br />
+                    <span className="text-gray-400 text-xs">
+                      Expires: {format(new Date(pkg.expiry_date), "MMM dd, yyyy")}
+                    </span>
+                  </p>
                 </div>
 
-                {/* Task Progress */}
-                <div className="flex flex-col items-end space-y-2 w-full md:w-auto mt-3 md:mt-0">
+                <div className="flex flex-col items-end space-y-2 mt-3 md:mt-0">
                   <span className="text-gray-700 font-medium text-sm">
                     {tasksCompletedToday}/{maxDailyTasks} tasks completed today
                   </span>
-
-                  {/* Progress Bar */}
                   <div className="w-full md:w-48 h-3 bg-white border-2 border-purple-500 rounded-full overflow-hidden">
                     <div
                       className="h-3 bg-gradient-to-r from-red-400 to-green-600"
                       style={{
-                        width: `${(tasksCompletedToday / maxDailyTasks) * 100
-                          }%`,
+                        width: `${(tasksCompletedToday / maxDailyTasks) * 100}%`,
                       }}
                     ></div>
                   </div>
                 </div>
               </div>
 
-              {tasks.length === 0 ? ( 
+              {tasks.length === 0 ? (
                 <p className="text-gray-500 text-center">No tasks available</p>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -294,7 +248,6 @@ const fetchTasksData = async () => {
                         key={task.id}
                         className="rounded-2xl p-4 hover:shadow-lg transition-shadow duration-300 bg-white"
                       >
-                        {/* Task Number and Title */}
                         <h4 className="flex items-center font-semibold text-gray-900 mb-2 text-lg">
                           <span className="mr-2 text-purple-600 font-bold">
                             {index + 1}.
@@ -302,12 +255,10 @@ const fetchTasksData = async () => {
                           {task.title}
                         </h4>
 
-                        {/* Task Description */}
                         <p className="text-gray-600 text-sm mb-3">
                           {task.description}
                         </p>
 
-                        {/* Task Actions */}
                         {completed ? (
                           <p className="text-green-600 font-medium flex items-center">
                             <CheckSquare className="w-5 h-5 mr-1" /> Completed
@@ -315,36 +266,33 @@ const fetchTasksData = async () => {
                         ) : !acceptedTask ? (
                           <button
                             onClick={() => handleAcceptTask(task.id, pkg.id)}
-                            className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                            disabled={!!completing} // 🚫 disable while submitting
+                            className={`w-full py-2 text-white rounded-lg transition-colors duration-200 ${
+                              completing
+                                ? "bg-gray-400 cursor-not-allowed"
+                                : "bg-blue-600 hover:bg-blue-700"
+                            }`}
                           >
                             Accept Task
                           </button>
                         ) : (
                           <div className="space-y-3">
                             <p className="text-cyan-600 text-sm">
-                              🤖 Share your surroundings! Take or upload a picture to train EnviroScan AI about real-world environments.
+                              🤖 Share your surroundings! Upload a picture to
+                              train EnviroScan AI.
                             </p>
 
-                            {/* Custom File Upload (Camera Enabled) */}
-
-                            <div className="relative">
-                              <input
-                                id={`file-upload-${task.id}`}
-                                type="file"
-                                accept="image/*"
-                                capture="environment"
-                                onChange={(e) => {
-                                  const file = e.target.files?.[0] || null;
-                                  handleFileUpload(task.id, file);
-                                  if (file) {
-                                    setSelectedImageName(file.name);
-                                  } else {
-                                    setSelectedImageName("");
-                                  }
-                                }}
-                                className="border border-gray-900 text-black"
-                              />
-                            </div>
+                            <input
+                              type="file"
+                              accept="image/*"
+                              capture="environment"
+                              onChange={(e) => {
+                                const file = e.target.files?.[0] || null;
+                                handleFileUpload(task.id, file);
+                                setSelectedImageName(file ? file.name : "");
+                              }}
+                              className="border border-gray-900 text-black"
+                            />
 
                             <div className="max-w-md mx-auto mt-4">
                               <label className="block text-cyan-800 font-bold mb-2 text-sm">
@@ -352,22 +300,23 @@ const fetchTasksData = async () => {
                               </label>
                               <textarea
                                 placeholder="Explain what’s in the image"
-                                className="w-full border border-cyan-600 rounded p-3 text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 transition-all duration-200 resize-none hover:shadow-md"></textarea>
+                                className="w-full border border-cyan-600 rounded p-3 text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 transition-all duration-200 resize-none hover:shadow-md"
+                              ></textarea>
                               <p className="text-xs text-purple-500 mt-1">
                                 ✨ The more detailed your description, the better AI learns.
                               </p>
                             </div>
 
-                            {/* Submit Button */}
                             <button
                               onClick={() => handleCompleteTask(task, pkg)}
-                              disabled={!canDo || completing === task.id}
-                              className={`w-full py-2 rounded-lg text-white font-medium transition-colors duration-200 ${completing === task.id
+                              disabled={!canDo || !!completing}
+                              className={`w-full py-2 rounded-lg text-white font-medium transition-colors duration-200 ${
+                                completing
                                   ? "bg-gray-400 cursor-not-allowed"
                                   : canDo
-                                    ? "bg-green-600 hover:bg-green-700"
-                                    : "bg-gray-300 cursor-not-allowed"
-                                }`}
+                                  ? "bg-green-600 hover:bg-green-700"
+                                  : "bg-gray-300 cursor-not-allowed"
+                              }`}
                             >
                               {completing === task.id
                                 ? "Completing..."
