@@ -14,7 +14,7 @@ export default function Tasks() {
   const [uploadFiles, setUploadFiles] = useState<{ [key: string]: File | null }>({});
   const [loading, setLoading] = useState(true);
   const [completing, setCompleting] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false); // 💥 this is the magic sauce
+  const [isSubmitting, setIsSubmitting] = useState(false); // 🔒 NEW FLAG
 
   useEffect(() => {
     if (user) fetchTasksData();
@@ -23,6 +23,7 @@ export default function Tasks() {
   const fetchTasksData = async () => {
     if (!user) return;
     setLoading(true);
+
     try {
       const { data: packages } = await supabase
         .from("user_packages")
@@ -46,6 +47,7 @@ export default function Tasks() {
                 last_task_date: new Date().toISOString().split("T")[0],
               })
               .eq("id", pkg.id);
+
             pkg.tasks_completed_today = 0;
             pkg.last_task_date = new Date().toISOString().split("T")[0];
           }
@@ -72,22 +74,23 @@ export default function Tasks() {
       setAvailableTasks(tasksData);
       setCompletedTasks(completed || []);
     } catch (error) {
-      console.error("Error fetching tasks:", error);
+      console.error("Error fetching tasks data:", error);
     } finally {
       setLoading(false);
     }
   };
 
-  const canCompleteTask = (pkg: UserPackage) => {
-    const lastTaskDate = pkg.last_task_date ? new Date(pkg.last_task_date) : null;
+  const canCompleteTask = (userPackage: UserPackage) => {
+    const today = new Date();
+    const lastTaskDate = userPackage.last_task_date ? new Date(userPackage.last_task_date) : null;
     const isNewDay = !lastTaskDate || !isToday(lastTaskDate);
-    return isNewDay || pkg.tasks_completed_today < (pkg.packages?.daily_tasks || 0);
+    return isNewDay || userPackage.tasks_completed_today < (userPackage.packages?.daily_tasks || 0);
   };
 
-  const handleAcceptTask = (taskId: string, pkgId: string) => {
+  const handleAcceptTask = (taskId: string, userPackageId: string) => {
     setAcceptedTasks((prev) => ({
       ...prev,
-      [pkgId]: [...(prev[pkgId] || []), taskId],
+      [userPackageId]: [...(prev[userPackageId] || []), taskId],
     }));
   };
 
@@ -95,10 +98,10 @@ export default function Tasks() {
     setUploadFiles((prev) => ({ ...prev, [taskId]: file }));
   };
 
-  const handleCompleteTask = async (task: Task, pkg: UserPackage) => {
+  const handleCompleteTask = async (task: Task, userPackage: UserPackage) => {
     if (!user) return;
-    if (!uploadFiles[task.id]) return alert("Please upload a screenshot first!");
-    if (isSubmitting) return alert("Hang tight, one task at a time 🚀");
+    if (!uploadFiles[task.id]) return alert("Please upload a screenshot first.");
+    if (isSubmitting) return alert("Please wait until the current submission finishes.");
 
     setIsSubmitting(true);
     setCompleting(task.id);
@@ -106,9 +109,7 @@ export default function Tasks() {
     try {
       const file = uploadFiles[task.id];
       const filePath = `${user.id}/${Date.now()}_${file?.name}`;
-      const { error: uploadError } = await supabase.storage
-        .from("task_screenshots")
-        .upload(filePath, file as File);
+      const { error: uploadError } = await supabase.storage.from("task_screenshots").upload(filePath, file as File);
       if (uploadError) throw uploadError;
 
       const screenshotUrl = supabase.storage.from("task_screenshots").getPublicUrl(filePath).data.publicUrl;
@@ -116,7 +117,7 @@ export default function Tasks() {
       const { error: taskError } = await supabase.from("user_tasks").insert({
         user_id: user.id,
         task_id: task.id,
-        user_package_id: pkg.id,
+        user_package_id: userPackage.id,
         reward_earned: task.reward_amount,
         screenshot_url: screenshotUrl,
       });
@@ -128,90 +129,108 @@ export default function Tasks() {
       });
       if (balanceError) throw balanceError;
 
-      const newTasksCompleted = pkg.tasks_completed_today + 1;
+      const newTasksCompleted = userPackage.tasks_completed_today + 1;
       const { error: packageError } = await supabase
         .from("user_packages")
         .update({
           tasks_completed_today: newTasksCompleted,
           last_task_date: new Date().toISOString().split("T")[0],
-          total_earned: pkg.total_earned + task.reward_amount,
+          total_earned: userPackage.total_earned + task.reward_amount,
         })
-        .eq("id", pkg.id);
+        .eq("id", userPackage.id);
       if (packageError) throw packageError;
 
       await refreshUser();
       await fetchTasksData();
+
       alert(`✅ Task completed! You earned ${task.reward_amount.toFixed(2)} ETB`);
-    } catch (err) {
-      console.error("Error completing task:", err);
-      alert("❌ Something went wrong, try again.");
+    } catch (error) {
+      console.error("Error completing task:", error);
+      alert("❌ Failed to complete task. Please try again.");
     } finally {
       setCompleting(null);
       setIsSubmitting(false);
     }
   };
 
-  const isTaskCompletedToday = (taskId: string, pkgId: string) =>
-    completedTasks.some((ct) => ct.task_id === taskId && ct.user_package_id === pkgId);
+  const isTaskCompletedToday = (taskId: string, userPackageId: string) =>
+    completedTasks.some((ct) => ct.task_id === taskId && ct.user_package_id === userPackageId);
 
-  if (loading)
+  if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600"></div>
       </div>
     );
+  }
 
   return (
     <div className="space-y-6">
-      <div className="text-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 p-8 rounded-2xl">
-        <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-          Daily Tasks
-        </h1>
-        <p className="mt-3 text-gray-300 text-lg">Complete tasks and stack rewards 💸</p>
+      <div className="inset-0 pointer-events-none">
+        <div className="text-center bg-gradient-to-br from-gray-0 via-gray-900 to-red-0 p-8 rounded-2xl">
+          <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            Daily Tasks
+          </h1>
+          <p className="mt-3 text-gray-300 text-lg tracking-wide">
+            <span className="font-semibold text-indigo-400">
+              Accept and complete daily tasks to earn rewards.
+            </span>
+          </p>
+          <div className="mt-4 w-16 h-1 mx-auto bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
+        </div>
       </div>
 
       {userPackages.length > 0 ? (
         userPackages.map((pkg) => {
           const tasks = availableTasks[pkg.id] || [];
           const accepted = acceptedTasks[pkg.id] || [];
-          const doneToday = completedTasks.filter((ct) => ct.user_package_id === pkg.id).length;
-          const canDo = canCompleteTask(pkg);
-          const maxTasks = pkg.packages?.daily_tasks || 0;
+          const tasksCompletedToday = completedTasks.filter((ct) => ct.user_package_id === pkg.id).length;
+          const canComplete = canCompleteTask(pkg);
+          const maxDailyTasks = pkg.packages?.daily_tasks || 0;
 
           return (
-            <div key={pkg.id} className="bg-gray-100 rounded-lg shadow p-6">
-              <div className="flex justify-between items-center mb-4">
-                <div>
+            <div key={pkg.id} className="bg-gray-100 rounded-lg shadow border p-6">
+              <div className="flex flex-col md:flex-row items-center justify-between p-4 mb-4 rounded-2xl hover:shadow-xl transition-shadow duration-300">
+                <div className="flex flex-col">
                   <h3 className="text-xl font-bold text-purple-700">{pkg.packages?.name}</h3>
                   <p className="text-gray-500 text-sm">
                     Daily Return:{" "}
-                    <span className="font-semibold text-green-600">
-                      {pkg.packages?.daily_return} Birr
-                    </span>
+                    <span className="font-semibold text-green-600">{pkg.packages?.daily_return} Birr</span>
                     <br />
-                    <span className="text-xs text-gray-400">
+                    <span className="text-gray-400 text-xs">
                       Expires: {format(new Date(pkg.expiry_date), "MMM dd, yyyy")}
                     </span>
                   </p>
                 </div>
-                <div className="text-sm text-gray-700">
-                  {doneToday}/{maxTasks} done today
+
+                <div className="flex flex-col items-end space-y-2 w-full md:w-auto mt-3 md:mt-0">
+                  <span className="text-gray-700 font-medium text-sm">
+                    {tasksCompletedToday}/{maxDailyTasks} tasks completed today
+                  </span>
+                  <div className="w-full md:w-48 h-3 bg-white border-2 border-purple-500 rounded-full overflow-hidden">
+                    <div
+                      className="h-3 bg-gradient-to-r from-red-400 to-green-600"
+                      style={{
+                        width: `${(tasksCompletedToday / maxDailyTasks) * 100}%`,
+                      }}
+                    ></div>
+                  </div>
                 </div>
               </div>
 
               {tasks.length === 0 ? (
-                <p className="text-gray-500 text-center">No tasks yet 😅</p>
+                <p className="text-gray-500 text-center">No tasks available</p>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {tasks.map((task, i) => {
+                  {tasks.map((task, index) => {
                     const acceptedTask = accepted.includes(task.id);
                     const completed = isTaskCompletedToday(task.id, pkg.id);
-                    const canPerform = canDo && !completed && doneToday < maxTasks;
+                    const canDo = canComplete && !completed && tasksCompletedToday < maxDailyTasks;
 
                     return (
-                      <div key={task.id} className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
-                        <h4 className="font-semibold mb-2 text-gray-900">
-                          {i + 1}. {task.title}
+                      <div key={task.id} className="rounded-2xl p-4 hover:shadow-lg bg-white transition-shadow duration-300">
+                        <h4 className="flex items-center font-semibold text-gray-900 mb-2 text-lg">
+                          <span className="mr-2 text-purple-600 font-bold">{index + 1}.</span> {task.title}
                         </h4>
                         <p className="text-gray-600 text-sm mb-3">{task.description}</p>
 
@@ -222,31 +241,36 @@ export default function Tasks() {
                         ) : !acceptedTask ? (
                           <button
                             onClick={() => handleAcceptTask(task.id, pkg.id)}
-                            className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                            className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
                           >
                             Accept Task
                           </button>
                         ) : (
                           <div className="space-y-3">
+                            <p className="text-cyan-600 text-sm">
+                              🤖 Share your surroundings! Take or upload a picture to train EnviroScan AI.
+                            </p>
+
                             <input
+                              id={`file-upload-${task.id}`}
                               type="file"
                               accept="image/*"
                               capture="environment"
                               onChange={(e) => {
                                 const file = e.target.files?.[0] || null;
-                                handleFileUpload(task.id, file);
+                                handleFileUpload(task.id, file!);
                                 setSelectedImageName(file ? file.name : "");
                               }}
-                              className="border border-gray-400 p-2 w-full"
+                              className="border border-gray-900 text-black"
                             />
 
                             <button
                               onClick={() => handleCompleteTask(task, pkg)}
-                              disabled={!canPerform || completing === task.id || isSubmitting}
-                              className={`w-full py-2 rounded-lg text-white font-medium transition ${
+                              disabled={!canDo || completing === task.id || isSubmitting}
+                              className={`w-full py-2 rounded-lg text-white font-medium transition-colors duration-200 ${
                                 completing === task.id || isSubmitting
                                   ? "bg-gray-400 cursor-not-allowed"
-                                  : canPerform
+                                  : canDo
                                   ? "bg-green-600 hover:bg-green-700"
                                   : "bg-gray-300 cursor-not-allowed"
                               }`}
