@@ -64,7 +64,7 @@ export default function Tasks() {
 
       const today = new Date().toISOString().split("T")[0];
       const { data: completed } = await supabase
-        .from("user_packages")
+        .from("user_tasks")
         .select(`*, tasks (*)`)
         .eq("user_id", user.id)
         .gte("completed_at", `${today}T00:00:00Z`)
